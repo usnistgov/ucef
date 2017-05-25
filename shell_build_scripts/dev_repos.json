@@ -1,0 +1,30 @@
+{
+  
+  "vulcanuser": "himanshu38",
+  "git_repos": [
+    {
+      "directory": "cpswt-devtools",
+      "url": "ssh://vulcanuser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-devtools"
+    },
+    {
+      "directory": "cpswt-cpp",
+      "url": "ssh://vulcanuser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-cpp"
+    },
+    {
+      "directory": "cpswt-java",
+      "url": "ssh://vulcanuser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-java"
+    },
+    {
+      "directory": "cpswt-meta",
+      "url": "ssh://vulcanuser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-meta"
+    },
+    {
+      "directory": "cpswt-gridlabd-meta",
+      "url": "ssh://vulcanuser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-gridlabd-meta"
+    },
+    {
+      "directory": "cpswt-samples",
+      "url": "ssh://vulcanuser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-samples"
+    }
+  ]
+}

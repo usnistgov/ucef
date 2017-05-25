@@ -1,0 +1,47 @@
+---
+# - name: Create portico installation folder
+- name: Install portico to local repo
+  become: false
+  shell: >
+   mvn install:install-file -Dfile={{ paths.portico_dir }}/portico-{{ dependency_versions.portico }}/lib/portico.jar \
+    -DgroupId=org.porticoproject -DartifactId=portico \
+    -Dversion={{ dependency_versions.portico }} \
+    -Dpackaging=jar -DgeneratePom=true
+
+- set_fact:
+    cpswtng_archiva: 127.0.0.1
+
+# Example that prints the loopback address and gateway for each host
+- debug:
+    msg: "Home Directory is {{ ansible_env.HOME }}"
+
+# - name: Display all variables/facts known for a host
+#   debug:
+#     var: hostvars[inventory_hostname]
+#     verbosity: 1    
+
+- name: Use admin credentials in maven settings file
+  become: false
+  template:
+      src: settings-admin.xml.j2
+      dest: "{{ ansible_env.HOME }}/{{ paths.maven_settings_dir }}/settings.xml"
+
+- name: Deploy portico {{ dependency_versions.portico }} to archiva
+  become: false
+  ignore_errors: yes
+  shell: >
+    mvn deploy:deploy-file \
+    -Durl=http://{{ cpswtng_archiva }}:8080/repository/internal
+    -DrepositoryId=archiva.internal \
+    -Dfile={{ paths.portico_dir }}/portico-{{ dependency_versions.portico }}/lib/portico.jar \
+    -DgroupId=org.porticoproject \
+    -DartifactId=portico \
+    -Dversion={{ dependency_versions.portico }} \
+    -Dpackaging=jar \
+    -DgeneratePom=true
+
+- name: Reset maven settings to deployer user
+  become: false
+  template:
+      src: settings.xml.j2
+      dest: "{{ ansible_env.HOME }}/{{ paths.maven_settings_dir }}/settings.xml"

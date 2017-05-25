@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Eclipse
+Type=Application
+Exec=/home/vagrant/eclipse/eclipse
+Terminal=false
+Icon=/home/vagrant/eclipse/icon.xpm
+Comment=Integrated Development Environment
+NoDisplay=false
+Categories=Development;IDE;
+Name[en]=Eclipse

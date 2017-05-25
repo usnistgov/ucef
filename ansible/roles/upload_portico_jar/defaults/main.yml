@@ -1,0 +1,11 @@
+# defaults file for upload_portico_jar
+---
+# defaults file for setup_archiva
+dependency_versions:
+    archiva: 2.2.1
+    java: '8u112'
+    maven: 3.3.9
+    portico: 2.1.0
+paths:
+    maven_settings_dir: .m2
+    portico_dir: "/home/vagrant"

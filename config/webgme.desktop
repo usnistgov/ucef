@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=xdg-open http://127.0.0.1:8088/
+Name=WebGME
+Comment=Graphical Modeling Environment
+Icon=/home/vagrant/webgme/node_modules/webgme/src/client/img/gme-icon.png

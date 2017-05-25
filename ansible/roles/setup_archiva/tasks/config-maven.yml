@@ -1,0 +1,11 @@
+---
+
+- name: Create $HOME/{{ paths.maven_settings_dir }} if not exists
+  file:
+    path: "{{ ansible_env.HOME }}/{{ paths.maven_settings_dir }}"
+    state: directory
+
+- name: Copy pre-defined maven settings file
+  template:
+      src: settings.xml.j2
+      dest: "{{ ansible_env.HOME }}/{{ paths.maven_settings_dir }}/settings.xml"

@@ -1,0 +1,5 @@
+- src: https://github.com/sperka/ansible-role-archiva.git
+  version: master
+  name: archiva
+
+- src: cmprescott.xml

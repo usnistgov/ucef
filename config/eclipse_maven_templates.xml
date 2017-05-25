@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="org.eclipse.m2e.editor.xml.templates.contextType.plugins" deleted="false" description="Creates an uber jar using the maven shade plugin." enabled="true" name="uber jar">&lt;plugin&gt;
+	&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+	&lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
+	&lt;version&gt;2.4.3&lt;/version&gt;
+	&lt;executions&gt;
+		&lt;execution&gt;
+			&lt;phase&gt;package&lt;/phase&gt;
+			&lt;goals&gt;
+				&lt;goal&gt;shade&lt;/goal&gt;
+			&lt;/goals&gt;
+			&lt;configuration&gt;
+				&lt;filters&gt;
+					&lt;filter&gt;
+						&lt;artifact&gt;*:*&lt;/artifact&gt;
+						&lt;excludes&gt;
+							&lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;
+							&lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;
+							&lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;
+						&lt;/excludes&gt;
+					&lt;/filter&gt;
+				&lt;/filters&gt;
+			&lt;/configuration&gt;
+		&lt;/execution&gt;
+	&lt;/executions&gt;
+&lt;/plugin&gt;</template></templates>

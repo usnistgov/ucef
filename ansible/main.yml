@@ -1,0 +1,6 @@
+--- 
+- 
+  hosts: all
+  roles: 
+    - {role: setup_archiva , ignore_errors: yes}
+    - upload_portico_jar

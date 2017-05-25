@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=xdg-open http://127.0.0.1:8080/
+Name=Archiva
+Comment=Maven Repository
+Icon=/home/vagrant/.local/share/icons/hicolor/48x48/apps/archiva.png

@@ -1,0 +1,76 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Author: Yogesh Barve <yogesh.d.barve@vanderbilt.edu>
+# source article: http://blog.scottlowe.org/2016/01/18/multi-machine-vagrant-json/
+
+# Specify minimum Vagrant version and Vagrant API version
+Vagrant.require_version '>= 1.6.0'
+VAGRANTFILE_API_VERSION = '2'
+
+require 'json'
+vm_config_dir = "./shell_build_scripts" 
+
+# Read JSON file with box details
+devMachines = JSON.parse(File.read(File.join(File.dirname(__FILE__), './machine.json')))
+
+# Create boxes
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Iterate through entries in JSON file
+  devMachines.each do |dev_setup|
+    config.vm.define dev_setup['name'] do |srv|
+      
+      srv.vm.box = dev_setup['box']
+      # Indicates all the shared drive with the guest
+      sync_folders = dev_setup['sync_folders']
+      sync_folders.each do |sync_folder|
+        srv.vm.synced_folder sync_folder['host_folder'], sync_folder['vagrant_folder']
+      end
+
+      
+      # Configures the Virtualbox specific metrics
+      srv.vm.provider :virtualbox do |vmw|
+        vmw.name = dev_setup['name']
+        properties = dev_setup['VBoxProperties']
+        properties.each do |key, value|
+          vmw.customize ["modifyvm", :id, "#{key}", "#{value}"]
+        end
+      end # srv.vm.provider
+
+      # Configures the Virtualbox specific metrics
+      srv.vbguest.auto_update = true  
+      srv.vm.post_up_message = dev_setup["post_up_message"]
+      
+
+      provision_ssh_keys = dev_setup["extra_ssh_key_paths"]
+      provision_ssh_keys.each do |ssh_key|
+        if ssh_key.to_s != ''
+          srv.vm.provision "shell" do |s|
+            
+            private_key_path = File.join("../secrets", ssh_key)
+            public_key_path = File.join("../secrets", ssh_key+".pub")
+
+            ssh_private_key = File.read(private_key_path)
+            ssh_pub_key = File.read(public_key_path)
+            
+            s.inline = <<-SHELL
+              echo '#{ssh_pub_key}' >> /home/vagrant/.ssh/authorized_keys
+              echo '#{ssh_private_key}' > /home/vagrant/.ssh/id_rsa
+            SHELL
+            
+          end
+        end
+      end
+
+      # Path of the provision files to be called
+      provision_scripts = dev_setup['provision_scripts']
+      provision_scripts.each do |run_script|
+        srv.vm.provision "shell", :path => File.join(vm_config_dir, run_script), privileged: false
+      end
+      
+
+
+      #srv.vm.provision "shell", :path => dev_setup['start_script'], privileged: false
+    end # config.vm.define
+  end # devMachines.each
+end # Vagrant.configure
+

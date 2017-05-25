@@ -1,0 +1,28 @@
+[
+  {
+    "name": "UCEF 1.0.0-alpha",
+    "box": "box-cutter/ubuntu1404-desktop",
+    "sync_folders": [
+      // {
+      //   "host_folder": "../share",
+      //   "vagrant_folder": "/cpswt"
+      // }
+    ],
+    "VBoxProperties": {
+      "--memory": 8192,
+      "--cpus": 4,
+      "--vram": 32,
+      "--monitorcount": 1,
+      "--accelerate3d": "off",
+      "--cableconnected1": "on"
+    },
+    "provision_scripts": [
+      "pre.sh",
+      "ucef_pre.sh",
+      "bootstrap.sh",
+      "post.sh"
+    ],
+    "post_up_message": "========================================= \n * Created at ISIS, Vanderbilt University \n * Authors: Yogesh Barve email:yogesh.d.barve@Vanderbilt.edu \n *          Himanshu Neema email:himanshu.neema@isis.vanderbilt.edu \n=============================================",
+    "extra_ssh_key_paths":["id_rsa_git_key"]
+  }
+]

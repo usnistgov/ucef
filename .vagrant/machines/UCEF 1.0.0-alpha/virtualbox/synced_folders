@@ -1,0 +1,1 @@
+{"virtualbox":{"/cpswt":{"guestpath":"/cpswt","hostpath":"D:/Projects/cpswt","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/Projects/cpswt/src/dev-tools","disabled":false,"__vagrantfile":true}}}

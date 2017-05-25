@@ -1,0 +1,13 @@
+--- 
+services: 
+  c2wtcore: 
+    build: .
+    image: "cpswt/c2wtcore_v002:160816"
+    #command: "sh /root/Projects/c2wt/deployment/HelloWorld_Deployment_Files/start.sh"
+    volumes:
+      - ./deployment:/root/Projects/c2wt/deployment
+    extra_hosts:
+      - "cpswtng_archiva:10.0.2.15"
+version: "2"
+
+

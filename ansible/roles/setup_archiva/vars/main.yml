@@ -1,0 +1,29 @@
+---
+  archiva_admin: 
+    email: admin@cpswtng.org
+    fullName: Admin
+    locked: false
+    password: adminpass123
+    passwordChangeRequired: false
+    permanent: false
+    readOnly: false
+    username: admin
+    validated: true
+  archiva_users: 
+    - email: deploy@cpswtng.org
+      fullName: "Deploy User"
+      locked: false
+      password: goC2wtng
+      passwordChangeRequired: false
+      permanent: false
+      readOnly: false
+      username: deployer
+      validated: true
+      assignedRoles: 
+        - "Global Repository Manager"
+        - "Global Repository Observer"
+        - "Registered User"
+        - "Repository Manager - internal"
+        - "Repository Observer - internal"
+        - "Repository Observer - snapshots"
+        - "Repository Manager - snapshots"

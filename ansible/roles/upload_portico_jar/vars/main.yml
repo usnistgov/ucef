@@ -1,0 +1,8 @@
+---
+# vars file for upload_portico_jar
+  archiva_admin: 
+    password: adminpass123
+    username: admin
+  archiva_users: 
+    - password: goC2wtng
+      username: deployer

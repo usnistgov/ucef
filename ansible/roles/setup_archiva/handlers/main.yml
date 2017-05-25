@@ -1,0 +1,4 @@
+---
+# handlers file for setup_archiva
+- name: restart archiva
+  service: name=archiva state=restarted
