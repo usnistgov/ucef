@@ -1,0 +1,3 @@
+/.vagrant
+/secrets/id_rsa_git_key
+/secrets/id_rsa_git_key.pub
