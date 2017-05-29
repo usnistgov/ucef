@@ -8,6 +8,7 @@ python27_func(){
 }
 git_func(){
     sudo apt-get install git -y
+	git config --global core.autocrlf true
 }
 
 gitpython_func(){
@@ -20,6 +21,6 @@ git_func
 gitpython_func
 # echo $PWD  ==> /home/vagrant
 
-echo "Cloning the Vulcan Developer Repositories"
+echo "Cloning the Developer Repositories"
 python /vagrant/shell_build_scripts/git_dev_fetch.py
 

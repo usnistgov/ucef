@@ -12,9 +12,10 @@ set_env_var_func(){
 init_func() {
     sudo apt-get update
     set -x
-    tr -d '\r' <  /vagrant/shell_build_scripts/env_file.sh > /home/vagrant/env_file.sh
+    tr -d '\r' <  /home/vagrant/cpswt/cpswt-devtools/shell_build_scripts/env_file.sh > /home/vagrant/env_file.sh
     source /home/vagrant/env_file.sh
     set +x
+	DEBIAN_FRONTEND=noninteractive 
 }
 
 openssl_func() {
@@ -104,7 +105,7 @@ webgme_func()
     npm install
 
     # Autostart WebGME on crash and reboot
-    sudo cp /vagrant/config/webgme.conf /etc/init/webgme.conf
+    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.conf /etc/init/webgme.conf
     sudo service webgme start
 
    
@@ -112,7 +113,7 @@ webgme_func()
     npm install
 
     # Autostart WebGMEGld on crash and reboot
-    sudo cp /vagrant/config/webgmegld.conf /etc/init/webgmegld.conf
+    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.conf /etc/init/webgmegld.conf
     sudo service webgmegld start
 }
 
@@ -145,9 +146,10 @@ eclipse_func(){
     wget --progress=bar:force  http://mirror.cc.vt.edu/pub/eclipse/technology/epp/downloads/release/luna/SR2/eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz
     tar xvf eclipse*.tar.gz -C $HOME
 
-    # Move the source code templates into the eclipse folder
+    # TODO: Remove 
+	# Move the source code templates into the eclipse folder
     # TODO: register the templates with eclipse automatically
-    cp /vagrant/config/eclipse_*_templates.xml $HOME
+    # cp /home/vagrant/cpswt/cpswt-devtools/config/eclipse_*_templates.xml $HOME
 }
 
 maven_func(){
@@ -161,7 +163,7 @@ maven_func(){
 
     # Configure maven to connect to internal archiva repository
     mkdir -p /home/vagrant/.m2
-    cp /vagrant/config/settings.xml $HOME/.m2/settings.xml
+    cp /home/vagrant/cpswt/cpswt-devtools/config/settings.xml $HOME/.m2/settings.xml
 }
 
 archiva_docker_func(){
@@ -278,7 +280,7 @@ ntp_func(){
 
 nmap_func(){
     # network mapper
-    sudo apt-get install nmap -y
+    sudo apt-get install nmap -y --force-yes
 }
 
 mc_func(){
@@ -321,8 +323,8 @@ gnome_func(){
 
     # Set launcher shortcuts
     mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
-    cp /vagrant/config/*.desktop $HOME/.local/share/applications
-    cp /vagrant/config/*.png $HOME/.local/share/icons/hicolor/48x48/apps
+    cp /home/vagrant/cpswt/cpswt-devtools/config/*.desktop $HOME/.local/share/applications
+    cp /home/vagrant/cpswt/cpswt-devtools/config/*.png $HOME/.local/share/icons/hicolor/48x48/apps
     gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://nautilus.desktop', 'archiva.desktop', 'eclipse.desktop', 'webgme.desktop', 'google-chrome.desktop', 'gnome-terminal.desktop', 'mysql-workbench.desktop', 'gedit.desktop', 'wireshark.desktop']"
 
     # Enable workspaces
@@ -444,8 +446,10 @@ download_cpswt_code_base_func(){
 build_foundation_classes_func (){
 
 	cd $JAVA_ROOT_FOUNDATION_SRC
+	sudo chmod +x setup_foundation_java.sh
 	sh setup_foundation_java.sh
 	cd $CPP_ROOT_FOUNDATION_SRC
+	sudo chmod +x setup_foundation.sh
 	sh setup_foundation.sh
 
 }
@@ -472,66 +476,68 @@ cppnetlib_func(){
 
 archiva_ansible_func(){
     mkdir -p /home/vagrant/ansible/
-    cp -r /vagrant/ansible/* /home/vagrant/ansible/
+    cp -r /home/vagrant/cpswt/cpswt-devtools/ansible/* /home/vagrant/ansible/
     cd /home/vagrant/ansible
     sh install_requirements.sh
     ansible-playbook main.yml -vv
 }
 
-
-
 # initialization
 init_func
 openssl_func
-git_func
-python27_func
+openjdk7_func
+java8_func
+chrome_browser_func
+
+# # databases 
+echo "UCEF-----> Install Databases"
+mongodb_func
+mysql_func
+
+# # java development
+echo "UCEF-----> Install management tools"
+ansible_func
+maven_func
+archiva_ansible_func
 
 # # docker
+echo "UCEF-----> Install Docker"
 docker_func
 docker_compose_func
 build_docker_image
 
 # # webgme development
-mongodb_func
+echo "UCEF-----> Install WEBGME Development"
 node_func
 webgme_func
-chrome_browser_func
-selenium_func
-mysql_func
-
-# # java development
-# openjdk7_func
-java8_func
-ansible_func
-maven_func
 portico_func
-archiva_ansible_func
+selenium_func
 
 # # Cpp libs
+echo "UCEF-----> Install Boost and CPPNet Libs"
 boost_func
 cppnetlib_func
 
-# Other software
-eclipse_func
-
 # # simulation software
+echo "UCEF-----> Install Gridlab-D"
 gridlabd_func
 
 # # federate source code
+echo "UCEF-----> Build Foundation Classes"
 build_foundation_classes_func
 
 # # misc applications
+echo "UCEF-----> Misc Tools"
+eclipse_func
 terminator_func
-sublime3_func
+#sublime3_func
 vim_func
 ntp_func
 nmap_func
 mc_func
-
-# #Installation Problems encounter for wireshark & ansible
-# # wireshark_func
-# # cleanup
-# gnome_func
+wireshark_func
 
 # cleanup
-# cleanup_func
+echo "UCEF-----> Cleanup"
+gnome_func
+cleanup_func

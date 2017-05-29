@@ -7,4 +7,4 @@ Terminal=false
 Exec=xdg-open http://127.0.0.1:8088/
 Name=WebGME
 Comment=Graphical Modeling Environment
-Icon=/home/vagrant/webgme/node_modules/webgme/src/client/img/gme-icon.png
+Icon=/home/vagrant/cpswt/cpswt-meta/node_modules/webgme/src/client/img/gme-icon.png
