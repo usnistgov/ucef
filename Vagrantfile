@@ -46,8 +46,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         if ssh_key.to_s != ''
           srv.vm.provision "shell" do |s|
             
-            private_key_path = File.join("./secrets", ssh_key)
-            public_key_path = File.join("./secrets", ssh_key+".pub")
+            private_key_path = File.join("../secrets", ssh_key)
+            public_key_path = File.join("../secrets", ssh_key+".pub")
 
             ssh_private_key = File.read(private_key_path)
             ssh_pub_key = File.read(public_key_path)

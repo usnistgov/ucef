@@ -14,7 +14,7 @@ Instruction to install:
 
  # Prerequisites 
 1) Make sure you have installed Oracle Virtualbox and Vagrant software (see the links below): - Oracle Virtualbox: https://www.virtualbox.org/ - Vagrant: https://www.vagrantup.com/docs/installation/ - Downloads: https://www.vagrantup.com/downloads.html
-1) create a subdirectory .secrets and place your public and private keys for the repository with the names id_rsa_git_key and id_rsa_git_key.pub
+1) Create a directory named 'secrets' in the parent directory that contains the checkout of this 'cpswt-devtools' repository. Place your public and private keys for the repository with the names id_rsa_git_key and id_rsa_git_key.pub
 1) Edit the file shell_build_scripts/dev_repos.json and place your username in the "vulcanuser" value.
 1) After installing Vagrant (or if you already have it installed), we need to make sure that Guest-Additions plugin is installed in Vagrant, by running the command on a DOS command prompt:
     
