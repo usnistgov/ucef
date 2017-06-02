@@ -4,12 +4,20 @@
   "repo_site": "git.vulcan.isis.vanderbilt.edu",
   "git_repos": [
     {
+      "directory": "cpswt-cpp",
+      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-cpp"
+    },
+    {
+      "directory": "cpswt-db",
+      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-db"
+    },
+    {
       "directory": "cpswt-devtools",
       "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-devtools"
     },
     {
-      "directory": "cpswt-cpp",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-cpp"
+      "directory": "cpswt-gridlabd-meta",
+      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-gridlabd-meta"
     },
     {
       "directory": "cpswt-java",
@@ -20,12 +28,12 @@
       "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-meta"
     },
     {
-      "directory": "cpswt-gridlabd-meta",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-gridlabd-meta"
-    },
-    {
       "directory": "cpswt-samples",
       "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-samples"
+    },
+    {
+      "directory": "ucef",
+      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/ucef"
     }
   ]
 }
