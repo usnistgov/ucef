@@ -9,6 +9,14 @@ set_env_var_func(){
     source $USER_ENV_FILE
 }
 
+disable_ipv6() {
+	# Multicast in a VM doesn't work properly with IPv6, so we must
+	# disable IPv6 on all network interfaces.
+	sudo echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+	sudo echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
+	sudo echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+}
+
 init_func() {
     sudo apt-get update
     set -x
@@ -485,6 +493,7 @@ archiva_ansible_func(){
 
 # initialization
 init_func
+disable_ipv6
 openssl_func
 openjdk7_func
 java8_func
