@@ -475,6 +475,7 @@ cppnetlib_func(){
 }
 
 archiva_ansible_func(){
+    rm -rf /home/vagrant/ansible/
     mkdir -p /home/vagrant/ansible/
     cp -r /home/vagrant/cpswt/cpswt-devtools/ansible/* /home/vagrant/ansible/
     cd /home/vagrant/ansible
@@ -498,6 +499,7 @@ mysql_func
 echo "UCEF-----> Install management tools"
 ansible_func
 maven_func
+portico_func
 archiva_ansible_func
 
 # # docker
@@ -510,7 +512,6 @@ build_docker_image
 echo "UCEF-----> Install WEBGME Development"
 node_func
 webgme_func
-portico_func
 selenium_func
 
 # # Cpp libs
@@ -530,7 +531,7 @@ build_foundation_classes_func
 echo "UCEF-----> Misc Tools"
 eclipse_func
 terminator_func
-#sublime3_func
+sublime3_func
 vim_func
 ntp_func
 nmap_func
