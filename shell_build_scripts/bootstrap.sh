@@ -12,9 +12,9 @@ set_env_var_func(){
 disable_ipv6() {
 	# Multicast in a VM doesn't work properly with IPv6, so we must
 	# disable IPv6 on all network interfaces.
-	sudo echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
-	sudo echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
-	sudo echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+	sudo sh -c 'echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf'
+	sudo sh -c 'echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf'
+	sudo sh -c 'echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf'
 	sudo sysctl -p
 }
 

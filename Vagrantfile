@@ -64,12 +64,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # Path of the provision files to be called
       provision_scripts = dev_setup['provision_scripts']
       provision_scripts.each do |run_script|
-        srv.vm.provision "shell", :path => File.join(vm_config_dir, run_script), privileged: true
+        srv.vm.provision "shell", :path => File.join(vm_config_dir, run_script), privileged: false
       end
       
 
 
-      #srv.vm.provision "shell", :path => dev_setup['start_script'], privileged: true
+      #srv.vm.provision "shell", :path => dev_setup['start_script'], privileged: false
     end # config.vm.define
   end # devMachines.each
 end # Vagrant.configure
