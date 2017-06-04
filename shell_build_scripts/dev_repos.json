@@ -16,6 +16,10 @@
       "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-devtools"
     },
     {
+      "directory": "cpswt-fedimgs",
+      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-fedimgs"
+    },
+    {
       "directory": "cpswt-gridlabd-meta",
       "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-gridlabd-meta"
     },
