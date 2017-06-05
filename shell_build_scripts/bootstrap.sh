@@ -486,7 +486,7 @@ cppnetlib_func(){
 archiva_ansible_func(){
     rm -rf /home/vagrant/ansible/
     mkdir -p /home/vagrant/ansible/
-    cp -r /home/vagrant/cpswt/cpswt-devtools/ansible/* /home/vagrant/ansible/
+    cp -r /vagrant/ansible/* /home/vagrant/ansible/
     cd /home/vagrant/ansible
     sh install_requirements.sh
     ansible-playbook main.yml -vv
@@ -498,7 +498,6 @@ disable_ipv6
 openssl_func
 openjdk7_func
 java8_func
-chrome_browser_func
 
 # # databases 
 echo "UCEF-----> Install Databases"
@@ -539,6 +538,7 @@ build_foundation_classes_func
 
 # # misc applications
 echo "UCEF-----> Misc Tools"
+chrome_browser_func
 eclipse_func
 terminator_func
 sublime3_func
@@ -548,7 +548,7 @@ nmap_func
 mc_func
 wireshark_func
 
-# cleanup
+# # cleanup
 echo "UCEF-----> Cleanup"
 gnome_func
 cleanup_func
