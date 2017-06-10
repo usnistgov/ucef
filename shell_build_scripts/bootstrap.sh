@@ -440,6 +440,7 @@ initialize_maven_archiva_settings_func()
 #    cp /home/vagrant/Projects/cpswt/src/dev-tools/settings.xml /home/vagrant/.m2/settings.xml
     #cp /home/vagrant/cpswt/src/dev-tools/settings.xml /home/vagrant/.m2/settings.xml
     cp $ARCHIVA_SETTINGS_XML_DIR/settings.xml /home/vagrant/.m2/settings.xml
+    
 }
 
 download_cpswt_code_base_func(){
@@ -490,6 +491,14 @@ archiva_ansible_func(){
     cd /home/vagrant/ansible
     sh install_requirements.sh
     ansible-playbook main.yml -vv
+
+    # create service start script for autostart (overrides what absible installs)
+    echo "sudo service archiva start" > startarchiva.sh
+    sudo chmod +x startarchiva.sh
+    sudo chown root:root startarchiva.sh
+    sudo mv startarchiva.sh /opt/apache-archiva-2.2.1/bin/
+    sudo ln -s -f /opt/apache-archiva-2.2.1/bin/startarchiva.sh /etc/rc2.d/S20archiva
+
 }
 
 # initialization
