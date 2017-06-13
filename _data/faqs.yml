@@ -1,0 +1,14 @@
+# This file contains FAQ entries
+
+# - question: "a question"
+#   answer: "an answer"
+#   category: [initiative | detail | ecosystem]
+#   audience: ["fed" | "consumer" | "developer" | "datacustodian" | "thirdparty" | "all"]
+#   url: "http://agency.gov"
+
+- question: "How do I ...?"
+  type: initiative
+  audience: all
+  url: "http://localhost.com/fubar"
+  answer: "..."
+

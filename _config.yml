@@ -1,0 +1,11 @@
+# Site settings
+title: UCEF
+description: "Universal CPS Environment for Federation: A development toolset to enable scalable and composable experimentation in CPS"
+
+baseurl: "/UCEF"
+rooturl: ""
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+exclude: [node_modules, gruntfile.js, package,json]

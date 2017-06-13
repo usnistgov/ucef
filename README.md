@@ -1,2 +1,1 @@
-# UCEF
-Universal CPS Environment for Federation
+UCEF README

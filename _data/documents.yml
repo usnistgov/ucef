@@ -1,0 +1,10 @@
+# This file contains the presentations library for UCEF
+# - name: "the title string of the presentation"
+#   description: "a description"
+#   category: ["document" | "presentation" | "TEapproach" | "standard" |
+#       "video" | ""]
+#   url: "<url to acquire document>"
+#   md5: md5 checksum
+#   sha256: sha256 checksum
+#   team: UCEF Team id -- UCEF for all
+#   featured: true (if item should be featured)
