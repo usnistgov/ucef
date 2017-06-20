@@ -152,13 +152,39 @@ openjdk7_func(){
 
 eclipse_func(){
     cd $HOME/Downloads/
-    wget --progress=bar:force  http://mirror.cc.vt.edu/pub/eclipse/technology/epp/downloads/release/luna/SR2/eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz
+    wget --progress=bar:force  http://mirror.cc.vt.edu/pub/eclipse/technology/epp/downloads/release/neon/3/eclipse-java-neon-3-linux-gtk-x86_64.tar.gz
     tar xvf eclipse*.tar.gz -C $HOME
 
     # TODO: Remove 
 	# Move the source code templates into the eclipse folder
     # TODO: register the templates with eclipse automatically
     # cp /home/vagrant/cpswt/cpswt-devtools/config/eclipse_*_templates.xml $HOME
+
+    # add emf classes needed for pubsub to m2
+# Edit this variable to point to your location of the files listed below.
+    EMF_HOME="./config"
+    GROUP="org.eclipse.emf"
+
+    mvn install:install-file \
+        -Dfile=$EMF_HOME/org.eclipse.emf.common_2.12.0.v20160420-0247.jar \
+        -DgroupId=$GROUP \
+        -DartifactId=org.eclipse.emf.common \
+        -Dversion=2.12.0 \
+        -Dpackaging=jar
+        
+    mvn install:install-file \
+        -Dfile=$EMF_HOME/org.eclipse.emf.ecore_2.12.0.v20160420-0247.jar \
+        -DgroupId=$GROUP \
+        -DartifactId=org.eclipse.emf.ecore \
+        -Dversion=2.12.0 \
+        -Dpackaging=jar
+        
+    mvn install:install-file \
+        -Dfile=$EMF_HOME/org.eclipse.emf.ecore.xmi_2.12.0.v20160420-0247.jar \
+        -DgroupId=$GROUP \
+        -DartifactId=org.eclipse.emf.ecore.xmi \
+        -Dversion=2.12.0 \
+        -Dpackaging=jar    
 }
 
 maven_func(){
