@@ -10,7 +10,7 @@ git_func(){
     sudo apt-get install git -y
 #	git config --global core.autocrlf true
 	git config core.eol lf
-    sudo apt-get gitk -y
+    sudo apt-get install gitk -y
 }
 
 gitpython_func(){
