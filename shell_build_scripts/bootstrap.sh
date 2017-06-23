@@ -421,6 +421,7 @@ java8_func(){
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
     sudo apt-get install oracle-java8-installer -y
     sudo apt-get install oracle-java8-set-default -y
+    sudo apt-get install default-jdk -y
 }
 
 #Finally Prepare this Box for package
@@ -531,7 +532,7 @@ archiva_ansible_func(){
 init_func
 disable_ipv6
 openssl_func
-openjdk7_func
+#openjdk7_func
 java8_func
 
 # # databases 
