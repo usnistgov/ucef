@@ -8,8 +8,8 @@ python27_func(){
 }
 git_func(){
     sudo apt-get install git -y
-#	git config --global core.autocrlf true
-	git config core.eol lf
+    # git config --global core.autocrlf true
+    git config core.eol lf
     sudo apt-get install gitk -y
 }
 
@@ -23,6 +23,5 @@ git_func
 gitpython_func
 # echo $PWD  ==> /home/vagrant
 
-echo "Cloning the Developer Repositories"
+echo "Cloning the Repositories"
 python /vagrant/shell_build_scripts/git_dev_fetch.py
-

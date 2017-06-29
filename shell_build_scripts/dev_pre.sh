@@ -3,6 +3,7 @@
 
 set_env_var_func(){
     USER_ENV_FILE="/home/vagrant/.bashrc"
+    CPSWT_FLAVOR=CPSWT
     #cat $USER_ENV_FILE
     #echo "$1"
     echo "$1" | sudo tee -a $USER_ENV_FILE
