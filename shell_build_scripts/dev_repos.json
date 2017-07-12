@@ -1,43 +1,35 @@
 {
   
-  "gituser": "martyburns",
+  "gituser": "hneema08",
   "repo_site": "git.vulcan.isis.vanderbilt.edu",
   "git_repos": [
     {
       "directory": "cpswt-cpp",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-cpp"
+      "url": "https://github.com/SimIntToolkit/cpswt-cpp"
     },
     {
       "directory": "cpswt-db",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-db"
+      "url": "https://github.com/SimIntToolkit/cpswt-db"
     },
     {
       "directory": "cpswt-devtools",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-devtools"
-    },
-    {
-      "directory": "cpswt-fedimgs",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-fedimgs"
+      "url": "https://github.com/SimIntToolkit/cpswt-devtools"
     },
     {
       "directory": "cpswt-gridlabd-meta",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-gridlabd-meta"
+      "url": "https://github.com/SimIntToolkit/cpswt-gridlabd-meta"
     },
     {
       "directory": "cpswt-java",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-java"
+      "url": "https://github.com/SimIntToolkit/cpswt-core"
     },
     {
       "directory": "cpswt-meta",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-meta"
+      "url": "https://github.com/SimIntToolkit/cpswt-meta"
     },
     {
       "directory": "cpswt-samples",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/cpswt-samples"
-    },
-    {
-      "directory": "ucef",
-      "url": "ssh://gituser@git.vulcan.isis.vanderbilt.edu/projects/cpswt/ucef"
+      "url": "https://github.com/SimIntToolkit/cpswt-samples"
     }
   ]
 }
