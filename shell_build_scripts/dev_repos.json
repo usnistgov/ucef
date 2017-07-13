@@ -20,7 +20,7 @@
       "url": "git@github.com:SimIntToolkit/cpswt-gridlabd-meta.git"
     },
     {
-      "directory": "cpswt-java",
+      "directory": "cpswt-core",
       "url": "git@github.com:SimIntToolkit/cpswt-core.git"
     },
     {
