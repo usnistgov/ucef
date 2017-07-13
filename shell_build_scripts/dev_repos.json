@@ -1,35 +1,35 @@
 {
   
   "gituser": "hneema08",
-  "repo_site": "git.vulcan.isis.vanderbilt.edu",
+  "repo_site": "github.com",
   "git_repos": [
     {
       "directory": "cpswt-cpp",
-      "url": "https://github.com/SimIntToolkit/cpswt-cpp"
+      "url": "git@github.com:SimIntToolkit/cpswt-cpp.git"
     },
     {
       "directory": "cpswt-db",
-      "url": "https://github.com/SimIntToolkit/cpswt-db"
+      "url": "git@github.com:SimIntToolkit/cpswt-db.git"
     },
     {
       "directory": "cpswt-devtools",
-      "url": "https://github.com/SimIntToolkit/cpswt-devtools"
+      "url": "git@github.com:SimIntToolkit/cpswt-devtools.git"
     },
     {
       "directory": "cpswt-gridlabd-meta",
-      "url": "https://github.com/SimIntToolkit/cpswt-gridlabd-meta"
+      "url": "git@github.com:SimIntToolkit/cpswt-gridlabd-meta.git"
     },
     {
       "directory": "cpswt-java",
-      "url": "https://github.com/SimIntToolkit/cpswt-core"
+      "url": "git@github.com:SimIntToolkit/cpswt-core.git"
     },
     {
       "directory": "cpswt-meta",
-      "url": "https://github.com/SimIntToolkit/cpswt-meta"
+      "url": "git@github.com:SimIntToolkit/cpswt-meta.git"
     },
     {
       "directory": "cpswt-samples",
-      "url": "https://github.com/SimIntToolkit/cpswt-samples"
+      "url": "git@github.com:SimIntToolkit/cpswt-samples.git"
     }
   ]
 }
