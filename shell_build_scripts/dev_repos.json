@@ -1,35 +1,34 @@
 {
-  
-  "gituser": "hneema08",
-  "repo_site": "github.com",
-  "git_repos": [
-    {
-      "directory": "cpswt-cpp",
-      "url": "git@github.com:SimIntToolkit/cpswt-cpp.git"
-    },
-    {
-      "directory": "cpswt-db",
-      "url": "git@github.com:SimIntToolkit/cpswt-db.git"
-    },
-    {
-      "directory": "cpswt-devtools",
-      "url": "git@github.com:SimIntToolkit/cpswt-devtools.git"
-    },
-    {
-      "directory": "cpswt-gridlabd-meta",
-      "url": "git@github.com:SimIntToolkit/cpswt-gridlabd-meta.git"
-    },
-    {
-      "directory": "cpswt-core",
-      "url": "git@github.com:SimIntToolkit/cpswt-core.git"
-    },
-    {
-      "directory": "cpswt-meta",
-      "url": "git@github.com:SimIntToolkit/cpswt-meta.git"
-    },
-    {
-      "directory": "cpswt-samples",
-      "url": "git@github.com:SimIntToolkit/cpswt-samples.git"
-    }
-  ]
+
+    "gituser": "MartyBurns",
+    "repo_site": "github.com",
+    "git_repos": [{
+            "directory": "cpswt-cpp",
+            "url": "git@github.com:usnistgov/ucef-cpp.git"
+        },
+        {
+            "directory": "cpswt-db",
+            "url": "git@github.com:usnistgov/ucef-db.git"
+        },
+        {
+            "directory": "cpswt-devtools",
+            "url": "git@github.com:usnistgov/ucef-devtools.git"
+        },
+        {
+            "directory": "cpswt-gridlabd-meta",
+            "url": "git@github.com:usnistgov/ucef-gridlabd-meta.git"
+        },
+        {
+            "directory": "cpswt-core",
+            "url": "git@github.com:usnistgov/ucef-core.git"
+        },
+        {
+            "directory": "cpswt-meta",
+            "url": "git@github.com:usnistgov/ucef-meta.git"
+        },
+        {
+            "directory": "cpswt-samples",
+            "url": "git@github.com:usnistgov/ucef-samples.git"
+        }
+    ]
 }
