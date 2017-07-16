@@ -30,7 +30,7 @@ federate_src_init_func(){
     # Export C2WTROOT 
 
     #echo "C2WTROOT=\"/home/vagrant/cpswt\"" | sudo tee -a /etc/environment
-    set_env_var_func "JAVA_ROOT_FOUNDATION_SRC=/home/vagrant/cpswt/cpswt-java"
+    set_env_var_func "JAVA_ROOT_FOUNDATION_SRC=/home/vagrant/cpswt/cpswt-core"
     set_env_var_func "CPP_ROOT_FOUNDATION_SRC=/home/vagrant/cpswt/cpswt-cpp"
 }
 
