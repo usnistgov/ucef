@@ -20,7 +20,7 @@ disable_ipv6() {
 init_func() {
     sudo apt-get update
     set -x
-    tr -d '\r' <  /home/vagrant/cpswt/cpswt-devtools/shell_build_scripts/env_file.sh > /home/vagrant/env_file.sh
+    tr -d '\r' <  /vagrant/shell_build_scripts/env_file.sh > /home/vagrant/env_file.sh
     source /home/vagrant/env_file.sh
     set +x
     DEBIAN_FRONTEND=noninteractive 
@@ -187,7 +187,10 @@ eclipse_func(){
 }
 
 maven_func(){
-    sudo apt-get install --fix-missing maven -y
+    sudo apt-get purge maven maven2 maven3
+    sudo add-apt-repository ppa:andrei-pozolotin/maven3
+    sudo apt-get update
+    sudo apt-get install maven3
 
     # add archiva to /etc/hosts
     cd $HOME/Downloads/
