@@ -12,7 +12,7 @@
         },
         {
             "directory": "cpswt-devtools",
-            "url": "git@github.com:usnistgov/ucef-devtools.git"
+            "url": "git@github.com:usnistgov/ucef.git"
         },
         {
             "directory": "cpswt-gridlabd-meta",
