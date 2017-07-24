@@ -1,5 +1,3 @@
-
-
 ![UCEF logo](ucef_final.jpg)
 
 # UCEF Workshop
@@ -105,4 +103,4 @@ Archiva, Git
 ### UCEF Website
 
 Follow this link to the [UCEF Website on GitHub] (docs/README.md "") 
-
+

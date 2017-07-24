@@ -40,27 +40,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       srv.vbguest.auto_update = true  
       srv.vm.post_up_message = dev_setup["post_up_message"]
       
-
-      provision_ssh_keys = dev_setup["extra_ssh_key_paths"]
-      provision_ssh_keys.each do |ssh_key|
-        if ssh_key.to_s != ''
-          srv.vm.provision "shell" do |s|
-            
-            private_key_path = File.join("./secrets", ssh_key)
-            public_key_path = File.join("./secrets", ssh_key+".pub")
-
-            ssh_private_key = File.read(private_key_path)
-            ssh_pub_key = File.read(public_key_path)
-            
-            s.inline = <<-SHELL
-              echo '#{ssh_pub_key}' >> /home/vagrant/.ssh/authorized_keys
-              echo '#{ssh_private_key}' > /home/vagrant/.ssh/id_rsa
-            SHELL
-            
-          end
-        end
-      end
-
       # Path of the provision files to be called
       provision_scripts = dev_setup['provision_scripts']
       provision_scripts.each do |run_script|
