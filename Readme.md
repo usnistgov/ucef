@@ -36,7 +36,7 @@ Please join us on Thursday, July 27th to learn about this exciting technology an
 * Location: NCCoE (National Cybersecurity Center of Excellence)
 * Directions and Phone: 9700 Great Seneca Hwy, Rockville, MD 20850, (301) 975-0200 
 * Date: 27 July 2017
-* Time: 8:00 a.m. to 5:45 p.m.
+* Time: 9:00 a.m. to 5:45 p.m.
 * Registration Link: <https://appam.certain.com/profile/web/index.cfm?PKWebId=0x14555479a>
 * Organizer Contacts: Martin Burns <martin.burns@nist.gov>, Thomas Roth <tom.roth@nist.gov>, Edward Griffor <edward.griffor@nist.gov>
 
