@@ -91,7 +91,7 @@ mongodb_func(){
 
     # add robomongo
     cd $HOME/Downloads/
-    wget https://download.robomongo.org/0.9.0/linux/robomongo-0.9.0-linux-x86_64-0786489.tar.gz
+    wget -q https://download.robomongo.org/0.9.0/linux/robomongo-0.9.0-linux-x86_64-0786489.tar.gz
     tar -xvzf robomongo-0.9.0-linux-x86_64-0786489.tar.gz
     sudo mkdir /usr/local/bin/robomongo
     sudo mv  robomongo-0.9.0-linux-x86_64-0786489/* /usr/local/bin/robomongo
@@ -270,7 +270,7 @@ portico_func(){
 
     # Download and extract portico
     cd $HOME/Downloads/
-    wget --progress=bar:force  http://downloads.sourceforge.net/project/portico/Portico/portico-$PORTICO_VERSION/portico-$PORTICO_VERSION-linux64.tar.gz
+    wget -q  http://downloads.sourceforge.net/project/portico/Portico/portico-$PORTICO_VERSION/portico-$PORTICO_VERSION-linux64.tar.gz
     tar xzf portico-$PORTICO_VERSION-linux64.tar.gz -C $HOME
 
     # Set the RTI_HOME environment variable
