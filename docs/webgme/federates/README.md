@@ -1,3 +1,5 @@
+![UCEF logo](ucef_final.jpg)
+
 This tutorial describes how to design a new federate in WebGME. The tutorial assumes that you have already created a WebGME project for the federate, and have the root folder of that project open. Refer to the tutorial on WebGME project management if you are not familiar with these steps.
 
 # Create a Federate
