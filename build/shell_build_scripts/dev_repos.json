@@ -1,34 +1,32 @@
 {
-
-    "gituser": "MartyBurns",
     "repo_site": "github.com",
     "git_repos": [{
             "directory": "cpswt-cpp",
-            "url": "git@github.com:usnistgov/ucef-cpp.git"
+            "url": "https://github.com/usnistgov/ucef-cpp.git"
         },
         {
             "directory": "cpswt-db",
-            "url": "git@github.com:usnistgov/ucef-db.git"
+            "url": "https://github.com/usnistgov/ucef-db.git"
         },
         {
             "directory": "cpswt-devtools",
-            "url": "git@github.com:usnistgov/ucef.git"
+            "url": "https://github.com/usnistgov/ucef.git"
         },
         {
             "directory": "cpswt-gridlabd-meta",
-            "url": "git@github.com:usnistgov/ucef-gridlabd-meta.git"
+            "url": "https://github.com/usnistgov/ucef-gridlabd-meta.git"
         },
         {
             "directory": "cpswt-core",
-            "url": "git@github.com:usnistgov/ucef-core.git"
+            "url": "https://github.com/usnistgov/ucef-core.git"
         },
         {
             "directory": "cpswt-meta",
-            "url": "git@github.com:usnistgov/ucef-meta.git"
+            "url": "https://github.com/usnistgov/ucef-meta.git"
         },
         {
             "directory": "cpswt-samples",
-            "url": "git@github.com:usnistgov/ucef-samples.git"
+            "url": "https://github.com/usnistgov/ucef-samples.git"
         }
     ]
 }
