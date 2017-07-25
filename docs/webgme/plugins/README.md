@@ -1,3 +1,4 @@
+![UCEF logo](ucef_final.jpg)
 # Code Generation Plugins
 
 ![Execute plugin](webgme-plugins-1.png)

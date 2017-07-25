@@ -1,5 +1,3 @@
-
-
 CPSWT Docker Virtual Machine
 =============================
 
@@ -50,6 +48,3 @@ Instruction to install:
 
 
 **UserName and Password for the Virtual Machine is default vagrant**
-
-
-

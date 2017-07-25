@@ -1,3 +1,5 @@
+![UCEF logo](ucef_final.jpg)
+
 This tutorial covers how to manage WebGME projects.
 
 # Create Project
