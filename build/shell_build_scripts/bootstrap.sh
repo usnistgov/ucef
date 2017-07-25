@@ -249,13 +249,15 @@ gridlabd_func(){
     cd $HOME/Downloads/
 #    sudo svn co -q svn://svn.code.sf.net/p/gridlab-d/code/trunk@5307 gridlab-d-code
     sudo svn co -q svn://svn.code.sf.net/p/gridlab-d/code/trunk gridlab-d-code
+    sudo mv gridlab-d-code /opt
 
-    cd $HOME/Downloads/gridlab-d-code
+    cd /opt/gridlab-d-code
     sudo mkdir -p /usr/local/gridlab-d
     sudo autoreconf -isf
     sudo ./configure --prefix=/usr/local/gridlab-d --enable-silent-rules
     sudo make && sudo make install
     sudo ln -s /usr/local/gridlab-d/bin/gridlabd /usr/local/bin/gridlabd
+
 }
 
 ########################
