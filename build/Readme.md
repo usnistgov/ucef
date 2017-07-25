@@ -1,23 +1,19 @@
-CPSWT Docker Virtual Machine
+UCEF Virtual Machine
 =============================
 
-Instruction:
+## Download Current VM Image
+ https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/UCEF1.0.0-alpha-20170725.ova
 
-Pre-requisite 
-- Virtualbox
-- Vagrant
-Instruction to install:
--  Vagrant: https://www.vagrantup.com/docs/installation/
--  Downloads: https://www.vagrantup.com/downloads.html
+## Build Instructions
 
- # Prerequisites 
+### Prerequisites 
 1) Make sure you have installed Oracle Virtualbox and Vagrant software (see the links below): - Oracle Virtualbox: https://www.virtualbox.org/ - Vagrant: https://www.vagrantup.com/docs/installation/ - Downloads: https://www.vagrantup.com/downloads.html
-
-1) Edit the file shell_build_scripts/dev_repos.json and place your username in the "vulcanuser" value.
 
 1) After installing Vagrant (or if you already have it installed), we need to make sure that Guest-Additions plugin is installed in Vagrant, by running the command on a DOS command prompt:
     
         vagrant plugin install vagrant-vbguest
+
+### Build the VM
 
 1) Issue command in the folder which contains the Vagrantfile (note: there will be some "system error" dialogs in the VM while it is being built; ignore them):
     
