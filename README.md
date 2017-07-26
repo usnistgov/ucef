@@ -1,8 +1,8 @@
 ![UCEF logo](ucef_final.jpg)
 
-# UCEF Workshop
+# UCEF
 
-### Background on Cyber-Physical Systems
+### Background on UCEF and Cyber-Physical Systems
 
 Cyber-Physical Systems (CPS) are smart systems that include co-engineered interacting networks of physical and computational components [1].  CPS integrate computation, communication, sensing and actuation with physical systems to fulfill time-sensitive functions with varying degrees of interaction with the environment, including human interaction.  These highly interconnected systems provide new functionalities to improve quality of life and enable technological advances in critical areas, such as personalized health care, emergency response, traffic flow management, smart manufacturing, defense and homeland security, and energy supply and use.  CPS and related systems (including the Internet of Things (IoT) and the Industrial Internet) are widely recognized as having potential to enable innovative applications and impact multiple economic sectors in the worldwide economy [2].
 
@@ -23,13 +23,22 @@ UCEF is provided as an open source toolkit that:
 * allows experiments to be composed among local simulations, hardware in the loop (HIL), cloud simulations, and collaborative experiments across the world;
 * integrates federates designed in (expected as of this workshop): Java, C++, Omnet++, Matlab, LabView, Gridlab-D.
 
+## Site organization
+
+This site has two principle sections:
+- [**Build**](build) which contains code to allow for the automated generation of the UCEF Virtual Machine
+- [**Docs**](docs) which contains documentation on UCEF
+
+---
+
+# July 27 Kickoff Workshop
+Please join us on Thursday, July 27th to learn about this exciting technology and participate in its evolution.
+
 At this workshop, participants will learn the details of UCEF, obtain a copy that they can install at the workshop and take home with them on a USB drive, and participate in a hands-on exercise to design/implement/build a collaborative experiment involving all attendees.
 
 We are looking for practitioners of these technologies who may be interested in not only using UCEF, but more importantly in contributing to its development and evolution. 
 
 To participate in the workshop exercise you will need a laptop with a Wi-Fi connection (during the federated experiment your laptop will be connected to a local private Wi-Fi network set up for this purpose). We will provide USB drive with software needed to load virtual machine on your computer. NIST will have a couple of secure USB drives for those who cannot connect an unencrypted USB to their laptop***.
-
-Please join us on Thursday, July 27th to learn about this exciting technology and participate in its evolution.
 
 ### Workshop Logistics
 
