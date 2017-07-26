@@ -32,13 +32,37 @@ This will run the federation manager and produce the following output:
 
 federation name & network address & server address
 
-RESTful command to start federation
-
-NEED OUTPUT HERE!!!!
+---
 
 # RESTful API
 
-steal from the workshop configuration files
+_RESTful commands to start, stop, pause, and resume a federation's execution.  These are given as complete commands that can copied and pasted into a command line._
+
+### Start execution 
+_We assume all federates in the experiment are deployed and running but are in a state-of-waiting waiting for time stepping to begin._
+
+	curl -i -X POST http://127.0.0.1:8083/fedmgr --data '{"action": "START"}' -H "Content-Type: application/json"
+
+### Stop execution
+_Ends the experiment_
+
+	curl -i -X POST http://127.0.0.1:8083/fedmgr --data '{"action": "TERMINATE"}' -H "Content-Type: application/json"
+
+### Pause execution
+_Puts the experiment on hold_
+
+	curl -i -X POST http://127.0.0.1:8083/fedmgr --data '{"action": "PAUSE"}' -H "Content-Type: application/json"
+
+### Resume execution 
+_Continues an experiment's execution after a pause._
+
+	curl -i -X POST http://127.0.0.1:8083/fedmgr --data '{"action": "RESUME"}' -H "Content-Type: application/json"
+
+### Lists running federates.
+
+	curl -i -X GET http://127.0.0.1:8083/federates
+
+---
 
 # Configuring the federation manager
 ## fedmgrconfig.json
@@ -61,7 +85,40 @@ steal from the workshop configuration files
 	  "experimentConfig": "conf/experimentConfig.json"
 	}
 
+### Field summary
+
+- federateRTIInitWaitTimeMs -- A sleep period before joining the federation.
+
+- federateType -- Value is set to FederationManager to distguish it from some other type of federate.
+
+- federationId -- The name of the federation manager.  This same value must be set in each joining federate.
+
+- isLateJoiner -- Must be set to true.
+
+- lookAhead -- Must be smaller that step size.
+
+- stepSize -- Number of logiclal time units per interation.
+
+- bindHost -- IP address for the RESTful API calls (above).
+
+- port -- Port for the RESTful API calls (above).
+
+- controlEndpoint -- Context for the RESTful API calls (above).
+
+- federatesEndpoint -- RESTful call that outputs a list of running federates.
+
+- federationEndTime -- The time step upon which an experiment ends.  Set to zero for unlimited.
+
+- realTimeMode -- Slows the wall clock time.
+
+- terminateOnCOAFinish -- Unused.
+
+- fedFile - Path to the file that defines the interactions used by this federation.
+
+- experimentConfig -- Path to the file that identifies the federates that participate in this experiment.
+
 ## experimentConfig.json
+_This file is referenced by the fedmgrconfig.json file (above)._
 
 	{
 	  "federateTypesAllowed": [
@@ -108,6 +165,15 @@ steal from the workshop configuration files
 	  ]
 	}
 
+### Field summary
+
+- federateTypesAllowed -- A collection of names of federates that are permitted to join this federation
+
+- expectedFederates:federateType -- Name of a federate.that is expected to join in this federation
+
+- lateJoinerFederates:federateType -- Name of a federate.that is expected to join in this federation after it starts execution.
+
+
 ## log4j2.xml
 
 	<?xml version="1.0" encoding="UTF-8"?>
@@ -124,6 +190,13 @@ steal from the workshop configuration files
 		</Loggers>
 	</Configuration>
 
+	log4j2 suppports several levels of logging. Set the level at <Root level="your level here">.  The most commion log levels levels are WARN, INFO, and DEBUG.  
+
+Find a complete list of log levels [here](http://javapapers.com/log4j/log4j-levels/)
+
+Complete logging documentaion is [here](https://logging.apache.org/log4j/2.x/manual/configuration.html)
+
+---
 ## RTI.rid
 
 	# (4.2) JGroups Bind Address
