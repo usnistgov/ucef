@@ -32,7 +32,7 @@ This site has two principle sections:
 ---
 
 # July 27 Kickoff Workshop
-Please join us on Thursday, July 27th to learn about this exciting technology and participate in its evolution.
+The workshop was completed on the 27th of July. Please monitor this site for future activities on the continued development and evolution of UCEF.
 
 At this workshop, participants will learn the details of UCEF, obtain a copy that they can install at the workshop and take home with them on a USB drive, and participate in a hands-on exercise to design/implement/build a collaborative experiment involving all attendees.
 
@@ -42,17 +42,10 @@ To participate in the workshop exercise you will need a laptop with a Wi-Fi conn
 
 ### Workshop Logistics
 
-* Location: NCCoE (National Cybersecurity Center of Excellence)
-* Directions and Phone: 9700 Great Seneca Hwy, Rockville, MD 20850, (301) 975-0200 
-* Date: 27 July 2017
-* Time: 9:00 a.m. to 5:45 p.m.
-* Registration Link: <https://appam.certain.com/profile/web/index.cfm?PKWebId=0x14555479a>
-* Organizer Contacts: Martin Burns <martin.burns@nist.gov>, Thomas Roth <tom.roth@nist.gov>, Edward Griffor <edward.griffor@nist.gov>
-
-
+Workshop was completed on July 27th
 
  
-### PRELIMINARY AGENDA
+### AGENDA
 
 [9:00-9:30] Welcome and NIST SGCPS
 NIST CPS Testbed Effort
