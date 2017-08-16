@@ -30,5 +30,5 @@ with open(dev_repo_file) as json_data:
         os.chdir(repo_path)
         repo = Repo.clone_from(repo_url, repo_path)
         if 'tag' in dev_repo:
-            repo.fetch()
-            repo.checkout(dev_repo['tag'])
+            repo.git.checkout(dev_repo['tag'])
+
