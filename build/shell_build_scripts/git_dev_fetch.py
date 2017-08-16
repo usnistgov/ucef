@@ -28,6 +28,7 @@ with open(dev_repo_file) as json_data:
         if not os.path.exists(repo_path):
             os.makedirs(repo_path)
         os.chdir(repo_path)
-        Repo.clone_from(repo_url, repo_path)
-
-
+        repo = Repo.clone_from(repo_url, repo_path)
+        if 'tag' in dev_repo:
+            repo.fetch()
+            repo.checkout(dev_repo['tag'])
