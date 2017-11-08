@@ -3,3 +3,5 @@ docs/fedmgr/Thumbs.db
 initializeCredentials.pyc
 Thumbs.db
 files/
+_site/
+*.pyc
