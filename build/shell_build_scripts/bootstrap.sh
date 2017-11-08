@@ -250,7 +250,7 @@ gridlabd_func(){
 #    sudo svn co -q svn://svn.code.sf.net/p/gridlab-d/code/trunk@5307 gridlab-d-code
 #    sudo svn co -q svn://svn.code.sf.net/p/gridlab-d/code/trunk gridlab-d-code
     # MJB 20171108 gridlab-d is abandoning sf repository in favor of github; will check out develop branch
-    git clone git@github.com:gridlab-d/gridlab-d.git gridlab-d-code
+    git clone https://github.com/gridlab-d/gridlab-d.git gridlab-d-code
     sudo mv gridlab-d-code /opt
 
     cd /opt/gridlab-d-code
