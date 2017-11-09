@@ -134,6 +134,7 @@ chrome_browser_func()
 
     sudo apt-get update
     sudo apt-get install google-chrome-stable -y
+    sudo apt-get install --reinstall libnss3
 
     # Set chrome as the default browser
     xdg-mime default google-chrome.desktop text/html
