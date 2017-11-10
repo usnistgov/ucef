@@ -134,7 +134,7 @@ chrome_browser_func()
 
     sudo apt-get update
     sudo apt-get install google-chrome-stable -y
-    sudo apt-get install --reinstall libnss3
+    sudo apt-get install --reinstall libnss3 -y -f
 
     # Set chrome as the default browser
     xdg-mime default google-chrome.desktop text/html
@@ -592,4 +592,7 @@ wireshark_func
 # cleanup
 echo "${CPSWT_FLAVOR}-----> Cleanup"
 gnome_func
+
+sudo apt-get install --reinstall libnss3 -y -f
+
 cleanup_func
