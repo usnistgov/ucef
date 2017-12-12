@@ -6554,7 +6554,8 @@ section.home{
 }
 
 .home-title{
-	min-height:468px;
+	min-height:600px;
+#	min-height:468px;
 	margin-top:40px;
 	color:#4cba6f;
 	background-size:cover;
@@ -6578,10 +6579,11 @@ section.home{
 }
 
 .home-title img{
-	width:300px;
-	height:200px;
+	width:80%;
+	height:80%;
 	margin:0 auto;
-	margin-bottom:40px
+	margin-top:40px;
+	margin-bottom:40px;
 }
 
 .home-title h2{

@@ -1,113 +1,15 @@
 ---
-title: Transactive Energy Library
+title: Library
 layout: page
 ---
-#Library
 
----
-<h2>Transactive Energy Library</h2>
-<p>The following documents provide background on Transactive Energy</p>
-<section>
+<img style="width:50%;" src="{{ site.baseurl }}/assets/ucef_final.jpg" alt="UCEF">
 
-<a href="#video">Videos</a> || <a href="#presentation">Presentations</a> || <a href="#document">Documents</a> || <a href="#TEapproach">TE Approaches</a> || <a href="#standard">Standards</a>
-<hr />
+# UCEF Workshop Website on GitHub
 
-<a id="Presentation">&nbsp;</a>
-<h3>TE Presentations</h3>
-<dl>
-{% for document in site.data.documents %}
+To access the documentation for this workshop you can follow the links below for each of the topics listed:
 
-  {% if document.category == "presentation" %}
-  <dt>
-    {% if document.html %}
-    <a href="{{document.html}}" >
-    {{document.name}} (Web Page)</a>
-    {% endif %}
-	
-    {% if document.doc %}
-    <a href="{{document.doc}}" >
-    {{document.name}} (Document) </a>
-    {% endif %}
-
-    {% if document.pdf %}
-    <a href="{{document.pdf}}" >
-    {{document.name}} (PDF) </a>
-    {% endif %}
-
-  </dt>
-
-
-  <dd>{{document.description}}</dd>
-
-{% endif %}
-{% endfor %}
-</dl>
-
-<a id="document">&nbsp;</a>
-<h3>TE Documents</h3>
-<dl>
-{% for document in site.data.documents %}
-
-  {% if document.category == "document" %}
-  <dt>
-    {% if document.html %}
-    <a href="{{document.html}}" >
-    {{document.name}} (Web Page)</a>
-    {% endif %}
-
-    {% if document.doc %}
-    <a href="{{document.doc}}" >
-    {{document.name}} (Document) </a>
-    {% endif %}
-
-    {% if document.pdf %}
-    <a href="{{document.pdf}}" >
-    {{document.name}} (.pdf) </a>
-    {% endif %}
-
-  </dt>
-
-
-  <dd>{{document.description}}</dd>
-
-{% endif %}
-{% endfor %}
-</dl>
-
-
-<a id="espidev">&nbsp;</a>
-<h3>TE Approaches</h3>
-<dl>
-{% for document in site.data.documents %}
-
-  {% if document.category == "TEapproach" %}
-  <dt>
-    {% if document.html %}
-    <a href="{{document.html}}" >
-    {{document.name}} (Web Page)</a>
-    {% endif %}
-
-    {% if document.doc %}
-    <a href="{{document.doc}}" >
-    {{document.name}} (Document) </a>
-    {% endif %}
-
-    {% if document.pdf %}
-    <a href="{{document.pdf}}" >
-    {{document.name}} (.pdf) </a>
-    {% endif %}
-
-  </dt>
-
-
-  <dd>{{document.description}}</dd>
-
-{% endif %}
-{% endfor %}
-</dl>
-
-
-
-
----
-Checksums for the documents stored for this site can be found [here](checksums)
+* [Federates and Federated Testbed Architecture](federatedtestbedarch/README.md "")
+* [How to use WebGME](webgme/README.md "")
+* [How to run a federation](fedmgr/README.md "")
+* [Testing and Curation of Federates](testingandcuration/README.md)
