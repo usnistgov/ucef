@@ -9,6 +9,10 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+Thumbs.db
+_site/
+files/
+*.pyc
 
 # Used by dotenv library to load environment variables.
 # .env
