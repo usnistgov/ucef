@@ -1,4 +1,8 @@
-![UCEF logo](ucef_final.jpg)
+---
+title: WebGME
+layout: page
+---
+
 # WebGME Overview
 The Web-based Graphical Modeling Environment (WebGME) is an editor used to design HLA federates and experiments.
 It contains plugins to facilitate model exchange between different WebGME environments, and code generation capabilities to turn designs into executable code.

@@ -1,4 +1,8 @@
-![UCEF Logo](ucef_final.jpg)
+---
+title: Fed Manager
+layout: page
+---
+
 
 # Running the federation manager
 

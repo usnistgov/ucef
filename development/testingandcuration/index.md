@@ -1,4 +1,7 @@
-![UCEF logo](ucef_final.jpg)
+---
+title: Testing and curation of Federates
+layout: page
+---
 
 ## Testing and Curation of Federates
 
