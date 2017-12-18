@@ -6564,7 +6564,7 @@ section.home{
 
 @media (min-width:1200px){
 	.home-title{
-		max-height:800px
+#		max-height:800px
 	}
 
 }
@@ -6650,7 +6650,7 @@ section.home.home-about .audiences li{
 	section.home.home-about .audiences li{
 
         float:left;
-	width:20%
+	width:33%
 	}
 
 }
