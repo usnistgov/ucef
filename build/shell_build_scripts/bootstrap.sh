@@ -287,11 +287,6 @@ omnetpp_func (){
     libwebkitgtk-1.0-0 \
     xvfb
     
-    #sudo apt-get install build-essential gcc g++ bison flex perl \
-    # qt5-default tcl-dev tk-dev libxml2-dev zlib1g-dev default-jre \
-    # doxygen graphviz libwebkitgtk-3.0-0 -y -f
-    
-    
     # QT5 components
     sudo apt-get install -y -f\
     qt5-default \
@@ -302,6 +297,7 @@ omnetpp_func (){
     openscenegraph-plugin-osgearth \
     osgearth \
     osgearth-data \
+    doxygen \
     libosgearth-dev
 
     # OMNeT++ 5
@@ -318,11 +314,25 @@ omnetpp_func (){
             https://www.omnetpp.org/omnetpp/send/30-omnet-releases/2321-omnetpp-5-2-1-linux
     tar -xf omnetpp-5.2.1-src.tgz
     sudo mv omnetpp-5.2.1 /opt/omnetpp
+
     # Configure and compile omnet++
     cd /opt/omnetpp/omnetpp-5.2.1
-    source setenv
+    
+    omnetpp_root=`pwd`
+    echo $omnetpp_root
+    export PATH=$omnetpp_root/bin:$PATH
+    export HOSTNAME
+    export HOST
+
+    #source setenv
     ./configure WITH_QTENV=no
     make
+
+    #install inet library
+    cd ~/Downloads
+    wget https://github.com/inet-framework/inet/releases/download/v3.6.3/inet-3.6.3-src.tgz
+    tar xvfz inet-3.6.3-src.tgz
+    sudo mv inet /opt/omnetpp/omnetpp-5.2.1/samples/
 
 }
 
@@ -614,6 +624,10 @@ maven_func
 portico_func
 archiva_ansible_func
 
+# install network simulator
+echo "${CPSWT_FLAVOR}-----> Install Omnet++"
+omnetpp_func
+
 # docker
 echo "${CPSWT_FLAVOR}-----> Install Docker"
 docker_func
@@ -632,10 +646,6 @@ boost_func
 cppnetlib_func
 
 # simulation software
-
-echo "${CPSWT_FLAVOR}-----> Install Omnet++"
-omnetpp_func
-
 echo "${CPSWT_FLAVOR}-----> Install Gridlab-D"
 gridlabd_func
 
