@@ -264,6 +264,68 @@ gridlabd_func(){
 
 }
 
+omnetpp_func (){
+    sudo apt-get update
+    # sudo apt-get ugrade -y -f
+
+    # General dependencies
+    sudo apt-get install -y -f\
+    git \
+    wget \
+    vim \
+    build-essential \
+    clang \
+    bison \
+    flex \
+    perl \
+    tcl-dev \
+    tk-dev \
+    libxml2-dev \
+    zlib1g-dev \
+    default-jre \
+    graphviz \
+    libwebkitgtk-1.0-0 \
+    xvfb
+    
+    #sudo apt-get install build-essential gcc g++ bison flex perl \
+    # qt5-default tcl-dev tk-dev libxml2-dev zlib1g-dev default-jre \
+    # doxygen graphviz libwebkitgtk-3.0-0 -y -f
+    
+    
+    # QT5 components
+    sudo apt-get install -y -f\
+    qt5-default \
+    qt5-qmake \
+    qtbase5-dev \
+    openscenegraph \
+    libopenscenegraph-dev \
+    openscenegraph-plugin-osgearth \
+    osgearth \
+    osgearth-data \
+    libosgearth-dev
+
+    # OMNeT++ 5
+    # Create working directory
+    sudo mkdir -p /opt/omnetpp
+
+    # Fetch Omnet++ source
+    # (Official mirror "doesn't support" command line downloads. Fortunately, we don't care)
+    cd ~/Downloads
+    wget --header="Accept: text/html" \
+            --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0" \
+            --referer="https://omnetpp.org" \
+            --output-document=omnetpp-5.2.1-src.tgz \
+            https://www.omnetpp.org/omnetpp/send/30-omnet-releases/2321-omnetpp-5-2-1-linux
+    tar -xf omnetpp-5.2.1-src.tgz
+    sudo mv omnetpp-5.2.1 /opt/omnetpp
+    # Configure and compile omnet++
+    cd /opt/omnetpp/omnetpp-5.2.1
+    source setenv
+    ./configure WITH_QTENV=no
+    make
+
+}
+
 ########################
 # Federate Source Code #
 ########################
@@ -570,6 +632,10 @@ boost_func
 cppnetlib_func
 
 # simulation software
+
+echo "${CPSWT_FLAVOR}-----> Install Omnet++"
+omnetpp_func
+
 echo "${CPSWT_FLAVOR}-----> Install Gridlab-D"
 gridlabd_func
 

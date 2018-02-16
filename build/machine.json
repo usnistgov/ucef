@@ -1,5 +1,5 @@
 [{
-    "name": "UCEF 1.0.0-alpha",
+    "name": "UCEF 1.0.0-alpha-omnetpp",
     "box": "box-cutter/ubuntu1404-desktop",
     "sync_folders": [
         // {
