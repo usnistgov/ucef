@@ -265,6 +265,8 @@ gridlabd_func(){
 }
 
 omnetpp_func (){
+    set +x 
+
     sudo apt-get update
     # sudo apt-get ugrade -y -f
 
@@ -307,7 +309,7 @@ omnetpp_func (){
     # Fetch Omnet++ source
     # (Official mirror "doesn't support" command line downloads. Fortunately, we don't care)
     cd ~/Downloads
-    wget --header="Accept: text/html" \
+    wget -q --header="Accept: text/html" \
             --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0" \
             --referer="https://omnetpp.org" \
             --output-document=omnetpp-5.2.1-src.tgz \
@@ -318,11 +320,15 @@ omnetpp_func (){
     # Configure and compile omnet++
     cd /opt/omnetpp/omnetpp-5.2.1
     
-    omnetpp_root=`pwd`
-    echo $omnetpp_root
-    export PATH=$omnetpp_root/bin:$PATH
+    export PATH=/opt/omnetpp/omnetpp-5.2.1/bin:$PATH
     export HOSTNAME
     export HOST
+    export DISPLAY=:0.0
+
+    echo "PATH=$PATH"
+    echo "HOSTNAME=$HOSTNAME"
+    echo "HOST=$HOST"
+    echo "DISPLAY=$DISPLAY"
 
     #source setenv
     ./configure WITH_QTENV=no
@@ -330,10 +336,14 @@ omnetpp_func (){
 
     #install inet library
     cd ~/Downloads
-    wget https://github.com/inet-framework/inet/releases/download/v3.6.3/inet-3.6.3-src.tgz
+    wget -q https://github.com/inet-framework/inet/releases/download/v3.6.3/inet-3.6.3-src.tgz
     tar xvfz inet-3.6.3-src.tgz
     sudo mv inet /opt/omnetpp/omnetpp-5.2.1/samples/
-
+    cd /opt/omnetpp/omnetpp-5.2.1/samples/inet
+    make makefiles
+    make
+    
+    set -x
 }
 
 ########################
@@ -615,6 +625,10 @@ echo "${CPSWT_FLAVOR}-----> Install Databases"
 mongodb_func
 mysql_func
 
+# install network simulator
+echo "${CPSWT_FLAVOR}-----> Install Omnet++"
+omnetpp_func
+
 # java development and management tools
 echo "${CPSWT_FLAVOR}-----> Install management tools"
 #openjdk7_func
@@ -623,10 +637,6 @@ ansible_func
 maven_func
 portico_func
 archiva_ansible_func
-
-# install network simulator
-echo "${CPSWT_FLAVOR}-----> Install Omnet++"
-omnetpp_func
 
 # docker
 echo "${CPSWT_FLAVOR}-----> Install Docker"
