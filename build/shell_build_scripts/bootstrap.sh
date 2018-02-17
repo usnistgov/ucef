@@ -343,6 +343,8 @@ omnetpp_func (){
     make makefiles
     make
     
+    sudo ln -s /opt/omnetpp/omnetpp-5.2.1/ide/omnetpp /usr/local/bin/omnetpp
+
     set -x
 }
 
@@ -625,10 +627,6 @@ echo "${CPSWT_FLAVOR}-----> Install Databases"
 mongodb_func
 mysql_func
 
-# install network simulator
-echo "${CPSWT_FLAVOR}-----> Install Omnet++"
-omnetpp_func
-
 # java development and management tools
 echo "${CPSWT_FLAVOR}-----> Install management tools"
 #openjdk7_func
@@ -655,7 +653,15 @@ echo "${CPSWT_FLAVOR}-----> Install Boost and CPPNet Libs"
 boost_func
 cppnetlib_func
 
-# simulation software
+#######################
+# simulation software #
+#######################
+
+# install network simulator
+echo "${CPSWT_FLAVOR}-----> Install Omnet++"
+omnetpp_func
+
+# install gridlab-d
 echo "${CPSWT_FLAVOR}-----> Install Gridlab-D"
 gridlabd_func
 
@@ -663,7 +669,10 @@ gridlabd_func
 echo "${CPSWT_FLAVOR}-----> Build Foundation Classes"
 build_foundation_classes_func
 
-# misc applications
+
+#####################
+# misc applications #
+#####################
 echo "${CPSWT_FLAVOR}-----> Misc Tools"
 chrome_browser_func
 eclipse_func
