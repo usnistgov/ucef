@@ -8,11 +8,11 @@ layout: page
 
 The federation manager needs a federation model to run. A federation model is a WebGME project that contains multiple federates connected by a shared set of interactions. You can either design the federation model from scratch, or use the WebGME import federate feature to bring existing federate models into a single project. This tutorial will use the following federation model as an example.
 
-![Federation Model](fedmgr-1.png)
+<img style="width:100%;" src="fedmgr-1.png"/>
 
 You must run the federate exporter, implement each federate, and compile the federates using maven prior to working through this tutorial. Then execute the deployment exporter plugin on the WebGME project and extract the generated files to your hard drive. The extracted directory should have the following file structure, with the JSON files named after your individual federates:
 
-![Deployment Project](fedmgr-2.png)
+<img style="width:20%;" src="fedmgr-2.png"/>
 
 The default configuration for the federation manager is sufficient to run the federation on your local computer. Open a terminal, navigate to the deployment directory that contains the file **pom.xml**, and execute the following commands: 
 

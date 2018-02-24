@@ -11,7 +11,7 @@ This document provides an overview of the WebGME user interface, and references 
 ## WebGME User Interface
 The following image annotates the important aspects of the WebGME user interface:
 
-![WebGME User Interface](webgme-overview-1.png)
+<img style="width:100%;" src="webgme-overview-1.png"/>
 
 1. **Execute Plugin** opens a menu that lists the enabled WebGME plugins. Some plugins are only available at the root level of the project.
 2. Clicking on the GME symbol opens the **Project Management** menu where WebGME projects can be created and deleted.
@@ -22,6 +22,6 @@ The following image annotates the important aspects of the WebGME user interface
 7. The **Property Editor** displays the properties of the part currently selected in the main workspace. Left click on a part in the workspace to show its properties. When no part is selected, the editor shows the properties of the opened project folder.
 
 # WebGME Tutorials
-- [How to create, delete, import, and export WebGME projects](projects/README.md)
-- [How to design an HLA federate in WebGME](federates/README.md)
-- [How to use the WebGME plugins for HLA](plugins/README.md)
+- [How to create, delete, import, and export WebGME projects](projects)
+- [How to design an HLA federate in WebGME](federates)
+- [How to use the WebGME plugins for HLA](plugins)
