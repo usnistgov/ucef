@@ -4,7 +4,10 @@ layout: page
 ---
 
 
-This tutorial covers how to manage WebGME projects.
+### This tutorial covers how to manage WebGME projects.
+
+* TOC
+{:toc}
 
 # Create Project
 This section describes how to create an empty WebGME project for HLA modeling.
