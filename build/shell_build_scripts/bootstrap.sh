@@ -188,11 +188,12 @@ eclipse_func(){
 }
 
 maven_func(){
-    sudo apt-get purge maven maven2 maven3
-    sudo add-apt-repository ppa:andrei-pozolotin/maven3
-    sudo apt-get update
-    sudo apt-get install maven3
-
+#    sudo apt-get purge maven maven2 maven3
+#    sudo add-apt-repository ppa:andrei-pozolotin/maven3
+#    sudo apt-get update
+#    sudo apt-get install maven3
+    sudo apt-get install maven
+    
     # add archiva to /etc/hosts
     cd $HOME/Downloads/
     sed '3 i127.0.0.1\tcpswtng_archiva' </etc/hosts >hosts
@@ -202,24 +203,6 @@ maven_func(){
     # Configure maven to connect to internal archiva repository
     mkdir -p /home/vagrant/.m2
     cp /home/vagrant/cpswt/cpswt-devtools/config/settings.xml $HOME/.m2/settings.xml
-}
-
-archiva_docker_func(){
-    sudo docker run --restart unless-stopped -v /home/vagrant/archiva:/var/archiva -p 8080:8080 -d ninjaben/archiva-docker
-    
-    # #Himanshu: Old hack to copy the entire archiva database in the VM -- commented out
-    # #Untill the password time out reset issue is resolved lets have a manual user/role creation
-    # sudo tar czvf $HOME/vagrant/archiva /vagrant/config/archiva_backup.tar.gz
-    # #stop instance
-    # sudo docker stop "tender_banach"
-    # #place prepopulated initial database
-    # cd $HOME
-    # sudo rm -rf $HOME/archiva
-    # sudo tar xvf /vagrant/config/archiva_initial.tar.gz
-
-    # #restart instance
-    # sudo docker start "tender_banach"
-    # sleep 20
 }
 
 ####################

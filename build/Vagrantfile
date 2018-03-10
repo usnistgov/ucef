@@ -37,7 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end # srv.vm.provider
 
       # Configures the Virtualbox specific metrics
-      srv.vbguest.auto_update = true  
+      #srv.vbguest.auto_update = true  
       srv.vm.post_up_message = dev_setup["post_up_message"]
       
       # Path of the provision files to be called
