@@ -614,8 +614,8 @@ mysql_func
 echo "${CPSWT_FLAVOR}-----> Install management tools"
 #openjdk7_func
 java8_func
-ansible_func
 maven_func
+ansible_func
 portico_func
 archiva_ansible_func
 
