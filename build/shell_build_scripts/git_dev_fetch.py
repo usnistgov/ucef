@@ -6,11 +6,11 @@ import string
 from git import Repo
 from pprint  import pprint
 
+#dev_repo_file="g:\github\CPSTesbed\ucef\\build\shell_build_scripts\dev_repos.json"
 dev_repo_file="/vagrant/shell_build_scripts/dev_repos.json"
 cpsproject_path='/home/vagrant/cpswt'
 
 with open(dev_repo_file) as json_data:
-
     dev_repo = json.load(json_data)
     repsite = dev_repo['repo_site']
     cmd = "ssh-keyscan " + repsite + " >> /home/vagrant/.ssh/known_hosts"
@@ -21,6 +21,7 @@ with open(dev_repo_file) as json_data:
         #print(i['url'])
         repo_directory = i['directory']
         repo_url = i['url']
+        repo_tag = i['tag']
 #        new_repo_url = string.replace(repo_url, 'gituser', gituser)
         #print(new_repo_url)
         repo_path = os.path.join(cpsproject_path, repo_directory)
@@ -29,6 +30,5 @@ with open(dev_repo_file) as json_data:
             os.makedirs(repo_path)
         os.chdir(repo_path)
         repo = Repo.clone_from(repo_url, repo_path)
-        if 'tag' in dev_repo:
+        if repo_tag:
             repo.git.checkout(dev_repo['tag'])
-

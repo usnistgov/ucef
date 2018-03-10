@@ -1,32 +1,38 @@
 {
     "repo_site": "github.com",
-    "tag": "v1.0.0-alpha",
     "git_repos": [{
             "directory": "cpswt-cpp",
+            "tag": "v1.0.0-alpha",
             "url": "https://github.com/usnistgov/ucef-cpp.git"
         },
         {
             "directory": "cpswt-db",
+            "tag": "v1.0.0-alpha",
             "url": "https://github.com/usnistgov/ucef-db.git"
         },
         {
             "directory": "cpswt-devtools",
+            "tag": "v1.0.0-alpha",
             "url": "https://github.com/usnistgov/ucef.git"
         },
         {
             "directory": "cpswt-gridlabd-meta",
+            "tag": "v1.0.0-alpha",
             "url": "https://github.com/usnistgov/ucef-gridlabd-meta.git"
         },
         {
             "directory": "cpswt-core",
+            "tag": "vu/develop",
             "url": "https://github.com/usnistgov/ucef-core.git"
         },
         {
             "directory": "cpswt-meta",
+            "tag": "vu/develop",
             "url": "https://github.com/usnistgov/ucef-meta.git"
         },
         {
             "directory": "cpswt-samples",
+            "tag": "v1.0.0-alpha",
             "url": "https://github.com/usnistgov/ucef-samples.git"
         }
     ]
