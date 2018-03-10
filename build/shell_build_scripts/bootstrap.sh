@@ -192,7 +192,7 @@ maven_func(){
 #    sudo add-apt-repository ppa:andrei-pozolotin/maven3
 #    sudo apt-get update
 #    sudo apt-get install maven3
-    sudo apt-get install maven
+    sudo apt-get install maven -y -f
     
     # add archiva to /etc/hosts
     cd $HOME/Downloads/
@@ -612,12 +612,16 @@ mysql_func
 
 # java development and management tools
 echo "${CPSWT_FLAVOR}-----> Install management tools"
-#openjdk7_func
+echo "${CPSWT_FLAVOR}-----> Install Java"
 java8_func
+echo "${CPSWT_FLAVOR}-----> Install Maven"
 maven_func
+echo "${CPSWT_FLAVOR}-----> Install Ansible"
 ansible_func
-portico_func
+echo "${CPSWT_FLAVOR}-----> Install archiva"
 archiva_ansible_func
+echo "${CPSWT_FLAVOR}-----> Install portico"
+portico_func
 
 # docker
 echo "${CPSWT_FLAVOR}-----> Install Docker"
