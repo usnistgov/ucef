@@ -1,0 +1,21 @@
+[Unit]
+Description=WebGME-DSS
+Documentation=https://webgme.org
+Requires=mongod.service
+
+[Service]
+# Path to your webgme application
+WorkingDirectory=chdir /home/vagrant/cpswt/cpswt-gridlabd-meta/
+ExecStart=/home/vagrant/.nvm/versions/node/v4.5.0/bin/node app.js
+Restart=always
+# Restart service after 30 seconds if node service crashes
+RestartSec=30
+# Output to syslog
+StandardOutput=syslog
+# Output to syslog
+StandardError=syslog
+SyslogIdentifier=webgme-dss
+Environment=NODE_ENV=deployment
+
+[Install]
+WantedBy=multi-user.target
