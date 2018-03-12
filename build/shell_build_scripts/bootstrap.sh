@@ -18,6 +18,12 @@ disable_ipv6() {
 }
 
 init_func() {
+    # add needed repositories
+    sudo add-apt-repository ppa:wireshark-dev/stable -y
+    sudo add-apt-repository ppa:webupd8team/sublime-text-3
+    sudo add-apt-repository ppa:webupd8team/java
+    sudo apt-add-repository  -y ppa:ansible/ansible
+    
     sudo apt-get update
     set -x
     tr -d '\r' <  /vagrant/shell_build_scripts/env_file.sh > /home/vagrant/env_file.sh
@@ -44,8 +50,8 @@ python27_func(){
 wireshark_func(){
     # Install wireshark
     export DEBIAN_FRONTEND=noninteractive
-    sudo add-apt-repository ppa:wireshark-dev/stable -y
-    sudo apt-get update -y
+#    sudo add-apt-repository ppa:wireshark-dev/stable -y
+#    sudo apt-get update -y
     sudo apt-get install wireshark -y
 
     sudo groupadd wireshark
@@ -113,16 +119,24 @@ webgme_func()
     npm install
 
     # Autostart WebGME on crash and reboot
-    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.conf /etc/init/webgme.conf
-    sudo service webgme start
+    #sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.conf /etc/init/webgme.conf
+    #sudo service webgme start
 
-   
+    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
+    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.service /etc/systemd/webgme.service
+    sudo systemctl daemon-reload
+    sudo systemctl start mongod
+    sudo systemctl start webgme
+
     cd $CPSWT_WEBGMEGLD_HOME
     npm install
 
     # Autostart WebGMEGld on crash and reboot
-    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.conf /etc/init/webgmegld.conf
-    sudo service webgmegld start
+#    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.conf /etc/init/webgmegld.conf
+#    sudo service webgmegld start
+    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.service /etc/systemd/webgmegld.service
+    sudo systemctl daemon-reload
+    sudo systemctl start webgmegld
 }
 
 
@@ -132,7 +146,7 @@ chrome_browser_func()
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
-    sudo apt-get update
+    sudo apt-get update -y
     sudo apt-get install google-chrome-stable -y
     sudo apt-get install --reinstall libnss3 -y -f
 
@@ -371,8 +385,8 @@ terminator_func(){
 }
 
 sublime3_func(){
-    sudo add-apt-repository ppa:webupd8team/sublime-text-3
-    sudo apt-get update
+#    sudo add-apt-repository ppa:webupd8team/sublime-text-3
+#    sudo apt-get update
     sudo apt-get install sublime-text-installer -y
 }
 
@@ -399,8 +413,8 @@ mc_func(){
 
 ansible_func(){
     sudo apt-get install  -y software-properties-common
-    sudo apt-add-repository  -y ppa:ansible/ansible
-    sudo apt-get update -y
+#    sudo apt-add-repository  -y ppa:ansible/ansible
+#    sudo apt-get update -y
     sudo apt-get install  -y ansible
     sudo apt-get install -y libxml2-dev libxslt-dev python-dev
     sudo apt-get install -y python3-lxml
@@ -480,8 +494,8 @@ java6_func(){
 
 #This installs the java
 java7_func(){
-    sudo add-apt-repository ppa:webupd8team/java -y
-    sudo apt-get update
+#    sudo add-apt-repository ppa:webupd8team/java -y
+#    sudo apt-get update
     echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
     sudo apt-get install oracle-java7-installer -y
     sudo apt-get install oracle-java7-set-default -y
@@ -489,8 +503,8 @@ java7_func(){
 
 #This installs the java
 java8_func(){
-    sudo add-apt-repository ppa:webupd8team/java -y
-    sudo apt-get update
+#    sudo add-apt-repository ppa:webupd8team/java -y
+#    sudo apt-get update
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
     sudo apt-get install oracle-java8-installer -y
     sudo apt-get install oracle-java8-set-default -y

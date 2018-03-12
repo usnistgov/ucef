@@ -1,8 +1,8 @@
 echo "Pre.sh script"
 
 python27_func(){
-    sudo add-apt-repository ppa:fkrull/deadsnakes -y
-    sudo apt-get update -y
+#    sudo add-apt-repository ppa:fkrull/deadsnakes -y
+#    sudo apt-get update -y
     sudo apt-get install python2.7 -y
     sudo apt-get install python-pip -y
 }
