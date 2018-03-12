@@ -89,11 +89,22 @@ docker_compose_func(){
 ######################
 mongodb_func(){
     # Add the MongoDB v3.0 repository
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-    echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+#    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+#    echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+#    sudo apt-get update
+#    sudo apt-get install -y mongodb-org
 
-    sudo apt-get update
+
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+    echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+    #sudo apt-get update
     sudo apt-get install -y mongodb-org
+
+    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
+    sudo systemctl enable /etc/systemd/mongod.service
+    sudo systemctl daemon-reload
+    sudo systemctl start mongod
+
 
     # add robomongo
     cd $HOME/Downloads/
@@ -101,7 +112,8 @@ mongodb_func(){
     tar -xvzf robomongo-0.9.0-linux-x86_64-0786489.tar.gz
     sudo mkdir /usr/local/bin/robomongo
     sudo mv  robomongo-0.9.0-linux-x86_64-0786489/* /usr/local/bin/robomongo
-    cd /usr/local/bin/robomongo/bin
+    sudo ln -s /usr/local/bin/robomongo/bin/robomongo /usr/local/bin/robomon
+
 }
 
 node_func(){
@@ -122,10 +134,10 @@ webgme_func()
     #sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.conf /etc/init/webgme.conf
     #sudo service webgme start
 
-    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
+    # configure service
     sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.service /etc/systemd/webgme.service
+    sudo systemctl enable /etc/systemd/webgme.service
     sudo systemctl daemon-reload
-    sudo systemctl start mongod
     sudo systemctl start webgme
 
     cd $CPSWT_WEBGMEGLD_HOME
@@ -135,6 +147,7 @@ webgme_func()
 #    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.conf /etc/init/webgmegld.conf
 #    sudo service webgmegld start
     sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.service /etc/systemd/webgmegld.service
+    sudo systemctl enable /etc/systemd/webgmegld.service
     sudo systemctl daemon-reload
     sudo systemctl start webgmegld
 }
@@ -146,7 +159,7 @@ chrome_browser_func()
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
-    sudo apt-get update -y
+    #sudo apt-get update -y
     sudo apt-get install google-chrome-stable -y
     sudo apt-get install --reinstall libnss3 -y -f
 
@@ -264,7 +277,7 @@ gridlabd_func(){
 omnetpp_func (){
     set +x 
 
-    sudo apt-get update
+    #sudo apt-get update
     # sudo apt-get ugrade -y -f
 
     # General dependencies
