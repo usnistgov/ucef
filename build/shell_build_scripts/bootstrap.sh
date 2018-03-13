@@ -627,7 +627,8 @@ archiva_ansible_func(){
     sudo chmod +x startarchiva.sh
     sudo chown root:root startarchiva.sh
     sudo mv startarchiva.sh /opt/apache-archiva-2.2.1/bin/
-    sudo ln -s -f /opt/apache-archiva-2.2.1/bin/startarchiva.sh /etc/rc2.d/S20archiva
+    # 20180313 MJB leave ansible service alone
+    #sudo ln -s -f /opt/apache-archiva-2.2.1/bin/startarchiva.sh /etc/rc2.d/S20archiva
 }
 
 # initialization
