@@ -1,12 +1,13 @@
 [Unit]
-Description=WebGME-DSS
+Description=WebGME
 Documentation=https://webgme.org
 Requires=mongod.service
+After=mongod.service
 
 [Service]
 # Path to your webgme application
-WorkingDirectory=/home/vagrant/cpswt/cpswt-meta/
-ExecStart=/home/vagrant/.nvm/versions/node/v4.5.0/bin/node app.js
+WorkingDirectory="/home/vagrant/cpswt/cpswt-meta/"
+ExecStart=/home/vagrant/.nvm/versions/node/v4.5.0/bin/node /home/vagrant/cpswt/cpswt-meta/app.js
 Restart=always
 # Restart service after 30 seconds if node service crashes
 RestartSec=30
@@ -14,7 +15,7 @@ RestartSec=30
 StandardOutput=syslog
 # Output to syslog
 StandardError=syslog
-SyslogIdentifier=webgme-dss
+SyslogIdentifier=webgme
 Environment=NODE_ENV=deployment
 
 [Install]

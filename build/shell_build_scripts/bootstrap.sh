@@ -89,16 +89,17 @@ docker_compose_func(){
 ######################
 mongodb_func(){
     # Add the MongoDB v3.0 repository
+# for Ubuntu 14.04    
 #    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 #    echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 #    sudo apt-get update
 #    sudo apt-get install -y mongodb-org
 
-
+    # for Ubuntu 16.04
     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
     echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
     #sudo apt-get update
-    sudo apt-get install -y mongodb-org
+    sudo apt-get install -y -f mongodb-org
 
     sudo cp /home/vagrant/cpswt/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
     sudo systemctl enable /etc/systemd/mongod.service
@@ -130,10 +131,12 @@ webgme_func()
     cd $CPSWT_WEBGME_HOME
     npm install
 
+    # for Ubuntu 14.04
     # Autostart WebGME on crash and reboot
     #sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.conf /etc/init/webgme.conf
     #sudo service webgme start
 
+    # for Ubuntu 16.04
     # configure service
     sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.service /etc/systemd/webgme.service
     sudo systemctl enable /etc/systemd/webgme.service
@@ -144,8 +147,11 @@ webgme_func()
     npm install
 
     # Autostart WebGMEGld on crash and reboot
+# for Ubuntu 14.04
 #    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.conf /etc/init/webgmegld.conf
 #    sudo service webgmegld start
+
+    # for Ubuntu 16.04
     sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.service /etc/systemd/webgmegld.service
     sudo systemctl enable /etc/systemd/webgmegld.service
     sudo systemctl daemon-reload
@@ -428,9 +434,9 @@ ansible_func(){
     sudo apt-get install  -y software-properties-common
 #    sudo apt-add-repository  -y ppa:ansible/ansible
 #    sudo apt-get update -y
-    sudo apt-get install  -y ansible
-    sudo apt-get install -y libxml2-dev libxslt-dev python-dev
-    sudo apt-get install -y python3-lxml
+    sudo apt-get install -y -f ansible
+    sudo apt-get install -y -f libxml2-dev libxslt-dev python-dev
+    sudo apt-get install -y -f python3-lxml
 }
 
 selenium_func() {
