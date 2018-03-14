@@ -165,8 +165,9 @@ chrome_browser_func()
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
-    #sudo apt-get update -y
-    sudo apt-get install google-chrome-stable -y
+    # does this apt-get update have to be here
+    sudo apt-get update -y
+    sudo apt-get install google-chrome-stable -y -f
     sudo apt-get install --reinstall libnss3 -y -f
 
     # Set chrome as the default browser
@@ -655,7 +656,6 @@ echo "${CPSWT_FLAVOR}-----> Install archiva"
 archiva_ansible_func
 echo "${CPSWT_FLAVOR}-----> Install portico"
 portico_func
-# docker
 echo "${CPSWT_FLAVOR}-----> Install Docker"
 docker_func
 docker_compose_func
@@ -701,7 +701,7 @@ vim_func
 ntp_func
 nmap_func
 mc_func
-wireshark_func
+# temp comment out wireshark_func
 
 # cleanup
 echo "${CPSWT_FLAVOR}-----> Cleanup"
