@@ -19,7 +19,7 @@ disable_ipv6() {
 
 init_func() {
     # add needed repositories
-    sudo add-apt-repository ppa:wireshark-dev/stable -y
+    #sudo add-apt-repository ppa:wireshark-dev/stable -y
     sudo add-apt-repository ppa:webupd8team/sublime-text-3
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-add-repository  -y ppa:ansible/ansible
@@ -52,7 +52,7 @@ wireshark_func(){
     export DEBIAN_FRONTEND=noninteractive
 #    sudo add-apt-repository ppa:wireshark-dev/stable -y
 #    sudo apt-get update -y
-    sudo apt-get install wireshark -y
+    sudo apt-get install wireshark -y -f
 
     sudo groupadd wireshark
     sudo usermod -a -G wireshark vagrant
@@ -627,8 +627,7 @@ archiva_ansible_func(){
     sudo chmod +x startarchiva.sh
     sudo chown root:root startarchiva.sh
     sudo mv startarchiva.sh /opt/apache-archiva-2.2.1/bin/
-    # 20180313 MJB leave ansible service alone
-    #sudo ln -s -f /opt/apache-archiva-2.2.1/bin/startarchiva.sh /etc/rc2.d/S20archiva
+    sudo ln -s -f /opt/apache-archiva-2.2.1/bin/startarchiva.sh /etc/rc2.d/S20archiva
 }
 
 # initialization
