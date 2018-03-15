@@ -24,7 +24,7 @@ init_func() {
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-add-repository  -y ppa:ansible/ansible
     
-    sudo apt-get update
+    sudo apt-get update -y --fix-missing
     set -x
     tr -d '\r' <  /vagrant/shell_build_scripts/env_file.sh > /home/vagrant/env_file.sh
     source /home/vagrant/env_file.sh
@@ -96,10 +96,17 @@ mongodb_func(){
 #    sudo apt-get install -y mongodb-org
 
     # for Ubuntu 16.04
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
-    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
-    sudo apt-get update
-    sudo apt-get install -y -f mongodb-org
+    #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+    #echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+    #sudo apt-get update
+    #sudo apt-get install -y -f mongodb-org
+
+    sudo rm /etc/apt/sources.list.d/mongodb*.list
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+    sudo echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" > tempfile 
+    sudo mv tempfile /etc/apt/sources.list.d/mongodb-org-3.2.list
+    sudo apt update -y
+    sudo apt install mongodb-org -y -f
 
     sudo cp /home/vagrant/cpswt/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
     sudo systemctl enable /etc/systemd/mongod.service
