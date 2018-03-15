@@ -169,13 +169,19 @@ webgme_func()
 chrome_browser_func()
 {
     # Add the chrome debian repository
-    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    #wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    #sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
     # does this apt-get update have to be here
-    sudo apt-get update -y
-    sudo apt-get install google-chrome-stable -y -f
-    sudo apt-get install --reinstall libnss3 -y -f
+    #sudo apt-get update -y
+    #sudo apt-get install google-chrome-stable -y -f
+    #sudo apt-get install --reinstall libnss3 -y -f
+
+
+    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+    sudo apt-get update -y --fix-missing
+    sudo apt-get -y install google-chrome-stable
 
     # Set chrome as the default browser
     xdg-mime default google-chrome.desktop text/html
@@ -669,6 +675,8 @@ docker_compose_func
 build_docker_image
 
 # webgme development
+echo "${CPSWT_FLAVOR}-----> Install Chrome"
+chrome_browser_func
 echo "${CPSWT_FLAVOR}-----> Install WEBGME Development"
 node_func
 webgme_func
@@ -700,7 +708,7 @@ build_foundation_classes_func
 # misc applications #
 #####################
 echo "${CPSWT_FLAVOR}-----> Misc Tools"
-chrome_browser_func
+#chrome_browser_func
 eclipse_func
 terminator_func
 sublime3_func
