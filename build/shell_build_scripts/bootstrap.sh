@@ -663,12 +663,12 @@ echo "${CPSWT_FLAVOR}-----> Install Java"
 java8_func
 echo "${CPSWT_FLAVOR}-----> Install Maven"
 maven_func
+echo "${CPSWT_FLAVOR}-----> Install portico"
+portico_func
 echo "${CPSWT_FLAVOR}-----> Install Ansible"
 ansible_func
 echo "${CPSWT_FLAVOR}-----> Install archiva"
 archiva_ansible_func
-echo "${CPSWT_FLAVOR}-----> Install portico"
-portico_func
 echo "${CPSWT_FLAVOR}-----> Install Docker"
 docker_func
 docker_compose_func
