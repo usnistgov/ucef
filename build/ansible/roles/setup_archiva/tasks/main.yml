@@ -13,9 +13,13 @@
     value: false
     xpath: /configuration/redbackRuntimeConfiguration/configurationProperties/security/policy/password/expiration/enabled
 
+#- name: restart archiva
+#  become: true
+#  service: name=archiva state=restarted
+
 - name: restart archiva
   become: true
-  service: name=archiva state=restarted
+  shell: /etc/init.d/archiva restart
 
 - name: "Config maven"
   become: false
