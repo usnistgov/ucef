@@ -19,9 +19,9 @@ disable_ipv6() {
 
 init_func() {
     # add needed repositories
-    #sudo add-apt-repository ppa:wireshark-dev/stable -y
-    sudo add-apt-repository ppa:webupd8team/sublime-text-3
-    sudo add-apt-repository ppa:webupd8team/java
+    # sudo add-apt-repository ppa:wireshark-dev/stable -y
+    # sudo add-apt-repository ppa:webupd8team/sublime-text-3
+    sudo add-apt-repository -y ppa:webupd8team/java
     sudo apt-add-repository  -y ppa:ansible/ansible
     
     sudo apt-get update -y --fix-missing
@@ -737,7 +737,7 @@ mc_func
 
 # Wireshark
 echo "${CPSWT_FLAVOR}-----> Install Wireshark"
-wireshark_func
+#wireshark_func
 
 # cleanup
 echo "${CPSWT_FLAVOR}-----> Cleanup"
