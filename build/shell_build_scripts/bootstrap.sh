@@ -66,17 +66,32 @@ wireshark_func(){
 # Docker #
 ##########
 docker_func(){
-    sudo apt-get install linux-image-extra-"$(uname -r)" -y
-    sudo apt-get install apparmor -y
-    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-    sudo sh -c "echo deb https://apt.dockerproject.org/repo ubuntu-trusty main > /etc/apt/sources.list.d/docker.list"
-    sudo apt-get update --fix-missing
-    sudo apt-get purge lxc-docker -y
-    sudo apt-cache policy docker-engine
-    sudo apt-get update --fix-missing
-    sudo apt-get install docker-engine -y
-    sudo service docker start
+
+    # for xenial from: https://gist.github.com/tsaqib/9c7c6eed460930b1a14665043bd2157c
+    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+    apt-get update -y
+    apt-get install -y linux-image-extra-$(uname -r)
+    rm -f /etc/apt/sources.list.d/docker.list
+    su -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list"
+    apt-get update -y
+    apt-get purge lxc-docker
+    apt-cache policy docker-engine
+    apt-get update -y
+    apt-get install -y docker-engine
+    service docker start
     sudo usermod -aG docker vagrant
+
+#    sudo apt-get install linux-image-extra-"$(uname -r)" -y
+#    sudo apt-get install apparmor -y
+#    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+#    sudo sh -c "echo deb https://apt.dockerproject.org/repo ubuntu-trusty main > /etc/apt/sources.list.d/docker.list"
+#    sudo apt-get update --fix-missing
+#    sudo apt-get purge lxc-docker -y
+#    sudo apt-cache policy docker-engine
+#    sudo apt-get update --fix-missing
+#    sudo apt-get install docker-engine -y
+#    sudo service docker start
+#    sudo usermod -aG docker vagrant
 }
 
 docker_compose_func(){
@@ -642,6 +657,9 @@ archiva_ansible_func(){
     sudo chown root:root startarchiva.sh
     sudo mv startarchiva.sh /opt/apache-archiva-2.2.1/bin/
     sudo ln -s -f /opt/apache-archiva-2.2.1/bin/startarchiva.sh /etc/rc2.d/S20archiva
+
+    # 20180317 mjb prevent loop on archiva starting (a little kludgy)
+    sudo sed -i 's/$all//g' /etc/init.d/plymouth
 }
 
 # initialization
@@ -670,9 +688,9 @@ ansible_func
 echo "${CPSWT_FLAVOR}-----> Install archiva"
 archiva_ansible_func
 echo "${CPSWT_FLAVOR}-----> Install Docker"
-#docker_func
-#docker_compose_func
-#build_docker_image
+docker_func
+docker_compose_func
+build_docker_image
 
 # webgme development
 echo "${CPSWT_FLAVOR}-----> Install Chrome"
