@@ -670,9 +670,9 @@ ansible_func
 echo "${CPSWT_FLAVOR}-----> Install archiva"
 archiva_ansible_func
 echo "${CPSWT_FLAVOR}-----> Install Docker"
-docker_func
-docker_compose_func
-build_docker_image
+#docker_func
+#docker_compose_func
+#build_docker_image
 
 # webgme development
 echo "${CPSWT_FLAVOR}-----> Install Chrome"
