@@ -711,12 +711,15 @@ echo "${CPSWT_FLAVOR}-----> Misc Tools"
 #chrome_browser_func
 eclipse_func
 terminator_func
-sublime3_func
+# sublime not free sublime3_func
 vim_func
 ntp_func
 nmap_func
 mc_func
-# temp comment out wireshark_func
+
+# Wireshark
+echo "${CPSWT_FLAVOR}-----> Install Wireshark"
+wireshark_func
 
 # cleanup
 echo "${CPSWT_FLAVOR}-----> Cleanup"
