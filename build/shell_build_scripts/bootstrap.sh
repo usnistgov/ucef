@@ -55,8 +55,7 @@ wireshark_func(){
 #    sudo apt-get update -y
 #    sudo apt-get install wireshark -y -f
     
-    DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f install
-
+    DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f install wireshark
     sudo groupadd wireshark
     sudo usermod -a -G wireshark vagrant
     sudo chgrp wireshark /usr/bin/dumpcap
