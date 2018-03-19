@@ -55,11 +55,17 @@ wireshark_func(){
 #    sudo apt-get update -y
 #    sudo apt-get install wireshark -y -f
     
+    echo "${CPSWT_FLAVOR}-----> Installing Wireshark app"
     DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f install wireshark
-    sudo groupadd wireshark
+    
+    echo "${CPSWT_FLAVOR}-----> Install Group"
+    #sudo groupadd wireshark
+    sudo addgroup -quiet -system wireshark
+    echo "${CPSWT_FLAVOR}-----> Modify Group"
     sudo usermod -a -G wireshark vagrant
     sudo chgrp wireshark /usr/bin/dumpcap
     sudo chmod 755 /usr/bin/dumpcap
+    echo "${CPSWT_FLAVOR}-----> Set Group Capabilities"
     sudo setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
 
 }
