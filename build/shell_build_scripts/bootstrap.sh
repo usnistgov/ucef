@@ -699,8 +699,9 @@ echo "${CPSWT_FLAVOR}-----> Install Docker"
 docker_func
 docker_compose_func
 build_docker_image
-echo "${CPSWT_FLAVOR}-----> Install Wireshark"
-wireshark_func
+# 20180319 mjb comment out wireshark
+#echo "${CPSWT_FLAVOR}-----> Install Wireshark"
+#wireshark_func
 
 
 # webgme development
