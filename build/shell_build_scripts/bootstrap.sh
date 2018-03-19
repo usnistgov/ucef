@@ -50,10 +50,12 @@ python27_func(){
 
 wireshark_func(){
     # Install wireshark
-    export DEBIAN_FRONTEND=noninteractive
+#    export DEBIAN_FRONTEND=noninteractive
 #    sudo add-apt-repository ppa:wireshark-dev/stable -y
 #    sudo apt-get update -y
-    sudo apt-get install wireshark -y -f
+#    sudo apt-get install wireshark -y -f
+    
+    DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f install
 
     sudo groupadd wireshark
     sudo usermod -a -G wireshark vagrant
@@ -692,6 +694,9 @@ echo "${CPSWT_FLAVOR}-----> Install Docker"
 docker_func
 docker_compose_func
 build_docker_image
+echo "${CPSWT_FLAVOR}-----> Install Wireshark"
+wireshark_func
+
 
 # webgme development
 echo "${CPSWT_FLAVOR}-----> Install Chrome"
@@ -735,10 +740,6 @@ vim_func
 ntp_func
 nmap_func
 mc_func
-
-# Wireshark
-echo "${CPSWT_FLAVOR}-----> Install Wireshark"
-wireshark_func
 
 # cleanup
 echo "${CPSWT_FLAVOR}-----> Cleanup"
