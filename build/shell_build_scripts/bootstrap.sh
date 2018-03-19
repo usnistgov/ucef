@@ -56,7 +56,7 @@ wireshark_func(){
 #    sudo apt-get install wireshark -y -f
     
     echo "${CPSWT_FLAVOR}-----> Installing Wireshark app"
-    DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f install wireshark
+    echo yes | DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f install wireshark
     
     echo "${CPSWT_FLAVOR}-----> Install Group"
     #sudo groupadd wireshark
