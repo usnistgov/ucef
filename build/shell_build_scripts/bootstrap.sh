@@ -651,6 +651,10 @@ cppnetlib_func(){
     sudo rm ../cpp-netlib-0.11.2-final.tar.gz
 }
 
+jquerry_func (){
+    sudo apt-get install -y -f jq
+}
+
 archiva_ansible_func(){
     rm -rf /home/vagrant/ansible/
     mkdir -p /home/vagrant/ansible/
@@ -716,6 +720,7 @@ selenium_func
 echo "${CPSWT_FLAVOR}-----> Install Boost and CPPNet Libs"
 boost_func
 cppnetlib_func
+jquerry_func
 
 #######################
 # simulation software #
