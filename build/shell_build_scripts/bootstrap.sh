@@ -56,8 +56,11 @@ wireshark_func(){
 #    sudo apt-get install wireshark -y -f
     
     echo "${CPSWT_FLAVOR}-----> Installing Wireshark app"
-    echo yes | DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f -q install wireshark
-    echo "wireshark-common wireshark-common/install-setuid boolean false" | debconf-set-selections
+#    echo yes | DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f -q install wireshark
+#    echo "wireshark-common wireshark-common/install-setuid boolean false" | debconf-set-selections
+    sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wireshark
+    echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
+    sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure wireshark-common
 
     echo "${CPSWT_FLAVOR}-----> Install Group"
     #sudo groupadd wireshark
