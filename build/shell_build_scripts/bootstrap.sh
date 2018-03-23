@@ -508,7 +508,7 @@ gnome_func(){
     mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
     cp /home/vagrant/cpswt/cpswt-devtools/config/*.desktop $HOME/.local/share/applications
     cp /home/vagrant/cpswt/cpswt-devtools/config/*.png $HOME/.local/share/icons/hicolor/48x48/apps
-    gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://nautilus.desktop', 'archiva.desktop', 'eclipse.desktop', 'webgme.desktop', 'google-chrome.desktop', 'gnome-terminal.desktop', 'mysql-workbench.desktop', 'gedit.desktop', 'wireshark.desktop']"
+    gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://nautilus.desktop', 'archiva.desktop', 'eclipse.desktop', 'webgme.desktop', 'google-chrome.desktop', 'gnome-terminal.desktop', 'mysql-workbench.desktop', 'gedit.desktop', 'wireshark.desktop', 'omnetpp.desktop']"
 
     # Enable workspaces
     gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 2
