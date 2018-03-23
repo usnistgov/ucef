@@ -1,5 +1,12 @@
 echo "Pre.sh script"
 
+init_func(){
+#    export DEBIAN_FRONTEND=noninteractive
+#    sudo debconf-set-selections <<< 'update-notifier-common 10periodic select Y'
+#    sudo apt-get install -yfq update-notifier-common
+    sudo rm /etc/apt/apt.conf.d/*
+}
+
 python27_func(){
 #    sudo add-apt-repository ppa:fkrull/deadsnakes -y
 #    sudo apt-get update -y
@@ -19,6 +26,7 @@ gitpython_func(){
 	sudo pip install gitpython
 }
 
+init_func
 python27_func
 git_func
 gitpython_func

@@ -18,7 +18,7 @@
         "ucef_pre.sh",
         "bootstrap.sh",
         "post.sh"
-    ],
+            ],
     "post_up_message": "========================================= \n * Created at ISIS, Vanderbilt University \n * Authors: Yogesh Barve email:yogesh.d.barve@Vanderbilt.edu \n *          Himanshu Neema email:himanshu.neema@isis.vanderbilt.edu \n============================================="
 
 }]

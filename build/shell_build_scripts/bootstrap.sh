@@ -56,8 +56,9 @@ wireshark_func(){
 #    sudo apt-get install wireshark -y -f
     
     echo "${CPSWT_FLAVOR}-----> Installing Wireshark app"
-    echo yes | DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f install wireshark
-    
+    echo yes | DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f -q install wireshark
+    echo "wireshark-common wireshark-common/install-setuid boolean false" | debconf-set-selections
+
     echo "${CPSWT_FLAVOR}-----> Install Group"
     #sudo groupadd wireshark
     sudo addgroup -quiet -system wireshark
@@ -704,8 +705,8 @@ docker_func
 docker_compose_func
 build_docker_image
 # 20180319 mjb comment out wireshark
-#echo "${CPSWT_FLAVOR}-----> Install Wireshark"
-#wireshark_func
+echo "${CPSWT_FLAVOR}-----> Install Wireshark"
+wireshark_func
 
 
 # webgme development
