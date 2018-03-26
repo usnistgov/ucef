@@ -236,7 +236,7 @@ eclipse_func(){
 
     # add emf classes needed for pubsub to m2
 # Edit this variable to point to your location of the files listed below.
-    EMF_HOME="./config"
+    EMF_HOME="/home/vagrant/eclipse/plugins"
     GROUP="org.eclipse.emf"
 
     mvn install:install-file \
