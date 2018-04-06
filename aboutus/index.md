@@ -41,7 +41,18 @@ UCEF is provided as an open source toolkit that:
 
 [5]	1516-2010 - IEEE Standard for Modeling and Simulation (M&S) High Level Architecture (HLA)-- Framework and Rules  
 
-### UCEF Website
+### UCEF Web Presence
+
+
+See us on NIST's main web site for overview and context:
+
+[Universal CPS Environment for Federation](https://www.nist.gov/el/cyber-physical-systems/ucef-universal-cps-environment-federation)
+
+
+[Why Do We Need UCEF?](https://www.nist.gov/el/cyber-physical-systems/why-do-we-need-ucef)
+[How Does UCEF Work?](https://www.nist.gov/el/cyber-physical-systems/how-does-ucef-work)
+[What are UCEF’s Key Features?](https://www.nist.gov/el/cyber-physical-systems/what-are-ucefs-key-features)
+
 
 Follow this link to the [UCEF Development Website on GitHub](https://github.com/usnistgov/ucef)
  
