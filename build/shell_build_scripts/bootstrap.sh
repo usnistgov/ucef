@@ -93,6 +93,9 @@ docker_func(){
     service docker start
     sudo usermod -aG docker vagrant
 
+    sudo apt-get install python-pip -y
+    sudo pip install docker-compose
+
 #    sudo apt-get install linux-image-extra-"$(uname -r)" -y
 #    sudo apt-get install apparmor -y
 #    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -106,10 +109,6 @@ docker_func(){
 #    sudo usermod -aG docker vagrant
 }
 
-docker_compose_func(){
-    sudo apt-get install python-pip -y
-    sudo pip install docker-compose
-}
 
 ######################
 # WebGME Development #
@@ -705,26 +704,28 @@ echo "${CPSWT_FLAVOR}-----> Install archiva"
 archiva_ansible_func
 echo "${CPSWT_FLAVOR}-----> Install Docker"
 docker_func
-docker_compose_func
-build_docker_image
-# 20180319 mjb comment out wireshark
 echo "${CPSWT_FLAVOR}-----> Install Wireshark"
 wireshark_func
-
-
-# webgme development
+echo "${CPSWT_FLAVOR}-----> Install Eclipse"
+eclipse_func
 echo "${CPSWT_FLAVOR}-----> Install Chrome"
 chrome_browser_func
+
+#######################
+# webgme development ##
+#######################
 echo "${CPSWT_FLAVOR}-----> Install WEBGME Development"
 node_func
 webgme_func
 selenium_func
-
-# Cpp libs
 echo "${CPSWT_FLAVOR}-----> Install Boost and CPPNet Libs"
 boost_func
 cppnetlib_func
 jquerry_func
+
+# federate source code
+echo "${CPSWT_FLAVOR}-----> Build Foundation Classes"
+build_foundation_classes_func
 
 #######################
 # simulation software #
@@ -738,17 +739,15 @@ omnetpp_func
 echo "${CPSWT_FLAVOR}-----> Install Gridlab-D"
 gridlabd_func
 
-# federate source code
-echo "${CPSWT_FLAVOR}-----> Build Foundation Classes"
-build_foundation_classes_func
 
+echo "${CPSWT_FLAVOR}-----> Build Docker Image"
+build_docker_image
 
 #####################
 # misc applications #
 #####################
 echo "${CPSWT_FLAVOR}-----> Misc Tools"
 #chrome_browser_func
-eclipse_func
 terminator_func
 # sublime not free sublime3_func
 vim_func
