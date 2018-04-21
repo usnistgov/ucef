@@ -418,6 +418,7 @@ portico_func(){
     cd $HOME/Downloads/
     wget -q  http://downloads.sourceforge.net/project/portico/Portico/portico-$PORTICO_VERSION/portico-$PORTICO_VERSION-linux64.tar.gz
     tar xzf portico-$PORTICO_VERSION-linux64.tar.gz -C $HOME
+    sudo mv $HOME/portico-$PORTICO_VERSION /usr/local/portico-$PORTICO_VERSION
 
     # Set the RTI_HOME environment variable
     echo "export RTI_HOME=\"/usr/local/portico-$PORTICO_VERSION\"" >> $HOME/.bashrc
