@@ -422,14 +422,9 @@ portico_func(){
 
     # Set the RTI_HOME environment variable
     echo "export RTI_HOME=\"/usr/local/portico-$PORTICO_VERSION\"" >> $HOME/.bashrc
-#    echo "export RTI_HOME=\"/home/vagrant/portico-$PORTICO_VERSION\"" >> $HOME/.bashrc
     source $HOME/.bashrc
 
-    set_env_var_func "RTI_HOME=/home/vagrant/portico-$PORTICO_VERSION"
-
-    # 20180421 MJB this is done as an archiva task
-    # Install portico to the internal archiva repository
-    #mvn install:install-file -Dfile=$HOME/portico-$PORTICO_VERSION/lib/portico.jar -DgroupId=org.porticoproject -DartifactId=portico -Dversion=$PORTICO_VERSION -Dpackaging=jar -DgeneratePom=true
+    # we will put it in archiva in the ansible script
 }
 
 # federate_src_func(){
