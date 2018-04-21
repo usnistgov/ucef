@@ -274,8 +274,8 @@ maven_func(){
     rm hosts
 
     # Configure maven to connect to internal archiva repository
-    mkdir -p /home/vagrant/.m2
-    cp /home/vagrant/cpswt/cpswt-devtools/config/settings.xml $HOME/.m2/settings.xml
+    #mkdir -p /home/vagrant/.m2
+    #cp /home/vagrant/cpswt/cpswt-devtools/config/settings.xml $HOME/.m2/settings.xml
 }
 
 ####################
