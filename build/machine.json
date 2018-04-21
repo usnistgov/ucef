@@ -1,6 +1,6 @@
 [{
     "name": "UCEF 1.0.0-alpha-omnetpp",
-    "box": "box-cutter/ubuntu1604-desktop",
+    "box": "https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/ubuntu1604-desktop-0.1.0.box",
     "sync_folders": [
         // {
         // }
