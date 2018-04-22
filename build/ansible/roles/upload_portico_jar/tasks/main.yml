@@ -8,8 +8,9 @@
     -Dversion={{ dependency_versions.portico }} \
     -Dpackaging=jar -DgeneratePom=true
 
-- set_fact:
-    cpswtng_archiva: 127.0.0.1
+# 20180421 MJB cpswtng_archiva already in etc/hosts
+#- set_fact:
+#    cpswtng_archiva: 127.0.0.1
 
 # Example that prints the loopback address and gateway for each host
 - debug:
