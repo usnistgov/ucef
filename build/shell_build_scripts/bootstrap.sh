@@ -80,20 +80,34 @@ wireshark_func(){
 docker_func(){
 
     # for xenial from: https://gist.github.com/tsaqib/9c7c6eed460930b1a14665043bd2157c
-    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-    apt-get update -y
-    apt-get install -y linux-image-extra-$(uname -r)
-    rm -f /etc/apt/sources.list.d/docker.list
-    su -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list"
-    apt-get update -y
-    apt-get purge lxc-docker
-    apt-cache policy docker-engine
-    apt-get update -y
-    apt-get install -y docker-engine
-    service docker start
+    #sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+    #sudo apt-get update -y
+    #sudo rm -f /etc/apt/sources.list.d/docker.list
+    #echo 'deb https://apt.dockerproject.org/repo/dists ubuntu-xenial main' >> tempfile
+    #sudo mv tempfile /etc/apt/sources.list.d/docker.list
+
+
+    # install instructions https://docs.docker.com/install/linux/docker-ce/ubuntu/#os-requirements
+    sudo apt-get install -y linux-image-extra-$(uname -r)
+    sudo apt-get install \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository \
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) \
+        stable"
+
+    sudo apt-get update -y
+    sudo apt-get purge lxc-docker
+
+    sudo apt-get install docker-ce -y -f --allow-unauthenticated
+    sudo service docker start
     sudo usermod -aG docker vagrant
 
-    sudo apt-get install python-pip -y
+#    sudo apt-get install python-pip -y
     sudo pip install docker-compose
 
 #    sudo apt-get install linux-image-extra-"$(uname -r)" -y
@@ -624,13 +638,17 @@ download_cpswt_code_base_func(){
 }
 
 build_foundation_classes_func (){
+    echo "Home: $HOME"
+    echo "RTI_HOME: $RTI_HOME"
 
     cd $JAVA_ROOT_FOUNDATION_SRC
     sudo chmod +x setup_foundation_java.sh
-    sh setup_foundation_java.sh
+#    . ./setup_foundation_java.sh
+    sh -DRTI_HOME=$RTI_HOME setup_foundation_java.sh
     cd $CPP_ROOT_FOUNDATION_SRC
     sudo chmod +x setup_foundation.sh
-    sh setup_foundation.sh
+#    . ./setup_foundation.sh
+    sh -DRTI_HOME=$RTI_HOME setup_foundation.sh
 }
 
 cppnetlib_func(){
@@ -650,6 +668,9 @@ cppnetlib_func(){
     sudo make 
     sudo make install
     sudo rm ../cpp-netlib-0.11.2-final.tar.gz
+
+    echo "export BOOST_NETWORK_INC_DIR=\"/usr/local/cpp-netlib/cpp-netlib-cpp-netlib-0.11.2-final\"" >> $HOME/.bashrc
+    source $HOME/.bashrc
 }
 
 jquerry_func (){
@@ -698,7 +719,7 @@ echo "${CPSWT_FLAVOR}-----> Install portico"
 portico_func
 echo "${CPSWT_FLAVOR}-----> Install Ansible"
 ansible_func
-echo "${CPSWT_FLAVOR}-----> Install archiva"
+echo "${CPSWT_FLAVOR}-----> Install Archiva"
 archiva_ansible_func
 echo "${CPSWT_FLAVOR}-----> Install Docker"
 docker_func

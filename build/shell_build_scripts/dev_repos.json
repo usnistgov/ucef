@@ -32,7 +32,7 @@
         },
         {
             "directory": "cpswt-samples",
-            "tag": "v1.0.0-alpha",
+            "tag": "vu/develop",
             "url": "https://github.com/usnistgov/ucef-samples.git"
         }
     ]
