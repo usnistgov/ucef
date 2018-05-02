@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 # Yogesh Barve <yogesh.d.barve@vanderbilt.edu>
 # Himanshu Neema <himanshu@isis.vanderbilt.edu>
+# Martin Burns <martin.burns@nist.gov>
 
-set_env_var_func(){
-    USER_ENV_FILE="/home/vagrant/.bashrc"
-    echo $1 >> $USER_ENV_FILE
-    source $USER_ENV_FILE
-}
 
 disable_ipv6() {
+
     # Multicast in a VM doesn't work properly with IPv6, so we must
     # disable IPv6 on all network interfaces.
     sudo sh -c 'echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf'
@@ -26,11 +23,13 @@ init_func() {
     # sudo add-apt-repository ppa:webupd8team/sublime-text-3
     
     sudo apt-get update -y --fix-missing
+
     set -x
     tr -d '\r' <  /vagrant/shell_build_scripts/env_file.sh > /home/vagrant/env_file.sh
     source /home/vagrant/env_file.sh
-    set +x
     DEBIAN_FRONTEND=noninteractive 
+
+    set +x
 }
 
 openssl_func() {
@@ -435,8 +434,9 @@ portico_func(){
     sudo mv $HOME/portico-$PORTICO_VERSION /usr/local/portico-$PORTICO_VERSION
 
     # Set the RTI_HOME environment variable
-    echo "export RTI_HOME=\"/usr/local/portico-$PORTICO_VERSION\"" >> $HOME/.bashrc
-    source $HOME/.bashrc
+    echo "export RTI_HOME=/usr/local/portico-$PORTICO_VERSION" >> $HOME/.bashrc
+    echo "export RTI_HOME=/usr/local/portico-$PORTICO_VERSION" >> $HOME/env_file.sh
+    source $HOME/env_file.sh
 
     # we will put it in archiva in the ansible script
 }
@@ -638,17 +638,28 @@ download_cpswt_code_base_func(){
 }
 
 build_foundation_classes_func (){
+    source $HOME/env_file.sh
     echo "Home: $HOME"
     echo "RTI_HOME: $RTI_HOME"
 
-    cd $JAVA_ROOT_FOUNDATION_SRC
-    sudo chmod +x setup_foundation_java.sh
-#    . ./setup_foundation_java.sh
-    sh -DRTI_HOME=$RTI_HOME setup_foundation_java.sh
-    cd $CPP_ROOT_FOUNDATION_SRC
-    sudo chmod +x setup_foundation.sh
-#    . ./setup_foundation.sh
-    sh -DRTI_HOME=$RTI_HOME setup_foundation.sh
+    # java foundation
+    echo "Maven install and deploy java foundation projects"
+    cd ${JAVA_ROOT_FOUNDATION_SRC}/cpswt-core
+    mvn -DRTI_HOME=$RTI_HOME clean install deploy -U -B
+
+    # CPP 3rdparty
+    echo "Compiling 3rd party libraries first"
+    cd ${CPP_ROOT_FOUNDATION_SRC}/3rdparty
+    mvn -DRTI_HOME=$RTI_HOME clean install deploy -fae -U -B
+
+    # CPP foundation
+    echo "Compiling cpp foundation libraries" 
+    cd ${CPP_ROOT_FOUNDATION_SRC}/foundation
+    mvn -DRTI_HOME=$RTI_HOME clean install deploy -fae -U -B
+
+    echo "=================================================================================="
+    echo "Completed the compilation, installation, deployment of CPSWT foundation packages  "
+    echo "=================================================================================="
 }
 
 cppnetlib_func(){
@@ -669,8 +680,9 @@ cppnetlib_func(){
     sudo make install
     sudo rm ../cpp-netlib-0.11.2-final.tar.gz
 
-    echo "export BOOST_NETWORK_INC_DIR=\"/usr/local/cpp-netlib/cpp-netlib-cpp-netlib-0.11.2-final\"" >> $HOME/.bashrc
-    source $HOME/.bashrc
+    echo "export BOOST_NETWORK_INC_DIR=/usr/local/cpp-netlib/cpp-netlib-cpp-netlib-0.11.2-final" >> $HOME/env_file.sh
+    echo "export BOOST_NETWORK_INC_DIR=/usr/local/cpp-netlib/cpp-netlib-cpp-netlib-0.11.2-final" >> $HOME/.bashrc
+    source $HOME/env_file.sh
 }
 
 jquerry_func (){
@@ -685,15 +697,30 @@ archiva_ansible_func(){
     sh install_requirements.sh
     ansible-playbook main.yml -vv
 
-    # create service start script for autostart (overrides what absible installs)
-    echo "sudo service archiva start" > startarchiva.sh
-    sudo chmod +x startarchiva.sh
-    sudo chown root:root startarchiva.sh
-    sudo mv startarchiva.sh /opt/apache-archiva-2.2.1/bin/
-    sudo ln -s -f /opt/apache-archiva-2.2.1/bin/startarchiva.sh /etc/rc2.d/S20archiva
-
-    # 20180317 mjb prevent loop on archiva starting (a little kludgy)
-    sudo sed -i 's/$all//g' /etc/init.d/plymouth
+    ## create service start script for autostart (overrides what absible installs)
+    #echo "### BEGIN INIT INFO" > startarchiva.sh
+    #echo "# Provides:          archiva" >> startarchiva.sh
+    #echo "# Required-Start:    $remote_fs $syslog" >> startarchiva.sh
+    #echo "# Required-Stop:     $remote_fs $syslog" >> startarchiva.sh
+    #echo "# Default-Start:     2 3 4 5" >> startarchiva.sh
+    #echo "# Default-Stop:      0 1 6" >> startarchiva.sh
+    #echo "# Short-Description: Example initscript" >> startarchiva.sh
+    #echo "# Description:       This file should be used to construct scripts to be" >> startarchiva.sh
+    #echo "#                    placed in /etc/init.d.  This example start a" >> startarchiva.sh
+    #echo "#                    single forking daemon capable of writing a pid" >> startarchiva.sh
+    #echo "#                    file.  To get other behavoirs, implemend" >> startarchiva.sh
+    #echo "#                    do_start(), do_stop() or other functions to" >> startarchiva.sh
+    #echo "#                    override the defaults in /lib/init/init-d-script." >> startarchiva.sh
+    #echo "### END INIT INFO" >> startarchiva.sh
+    #echo "sudo service archiva start" >> startarchiva.sh
+    #
+    #sudo chmod +x startarchiva.sh
+    #sudo chown root:root startarchiva.sh
+    #sudo mv startarchiva.sh /opt/apache-archiva-2.2.1/bin/
+    #sudo ln -s -f /opt/apache-archiva-2.2.1/bin/startarchiva.sh /etc/rc2.d/S20archiva
+    #
+    ## 20180317 mjb prevent loop on archiva starting (a little kludgy)
+    #sudo sed -i 's/$all//g' /etc/init.d/plymouth
 }
 
 # initialization
