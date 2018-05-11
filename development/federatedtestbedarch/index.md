@@ -14,7 +14,7 @@ This section discusses the benefits of a federated testbed architecture for CPS 
 
 A CPS contains co-engineered, interacting networks of physical and computational components from multiple domains of technology. These domains – such as smart cities, smart manufacturing, and transportation – each have technologies and simulation engines tailored to their individual needs and experiences. CPS experimentation requires the integration of these heterogeneous, domain-specific tools into a common co-simulation platform. Figure 1 illustrates a subset of the different things that must be integrated together to perform a CPS experiment.
 
-<img style="width:100%;" src="Integrative.png"/>
+<img style="width:100%;" src="Integrative.png" alt="Figure 1: Ability to federate across sectors and technologies, as well as virtual or real instances of CPS."/>
 
 *Figure 1 Ability to federate across sectors and technologies, as well as virtual or real instances of CPS.*
 

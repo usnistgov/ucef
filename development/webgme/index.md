@@ -11,7 +11,7 @@ This document provides an overview of the WebGME user interface, and references 
 ## WebGME User Interface
 The following image annotates the important aspects of the WebGME user interface:
 
-<img style="width:100%;" src="webgme-overview-1.png"/>
+<img style="width:100%;" src="webgme-overview-1.png" alt="Figure 1: WebGME User Interface"/>
 
 1. **Execute Plugin** opens a menu that lists the enabled WebGME plugins. Some plugins are only available at the root level of the project.
 2. Clicking on the GME symbol opens the **Project Management** menu where WebGME projects can be created and deleted.
