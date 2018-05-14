@@ -2,7 +2,6 @@
     "repo_site": "github.com",
     "git_repos": [{
             "directory": "cpswt-cpp",
-            "tag": "vu/develop",
             "url": "https://github.com/usnistgov/ucef-cpp.git"
         },
         {
@@ -22,17 +21,14 @@
         },
         {
             "directory": "cpswt-core",
-            "tag": "vu/develop",
             "url": "https://github.com/usnistgov/ucef-core.git"
         },
         {
             "directory": "cpswt-meta",
-            "tag": "vu/develop",
             "url": "https://github.com/usnistgov/ucef-meta.git"
         },
         {
             "directory": "cpswt-samples",
-            "tag": "vu/develop",
             "url": "https://github.com/usnistgov/ucef-samples.git"
         }
     ]
