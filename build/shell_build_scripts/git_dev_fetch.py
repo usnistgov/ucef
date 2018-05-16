@@ -25,7 +25,6 @@ with open(dev_repo_file) as json_data:
 #        print(i['url'])
         repo_directory = i['directory']
         repo_url = i['url']
-        repo_tag = i['tag']
 #        new_repo_url = string.replace(repo_url, 'gituser', gituser)
 #        print(new_repo_url)
         repo_path = os.path.join(cpsproject_path, repo_directory)
@@ -35,5 +34,6 @@ with open(dev_repo_file) as json_data:
         os.chdir(repo_path)
         print("Cloning new repo: " +  repo_path)
         repo = Repo.clone_from(repo_url, repo_path)
-        if repo_tag:
+        if 'tag' in i:
+            repo_tag = i['tag']
             repo.git.checkout(repo_tag)
