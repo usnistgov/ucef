@@ -327,8 +327,8 @@ gridlabd_func(){
     git checkout develop
     sudo mkdir -p /usr/local/gridlab-d
     sudo autoreconf -isf
-    sudo ./configure --prefix=/usr/local/gridlab-d --enable-silent-rules
-    sudo make && sudo make install
+    sudo ./configure --enable-silent-rules 'CFLAGS=-g -O0 -w' 'CXXFLAGS=-g -O0 -w' 'LDFLAGS=-g -O0 -w'
+    make && sudo make install
     sudo ln -s /usr/local/gridlab-d/bin/gridlabd /usr/local/bin/gridlabd
 
 }
