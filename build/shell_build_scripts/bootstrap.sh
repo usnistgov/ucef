@@ -315,7 +315,8 @@ gridlabd_func(){
     sudo apt-get install automake autoconf libtool curl subversion build-essential libxerces-c-dev  cmake -y
 
     ############ MOST IMPORTANT
-    # Most Important Note!!!!!: We need to stick with commit 5307.....
+    # careful use of opt directory to maintain ownership by vagrant:vagrant and not root
+
     cd $HOME/Downloads/
 #    sudo svn co -q svn://svn.code.sf.net/p/gridlab-d/code/trunk@5307 gridlab-d-code
 #    sudo svn co -q svn://svn.code.sf.net/p/gridlab-d/code/trunk gridlab-d-code
@@ -326,8 +327,8 @@ gridlabd_func(){
     cd /opt/gridlab-d-code
     git checkout develop
     sudo mkdir -p /usr/local/gridlab-d
-    sudo autoreconf -isf
-    sudo ./configure --enable-silent-rules 'CFLAGS=-g -O0 -w' 'CXXFLAGS=-g -O0 -w' 'LDFLAGS=-g -O0 -w'
+    autoreconf -isf
+     ./configure --enable-silent-rules 'CFLAGS=-g -O0 -w' 'CXXFLAGS=-g -O0 -w' 'LDFLAGS=-g -O0 -w'
     make && sudo make install
     sudo ln -s /usr/local/gridlab-d/bin/gridlabd /usr/local/bin/gridlabd
 
