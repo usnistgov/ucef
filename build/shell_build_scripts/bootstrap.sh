@@ -4,7 +4,19 @@
 # Martin Burns <martin.burns@nist.gov>
 
 
-disable_ipv6() {
+init_func() {
+    # add needed repositories
+    sudo add-apt-repository universe
+    sudo add-apt-repository ppa:wireshark-dev/stable -y
+    sudo add-apt-repository -y ppa:webupd8team/java
+    sudo apt-add-repository  -y ppa:ansible/ansible
+   
+    sudo apt-get update -y --fix-missing
+
+    tr -d '\r' <  /vagrant/shell_build_scripts/env_file.sh > /home/vagrant/env_file.sh
+    source /home/vagrant/env_file.sh
+    DEBIAN_FRONTEND=noninteractive 
+
 
     # Multicast in a VM doesn't work properly with IPv6, so we must
     # disable IPv6 on all network interfaces.
@@ -12,79 +24,123 @@ disable_ipv6() {
     sudo sh -c 'echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf'
     sudo sh -c 'echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf'
     sudo sysctl -p
-}
 
-init_func() {
-    # add needed repositories
-    sudo add-apt-repository universe
-    sudo add-apt-repository ppa:wireshark-dev/stable -y
-    sudo add-apt-repository -y ppa:webupd8team/java
-    sudo apt-add-repository  -y ppa:ansible/ansible
-    # sudo add-apt-repository ppa:webupd8team/sublime-text-3
-    
-    sudo apt-get update -y --fix-missing
-
-    set -x
-    tr -d '\r' <  /vagrant/shell_build_scripts/env_file.sh > /home/vagrant/env_file.sh
-    source /home/vagrant/env_file.sh
-    DEBIAN_FRONTEND=noninteractive 
-
-    set +x
-}
-
-openssl_func() {
     sudo apt-get install libssl-dev -y
 }
 
-git_func(){
-    sudo apt-get install git -y
-    sudo apt-get install gitk -y
+####################
+# mongo            #
+####################
+mongodb_func(){
+    # Add the MongoDB v3.0 repository
+    sudo rm /etc/apt/sources.list.d/mongodb*.list
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+    sudo echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" > tempfile 
+    sudo mv tempfile /etc/apt/sources.list.d/mongodb-org-3.2.list
+    sudo apt update -y
+    sudo apt install mongodb-org -y -f
+
+    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
+    sudo systemctl enable /etc/systemd/mongod.service
+    sudo systemctl daemon-reload
+    sudo systemctl start mongod
+
+    # add robomongo
+    cd $HOME/Downloads/
+    wget -q https://download.robomongo.org/0.9.0/linux/robomongo-0.9.0-linux-x86_64-0786489.tar.gz
+    tar -xvzf robomongo-0.9.0-linux-x86_64-0786489.tar.gz
+    sudo mkdir /usr/local/bin/robomongo
+    sudo mv  robomongo-0.9.0-linux-x86_64-0786489/* /usr/local/bin/robomongo
+    sudo ln -s /usr/local/bin/robomongo/bin/robomongo /usr/local/bin/robomon
 }
 
-python27_func(){
-    sudo add-apt-repository ppa:fkrull/deadsnakes -y
-    sudo apt-get update -y
-    sudo apt-get install python2.7 -y
+####################
+# mysql            #
+####################
+mysql_func(){
+    # Make sure dependencies have been updated
+    sudo debconf-set-selections <<<'mysql-server mysql-server/root_password  password c2wt'
+    sudo debconf-set-selections <<<'mysql-server mysql-server/root_password_again  password c2wt'
+    sudo apt-get install -yf
+
+    # Install mysql server
+    sudo debconf-set-selections <<<'mysql-server mysql-server/root_password  password c2wt'
+    sudo debconf-set-selections <<<'mysql-server mysql-server/root_password_again  password c2wt'
+    sudo apt-get install -y mysql-server mysql-common mysql-client
+
+    # Instsall workbench
+    sudo apt-get install -y mysql-workbench
 }
 
-wireshark_func(){
-    # Install wireshark
-#    export DEBIAN_FRONTEND=noninteractive
-#    sudo add-apt-repository ppa:wireshark-dev/stable -y
-#    sudo apt-get update -y
-#    sudo apt-get install wireshark -y -f
+jquerry_func (){
+    sudo apt-get install -y -f jq
+}
+
+####################
+# management tools #
+####################
+#This installs the java
+java8_func(){
+    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+    sudo apt-get install oracle-java8-installer -y
+    sudo apt-get install oracle-java8-set-default -y
+    sudo apt-get install default-jdk -y
+}
+
+maven_func(){
+    sudo apt-get install maven -y -f
     
-    echo "${CPSWT_FLAVOR}-----> Installing Wireshark app"
-#    echo yes | DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f -q install wireshark
-#    echo "wireshark-common wireshark-common/install-setuid boolean false" | debconf-set-selections
-    sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wireshark
-    echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
-    sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure wireshark-common
+    # add archiva to /etc/hosts
+    cd $HOME/Downloads/
+    sed '3 i127.0.0.1\tcpswtng_archiva' </etc/hosts >hosts
+    sudo cp hosts /etc
+    rm hosts
+}
 
-    echo "${CPSWT_FLAVOR}-----> Install Group"
-    #sudo groupadd wireshark
-    sudo addgroup -quiet -system wireshark
-    echo "${CPSWT_FLAVOR}-----> Modify Group"
-    sudo usermod -a -G wireshark vagrant
-    sudo chgrp wireshark /usr/bin/dumpcap
-    sudo chmod 755 /usr/bin/dumpcap
-    echo "${CPSWT_FLAVOR}-----> Set Group Capabilities"
-    sudo setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
+portico_func(){
+    PORTICO_VERSION=2.1.0
 
+    # Download and extract portico
+    cd $HOME/Downloads/
+    wget -q  http://downloads.sourceforge.net/project/portico/Portico/portico-$PORTICO_VERSION/portico-$PORTICO_VERSION-linux64.tar.gz
+    tar xzf portico-$PORTICO_VERSION-linux64.tar.gz -C $HOME
+    sudo mv $HOME/portico-$PORTICO_VERSION /usr/local/portico-$PORTICO_VERSION
+
+    # Set the RTI_HOME environment variable
+    echo "export RTI_HOME=/usr/local/portico-$PORTICO_VERSION" >> $HOME/.bashrc
+    echo "export RTI_HOME=/usr/local/portico-$PORTICO_VERSION" >> $HOME/env_file.sh
+    source $HOME/env_file.sh
+
+    # we will put it in archiva in the ansible script
+}
+
+##########
+# Ansible #
+##########
+ansible_func(){
+    sudo apt-get install  -y software-properties-common
+    sudo apt-get install -y -f ansible
+    sudo apt-get install -y -f libxml2-dev libxslt-dev python-dev
+    sudo apt-get install -y -f python3-lxml
+}
+
+##########
+# Archiva #
+##########
+archiva_ansible_func(){
+    rm -rf /home/vagrant/ansible/
+    mkdir -p /home/vagrant/ansible/
+    cp -r /vagrant/ansible/* /home/vagrant/ansible/
+    cd /home/vagrant/ansible
+    sh install_requirements.sh
+    ansible-playbook main.yml -vv
+    sudo update-rc.d archiva defaults 80
 }
 
 ##########
 # Docker #
 ##########
 docker_func(){
-
-    # for xenial from: https://gist.github.com/tsaqib/9c7c6eed460930b1a14665043bd2157c
-    #sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-    #sudo apt-get update -y
-    #sudo rm -f /etc/apt/sources.list.d/docker.list
-    #echo 'deb https://apt.dockerproject.org/repo/dists ubuntu-xenial main' >> tempfile
-    #sudo mv tempfile /etc/apt/sources.list.d/docker.list
-
 
     # install instructions https://docs.docker.com/install/linux/docker-ce/ubuntu/#os-requirements
     sudo apt-get install -y linux-image-extra-$(uname -r)
@@ -106,148 +162,48 @@ docker_func(){
     sudo service docker start
     sudo usermod -aG docker vagrant
 
-#    sudo apt-get install python-pip -y
     sudo pip install docker-compose
+}
 
-#    sudo apt-get install linux-image-extra-"$(uname -r)" -y
-#    sudo apt-get install apparmor -y
-#    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-#    sudo sh -c "echo deb https://apt.dockerproject.org/repo ubuntu-trusty main > /etc/apt/sources.list.d/docker.list"
-#    sudo apt-get update --fix-missing
-#    sudo apt-get purge lxc-docker -y
-#    sudo apt-cache policy docker-engine
-#    sudo apt-get update --fix-missing
-#    sudo apt-get install docker-engine -y
-#    sudo service docker start
-#    sudo usermod -aG docker vagrant
+# Install Shipyard for Docker Visualization
+shipyard_func(){
+    # May have a conflit with default port 8080
+    curl -s https://shipyard-project.com/deploy | sudo bash -s
+}
+
+##########
+# Wireshark #
+##########
+wireshark_func(){
+    echo "${CPSWT_FLAVOR}-----> Installing Wireshark app"
+
+    sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wireshark
+    echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
+    sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure wireshark-common
+
+    echo "${CPSWT_FLAVOR}-----> Install Group"
+    #sudo groupadd wireshark
+    sudo addgroup -quiet -system wireshark
+    echo "${CPSWT_FLAVOR}-----> Modify Group"
+    sudo usermod -a -G wireshark vagrant
+    sudo chgrp wireshark /usr/bin/dumpcap
+    sudo chmod 755 /usr/bin/dumpcap
+    echo "${CPSWT_FLAVOR}-----> Set Group Capabilities"
+    sudo setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
 }
 
 
-######################
-# WebGME Development #
-######################
-mongodb_func(){
-    # Add the MongoDB v3.0 repository
-# for Ubuntu 14.04    
-#    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-#    echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
-#    sudo apt-get update
-#    sudo apt-get install -y mongodb-org
 
-    # for Ubuntu 16.04
-    #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
-    #echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
-    #sudo apt-get update
-    #sudo apt-get install -y -f mongodb-org
-
-    sudo rm /etc/apt/sources.list.d/mongodb*.list
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-    sudo echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" > tempfile 
-    sudo mv tempfile /etc/apt/sources.list.d/mongodb-org-3.2.list
-    sudo apt update -y
-    sudo apt install mongodb-org -y -f
-
-    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
-    sudo systemctl enable /etc/systemd/mongod.service
-    sudo systemctl daemon-reload
-    sudo systemctl start mongod
-
-
-    # add robomongo
-    cd $HOME/Downloads/
-    wget -q https://download.robomongo.org/0.9.0/linux/robomongo-0.9.0-linux-x86_64-0786489.tar.gz
-    tar -xvzf robomongo-0.9.0-linux-x86_64-0786489.tar.gz
-    sudo mkdir /usr/local/bin/robomongo
-    sudo mv  robomongo-0.9.0-linux-x86_64-0786489/* /usr/local/bin/robomongo
-    sudo ln -s /usr/local/bin/robomongo/bin/robomongo /usr/local/bin/robomon
-
-}
-
-node_func(){
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-    source /home/vagrant/.nvm/nvm.sh
-    nvm install 4.5.0
-    nvm use 4.5.0
-    nvm alias default 4.5.0
-}
-
-webgme_func()
-{
-
-    cd $CPSWT_WEBGME_HOME
-    npm install
-
-    # for Ubuntu 14.04
-    # Autostart WebGME on crash and reboot
-    #sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.conf /etc/init/webgme.conf
-    #sudo service webgme start
-
-    # for Ubuntu 16.04
-    # configure service
-    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.service /etc/systemd/webgme.service
-    sudo systemctl enable /etc/systemd/webgme.service
-    sudo systemctl daemon-reload
-    sudo systemctl start webgme
-
-    cd $CPSWT_WEBGMEGLD_HOME
-    npm install
-
-    # Autostart WebGMEGld on crash and reboot
-# for Ubuntu 14.04
-#    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.conf /etc/init/webgmegld.conf
-#    sudo service webgmegld start
-
-    # for Ubuntu 16.04
-    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.service /etc/systemd/webgmegld.service
-    sudo systemctl enable /etc/systemd/webgmegld.service
-    sudo systemctl daemon-reload
-    sudo systemctl start webgmegld
-}
-
-
-chrome_browser_func()
-{
-    # Add the chrome debian repository
-    #wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    #sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-
-    # does this apt-get update have to be here
-    #sudo apt-get update -y
-    #sudo apt-get install google-chrome-stable -y -f
-    #sudo apt-get install --reinstall libnss3 -y -f
-
-
-    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-    sudo apt-get update -y --fix-missing
-    sudo apt-get -y install google-chrome-stable
-
-    # Set chrome as the default browser
-    xdg-mime default google-chrome.desktop text/html
-    xdg-mime default google-chrome.desktop x-scheme-handler/http
-    xdg-mime default google-chrome.desktop x-scheme-handler/https
-    xdg-mime default google-chrome.desktop x-scheme-handler/about
-}
-
-####################
-# Java Development #
-####################
-openjdk7_func(){
-    sudo apt-get install openjdk-7-jdk -y
-}
-
+##########
+# Eclipse #
+##########
 eclipse_func(){
     cd $HOME/Downloads/
     wget --progress=bar:force  http://mirror.cc.vt.edu/pub/eclipse/technology/epp/downloads/release/neon/3/eclipse-java-neon-3-linux-gtk-x86_64.tar.gz
     tar xvf eclipse*.tar.gz -C $HOME
 
-    # TODO: Remove 
-    # Move the source code templates into the eclipse folder
-    # TODO: register the templates with eclipse automatically
-    # cp /home/vagrant/cpswt/cpswt-devtools/config/eclipse_*_templates.xml $HOME
-
     # add emf classes needed for pubsub to m2
-# Edit this variable to point to your location of the files listed below.
+    # Edit this variable to point to your location of the files listed below.
     EMF_HOME="/home/vagrant/eclipse/plugins"
     GROUP="org.eclipse.emf"
 
@@ -273,73 +229,127 @@ eclipse_func(){
         -Dpackaging=jar    
 }
 
-maven_func(){
-#    sudo apt-get purge maven maven2 maven3
-#    sudo add-apt-repository ppa:andrei-pozolotin/maven3
-#    sudo apt-get update
-#    sudo apt-get install maven3
-    sudo apt-get install maven -y -f
-    
-    # add archiva to /etc/hosts
+
+
+##########
+# Chrome #
+##########
+chrome_browser_func()
+{
+    # get chrome
+    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+    sudo apt-get update -y --fix-missing
+    sudo apt-get -y install google-chrome-stable
+
+    # Set chrome as the default browser
+    xdg-mime default google-chrome.desktop text/html
+    xdg-mime default google-chrome.desktop x-scheme-handler/http
+    xdg-mime default google-chrome.desktop x-scheme-handler/https
+    xdg-mime default google-chrome.desktop x-scheme-handler/about
+}
+
+
+
+######################
+# WebGME Development #
+######################
+node_func(){
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+    source /home/vagrant/.nvm/nvm.sh
+    nvm install 4.5.0
+    nvm use 4.5.0
+    nvm alias default 4.5.0
+}
+
+webgme_func()
+{
+    cd $CPSWT_WEBGME_HOME
+    npm install
+
+    # configure WebGME service
+    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.service /etc/systemd/webgme.service
+    sudo systemctl enable /etc/systemd/webgme.service
+    sudo systemctl daemon-reload
+    sudo systemctl start webgme
+
+    cd $CPSWT_WEBGMEGLD_HOME
+    npm install
+
+    # Autostart WebGMEGld on crash and reboot
+    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.service /etc/systemd/webgmegld.service
+    sudo systemctl enable /etc/systemd/webgmegld.service
+    sudo systemctl daemon-reload
+    sudo systemctl start webgmegld
+}
+
+selenium_func() {
     cd $HOME/Downloads/
-    sed '3 i127.0.0.1\tcpswtng_archiva' </etc/hosts >hosts
-    sudo cp hosts /etc
-    rm hosts
-
-    # Configure maven to connect to internal archiva repository
-    #mkdir -p /home/vagrant/.m2
-    #cp /home/vagrant/cpswt/cpswt-devtools/config/settings.xml $HOME/.m2/settings.xml
+    sudo pip install selenium
+    wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
 }
 
-####################
-# mysql            #
-####################
-mysql_func(){
-    # Make sure dependencies have been updated
-    sudo debconf-set-selections <<<'mysql-server mysql-server/root_password  password c2wt'
-    sudo debconf-set-selections <<<'mysql-server mysql-server/root_password_again  password c2wt'
-    sudo apt-get install -yf
-
-    # Install mysql server
-    sudo debconf-set-selections <<<'mysql-server mysql-server/root_password  password c2wt'
-    sudo debconf-set-selections <<<'mysql-server mysql-server/root_password_again  password c2wt'
-    sudo apt-get install -y mysql-server mysql-common mysql-client
-
-    # Instsall workbench
-    sudo apt-get install -y mysql-workbench
+boost_func(){
+    sudo apt-get install --fix-missing gcc g++ wget libboost-all-dev libmysqlcppconn-dev -y
 }
+
+cppnetlib_func(){
+    sudo mkdir /usr/local/cpp-netlib
+
+    cd /usr/local/cpp-netlib 
+    sudo wget https://github.com/cpp-netlib/cpp-netlib/archive/cpp-netlib-0.11.2-final.tar.gz 
+    sudo tar xvf  cpp-netlib-0.11.2-final.tar.gz
+
+    cd /usr/local/cpp-netlib
+    sudo mkdir cpp-netlib-build 
+    cd cpp-netlib-build
+    sudo cmake -DCMAKE_BUILD_TYPE=Debug \
+    -DCMAKE_C_COMPILER=gcc \
+    -DCMAKE_CXX_COMPILER=g++ \
+    ../cpp-netlib-cpp-netlib-0.11.2-final 
+    sudo make 
+    sudo make install
+    sudo rm ../cpp-netlib-0.11.2-final.tar.gz
+
+    echo "export BOOST_NETWORK_INC_DIR=/usr/local/cpp-netlib/cpp-netlib-cpp-netlib-0.11.2-final" >> $HOME/env_file.sh
+    echo "export BOOST_NETWORK_INC_DIR=/usr/local/cpp-netlib/cpp-netlib-cpp-netlib-0.11.2-final" >> $HOME/.bashrc
+    source $HOME/env_file.sh
+}
+
+########################
+# Federate Source Code #
+########################
+build_foundation_classes_func (){
+    source $HOME/env_file.sh
+    echo "Home: $HOME"
+    echo "RTI_HOME: $RTI_HOME"
+
+    # java foundation
+    echo "Maven install and deploy java foundation projects"
+    cd ${JAVA_ROOT_FOUNDATION_SRC}/cpswt-core
+    mvn -DRTI_HOME=$RTI_HOME clean install deploy -U -B
+
+    # CPP 3rdparty
+    echo "Compiling 3rd party libraries first"
+    cd ${CPP_ROOT_FOUNDATION_SRC}/3rdparty
+    mvn -DRTI_HOME=$RTI_HOME clean install deploy -fae -U -B
+
+    # CPP foundation
+    echo "Compiling cpp foundation libraries" 
+    cd ${CPP_ROOT_FOUNDATION_SRC}/foundation
+    mvn -DRTI_HOME=$RTI_HOME clean install deploy -fae -U -B
+
+    echo "=================================================================================="
+    echo "Completed the compilation, installation, deployment of CPSWT foundation packages  "
+    echo "=================================================================================="
+}
+
+
 #######################
 # Simulation Software #
 #######################
-gridlabd_func(){
-    sudo apt-get install automake autoconf libtool curl subversion build-essential libxerces-c-dev  cmake -y
-
-    ############ MOST IMPORTANT
-    # careful use of opt directory to maintain ownership by vagrant:vagrant and not root
-
-    cd $HOME/Downloads/
-#    sudo svn co -q svn://svn.code.sf.net/p/gridlab-d/code/trunk@5307 gridlab-d-code
-#    sudo svn co -q svn://svn.code.sf.net/p/gridlab-d/code/trunk gridlab-d-code
-    # MJB 20171108 gridlab-d is abandoning sf repository in favor of github; will check out develop branch
-    git clone https://github.com/gridlab-d/gridlab-d.git gridlab-d-code
-    sudo mv gridlab-d-code /opt
-
-    cd /opt/gridlab-d-code
-    git checkout develop
-    sudo mkdir -p /usr/local/gridlab-d
-    autoreconf -isf
-     ./configure --enable-silent-rules 'CFLAGS=-g -O0 -w' 'CXXFLAGS=-g -O0 -w' 'LDFLAGS=-g -O0 -w'
-    make && sudo make install
-    sudo ln -s /usr/local/gridlab-d/bin/gridlabd /usr/local/bin/gridlabd
-
-}
 
 omnetpp_func (){
-    set +x 
-
-    #sudo apt-get update
-    # sudo apt-get ugrade -y -f
-
     # General dependencies
     sudo apt-get install -y -f\
     git \
@@ -415,51 +425,36 @@ omnetpp_func (){
     
     sudo ln -s /opt/omnetpp/omnetpp-5.2.1/ide/omnetpp /usr/local/bin/omnetpp
 
-    set -x
 }
 
-########################
-# Federate Source Code #
-########################
-boost_func(){
-    sudo apt-get install --fix-missing gcc g++ wget libboost-all-dev libmysqlcppconn-dev -y
-}
+gridlabd_func(){
+    sudo apt-get install automake autoconf libtool curl subversion build-essential libxerces-c-dev  cmake -y
 
-portico_func(){
-    PORTICO_VERSION=2.1.0
-
-    # Download and extract portico
+    ############ MOST IMPORTANT
+    # careful use of opt directory to maintain ownership by vagrant:vagrant and not root
     cd $HOME/Downloads/
-    wget -q  http://downloads.sourceforge.net/project/portico/Portico/portico-$PORTICO_VERSION/portico-$PORTICO_VERSION-linux64.tar.gz
-    tar xzf portico-$PORTICO_VERSION-linux64.tar.gz -C $HOME
-    sudo mv $HOME/portico-$PORTICO_VERSION /usr/local/portico-$PORTICO_VERSION
+    git clone https://github.com/gridlab-d/gridlab-d.git gridlab-d-code
+    sudo mv gridlab-d-code /opt
 
-    # Set the RTI_HOME environment variable
-    echo "export RTI_HOME=/usr/local/portico-$PORTICO_VERSION" >> $HOME/.bashrc
-    echo "export RTI_HOME=/usr/local/portico-$PORTICO_VERSION" >> $HOME/env_file.sh
-    source $HOME/env_file.sh
-
-    # we will put it in archiva in the ansible script
+    cd /opt/gridlab-d-code
+    git checkout develop
+    sudo mkdir -p /usr/local/gridlab-d
+    autoreconf -isf
+     ./configure --enable-silent-rules 'CFLAGS=-g -O0 -w' 'CXXFLAGS=-g -O0 -w' 'LDFLAGS=-g -O0 -w'
+    make && sudo make install
+    sudo ln -s /usr/local/gridlab-d/bin/gridlabd /usr/local/bin/gridlabd
 }
 
-# federate_src_func(){
-#     mvn -f $JAVA_ROOT_FOUNDATION_SRC/c2w-jni/pom.xml install
-#     mvn -f $JAVA_ROOT_FOUNDATION_SRC/c2w-foundation/pom.xml install
-#     mvn -f $CPP_ROOT_FOUNDATION_SRC/3rdparty/pom.xml install
-#     mvn -f $JAVA_ROOT_FOUNDATION_SRC/foundation/pom.xml install
-# }
+build_docker_image(){
+    cd $Docker_FED_SRC/c2wtcore
+    sudo docker-compose build
+}
 
 ######################
-# Other Applications #
+# Misc Applications #
 ######################
 terminator_func(){
     sudo apt-get install terminator -y
-}
-
-sublime3_func(){
-#    sudo add-apt-repository ppa:webupd8team/sublime-text-3
-#    sudo apt-get update
-    sudo apt-get install sublime-text-installer -y
 }
 
 vim_func(){
@@ -483,31 +478,13 @@ mc_func(){
     sudo apt-get install mc -y
 }
 
-ansible_func(){
-    sudo apt-get install  -y software-properties-common
-#    sudo apt-add-repository  -y ppa:ansible/ansible
-#    sudo apt-get update -y
-    sudo apt-get install -y -f ansible
-    sudo apt-get install -y -f libxml2-dev libxslt-dev python-dev
-    sudo apt-get install -y -f python3-lxml
-}
 
-selenium_func() {
-    cd $HOME/Downloads/
-    sudo pip install selenium
-    wget https://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
-}
+
+
 
 ###########
 # Cleanup #
 ###########
-
-build_docker_image(){
-    cd $Docker_FED_SRC/c2wtcore
-    sudo docker-compose build
-}
-
-
 gnome_func(){
     # add terminal option to nautilus
     sudo apt-get install nautilus-open-terminal -y
@@ -550,187 +527,12 @@ cleanup_func(){
     sudo rm -r $HOME/Downloads/*
 }
 
-####################
-# Unused Functions #
-####################
-# Install the necessary Java Version on the Virtual Machine
-java6_func(){
-    echo "installing java6"
-    oracle-java6-installer
-    sudo echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-    sudo apt-get install oracle-java6-installer -y
-    sudo apt-get install oracle-java6-set-default -y
-    echo "Current Java Version is: "
-    java -version
-}
-
-#This installs the java
-java7_func(){
-#    sudo add-apt-repository ppa:webupd8team/java -y
-#    sudo apt-get update
-    echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
-    sudo apt-get install oracle-java7-installer -y
-    sudo apt-get install oracle-java7-set-default -y
-}
-
-#This installs the java
-java8_func(){
-#    sudo add-apt-repository ppa:webupd8team/java -y
-#    sudo apt-get update
-    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
-    sudo apt-get install oracle-java8-installer -y
-    sudo apt-get install oracle-java8-set-default -y
-    sudo apt-get install default-jdk -y
-}
-
-#Finally Prepare this Box for package
-emptybox_func(){
-    sudo apt-get clean -y
-    sudo dd if=/dev/zero of=/EMPTY bs=1M
-    sudo rm -f /EMPTY
-}
-
-#lastly clear the bash_history and quit
-historyclear_func(){
-    echo "Cleaning the history"
-    cat /dev/null > /home/vagrant/.bash_history && history -c
-}
-#Finally shutdown the system
-shutdown_func(){
-    echo "System Shutting Down"
-    sudo shutdown now -h
-}
-
-# Install Shipyard for Docker Visualization
-shipyard_func(){
-    # May have a conflit with default port 8080
-    curl -s https://shipyard-project.com/deploy | sudo bash -s
-}
-
-# Installs the Chromium
-chromium_func(){
-    sudo apt-get install chromium-browser -y
-}
-
-# Installs the webgme_cli_tool
-webgme_cli_func(){
-
-  npm install -g webgme/webgme-setup-tool
-
-}
-
-initialize_maven_archiva_settings_func()
-{
-    PORTICO_VERSION=2.1.0
-    mkdir -p /home/vagrant/.m2
-#    cp /home/vagrant/Projects/cpswt/src/dev-tools/settings.xml /home/vagrant/.m2/settings.xml
-    #cp /home/vagrant/cpswt/src/dev-tools/settings.xml /home/vagrant/.m2/settings.xml
-    cp $ARCHIVA_SETTINGS_XML_DIR/settings.xml /home/vagrant/.m2/settings.xml
-}
-
-download_cpswt_code_base_func(){
-    CPSWT_PROJECT_DIR=/home/vagrant/CPSWT_Project/
-    mkdir -p $CPSWT_PROJECT_DIR
-    cd $CPSWT_PROJECT_DIR
-    echo "Next we need to login to the Vulcan to pull C2WT Repositories....."
-    echo "Type the vulcan.isis.vanderbilt username now, followed by [ENTER]:"
-    read -r vulcanuser
-    svn checkout https://"$vulcanuser"@svn.vulcan.isis.vanderbilt.edu/projects/cpswt/trunk .
-}
-
-build_foundation_classes_func (){
-    source $HOME/env_file.sh
-    echo "Home: $HOME"
-    echo "RTI_HOME: $RTI_HOME"
-
-    # java foundation
-    echo "Maven install and deploy java foundation projects"
-    cd ${JAVA_ROOT_FOUNDATION_SRC}/cpswt-core
-    mvn -DRTI_HOME=$RTI_HOME clean install deploy -U -B
-
-    # CPP 3rdparty
-    echo "Compiling 3rd party libraries first"
-    cd ${CPP_ROOT_FOUNDATION_SRC}/3rdparty
-    mvn -DRTI_HOME=$RTI_HOME clean install deploy -fae -U -B
-
-    # CPP foundation
-    echo "Compiling cpp foundation libraries" 
-    cd ${CPP_ROOT_FOUNDATION_SRC}/foundation
-    mvn -DRTI_HOME=$RTI_HOME clean install deploy -fae -U -B
-
-    echo "=================================================================================="
-    echo "Completed the compilation, installation, deployment of CPSWT foundation packages  "
-    echo "=================================================================================="
-}
-
-cppnetlib_func(){
-    sudo mkdir /usr/local/cpp-netlib
-
-    cd /usr/local/cpp-netlib 
-    sudo wget https://github.com/cpp-netlib/cpp-netlib/archive/cpp-netlib-0.11.2-final.tar.gz 
-    sudo tar xvf  cpp-netlib-0.11.2-final.tar.gz
-
-    cd /usr/local/cpp-netlib
-    sudo mkdir cpp-netlib-build 
-    cd cpp-netlib-build
-    sudo cmake -DCMAKE_BUILD_TYPE=Debug \
-    -DCMAKE_C_COMPILER=gcc \
-    -DCMAKE_CXX_COMPILER=g++ \
-    ../cpp-netlib-cpp-netlib-0.11.2-final 
-    sudo make 
-    sudo make install
-    sudo rm ../cpp-netlib-0.11.2-final.tar.gz
-
-    echo "export BOOST_NETWORK_INC_DIR=/usr/local/cpp-netlib/cpp-netlib-cpp-netlib-0.11.2-final" >> $HOME/env_file.sh
-    echo "export BOOST_NETWORK_INC_DIR=/usr/local/cpp-netlib/cpp-netlib-cpp-netlib-0.11.2-final" >> $HOME/.bashrc
-    source $HOME/env_file.sh
-}
-
-jquerry_func (){
-    sudo apt-get install -y -f jq
-}
-
-archiva_ansible_func(){
-    rm -rf /home/vagrant/ansible/
-    mkdir -p /home/vagrant/ansible/
-    cp -r /vagrant/ansible/* /home/vagrant/ansible/
-    cd /home/vagrant/ansible
-    sh install_requirements.sh
-    ansible-playbook main.yml -vv
-
-    ## create service start script for autostart (overrides what absible installs)
-    #echo "### BEGIN INIT INFO" > startarchiva.sh
-    #echo "# Provides:          archiva" >> startarchiva.sh
-    #echo "# Required-Start:    $remote_fs $syslog" >> startarchiva.sh
-    #echo "# Required-Stop:     $remote_fs $syslog" >> startarchiva.sh
-    #echo "# Default-Start:     2 3 4 5" >> startarchiva.sh
-    #echo "# Default-Stop:      0 1 6" >> startarchiva.sh
-    #echo "# Short-Description: Example initscript" >> startarchiva.sh
-    #echo "# Description:       This file should be used to construct scripts to be" >> startarchiva.sh
-    #echo "#                    placed in /etc/init.d.  This example start a" >> startarchiva.sh
-    #echo "#                    single forking daemon capable of writing a pid" >> startarchiva.sh
-    #echo "#                    file.  To get other behavoirs, implemend" >> startarchiva.sh
-    #echo "#                    do_start(), do_stop() or other functions to" >> startarchiva.sh
-    #echo "#                    override the defaults in /lib/init/init-d-script." >> startarchiva.sh
-    #echo "### END INIT INFO" >> startarchiva.sh
-    #echo "sudo service archiva start" >> startarchiva.sh
-    #
-    #sudo chmod +x startarchiva.sh
-    #sudo chown root:root startarchiva.sh
-    #sudo mv startarchiva.sh /opt/apache-archiva-2.2.1/bin/
-    #sudo ln -s -f /opt/apache-archiva-2.2.1/bin/startarchiva.sh /etc/rc2.d/S20archiva
-    #
-    ## 20180317 mjb prevent loop on archiva starting (a little kludgy)
-    #sudo sed -i 's/$all//g' /etc/init.d/plymouth
-}
-
+###############################################################################
+# Installation Script                                                         #
+###############################################################################
 # initialization
 echo "${CPSWT_FLAVOR}-----> Initialization"
 init_func
-disable_ipv6
-openssl_func
-#git_func
-#python27_func
 
 # databases 
 echo "${CPSWT_FLAVOR}-----> Install Databases"
@@ -770,7 +572,9 @@ boost_func
 cppnetlib_func
 jquerry_func
 
+#######################
 # federate source code
+#######################
 echo "${CPSWT_FLAVOR}-----> Build Foundation Classes"
 build_foundation_classes_func
 
@@ -794,18 +598,19 @@ build_docker_image
 # misc applications #
 #####################
 echo "${CPSWT_FLAVOR}-----> Misc Tools"
-#chrome_browser_func
 terminator_func
-# sublime not free sublime3_func
 vim_func
 ntp_func
 nmap_func
 mc_func
 
+#######################
 # cleanup
+#######################
 echo "${CPSWT_FLAVOR}-----> Cleanup"
 gnome_func
 
+# %%%% 20180517 mjb not sure this is still needed remnant from earlier debug
 sudo apt-get install --reinstall libnss3 -y -f
 
 cleanup_func
