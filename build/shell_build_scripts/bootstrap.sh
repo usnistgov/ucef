@@ -418,8 +418,8 @@ omnetpp_func (){
     cd ~/Downloads
     wget -q https://github.com/inet-framework/inet/releases/download/v3.6.3/inet-3.6.3-src.tgz
     tar xvfz inet-3.6.3-src.tgz
-    sudo mv inet /opt/omnetpp/omnetpp-5.2.1/samples/
-    cd /opt/omnetpp/omnetpp-5.2.1/samples/inet
+    sudo mv inet /opt/omnetpp/omnetpp-5.2.1/
+    cd /opt/omnetpp/omnetpp-5.2.1/inet
     make makefiles
     make
     
