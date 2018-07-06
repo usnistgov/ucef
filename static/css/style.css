@@ -7176,12 +7176,13 @@ section.home {
 .home-title {
     /* min-height: 600px;*/
     /*	min-height:468px;*/
-    height: 80%;
-    width: 100%;
+    height: 40%;
+    /*    width: 100%;*/
     margin-top: 40px;
     color: #4cba6f;
-    background-size: cover;
-    background-position: center center
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 
@@ -7203,8 +7204,8 @@ section.home {
 }
 
 .home-title img {
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
     margin-top: 40px;
     margin-bottom: 40px;
