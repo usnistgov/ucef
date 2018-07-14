@@ -401,6 +401,7 @@ omnetpp_func (){
     cd /opt/omnetpp/omnetpp-5.2.1
     
     export PATH=/opt/omnetpp/omnetpp-5.2.1/bin:$PATH
+    export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-5.2.1/Makefile.inc
     export HOSTNAME
     export HOST
     export DISPLAY=:0.0
@@ -409,19 +410,36 @@ omnetpp_func (){
     echo "HOSTNAME=$HOSTNAME"
     echo "HOST=$HOST"
     echo "DISPLAY=$DISPLAY"
+    echo "OMNETPP_CONFIGFILE=$OMNETPP_CONFIGFILE"
 
     #source setenv
     ./configure WITH_QTENV=no
     make
 
-    #install inet library
-    cd ~/Downloads
-    wget -q https://github.com/inet-framework/inet/releases/download/v3.6.3/inet-3.6.3-src.tgz
-    tar xvfz inet-3.6.3-src.tgz
-    sudo mv inet /opt/omnetpp/omnetpp-5.2.1/
-    cd /opt/omnetpp/omnetpp-5.2.1/inet
+    echo "export PATH=/opt/omnetpp/omnetpp-5.2.1/bin:$PATH" >> $HOME/.bashrc
+    echo "export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-5.2.1/Makefile.inc" >> $HOME/.bashrc
+
+
+    #install inet library (NIST clone of inet on github)
+    git clone -b feature/can --recursive https://github.com/usnistgov/inet.git
+    cd inet
+    ./inet_featuretool reset
+    ./inet_featuretool disable wirelesstutorial
+    ./inet_featuretool disable wirelessshowcases
+    ./inet_featuretool disable visualizationtutorial
+    ./inet_featuretool disable configuratortutorial
+    ./inet_featuretool disable visualizershowcases
     make makefiles
     make
+
+#    #install inet library
+#    cd ~/Downloads
+#    wget -q https://github.com/inet-framework/inet/releases/download/v3.6.3/inet-3.6.3-src.tgz
+#    tar xvfz inet-3.6.3-src.tgz
+#    sudo mv inet /opt/omnetpp/omnetpp-5.2.1/
+#    cd /opt/omnetpp/omnetpp-5.2.1/inet
+#    make makefiles
+#    make
     
     sudo ln -s /opt/omnetpp/omnetpp-5.2.1/ide/omnetpp /usr/local/bin/omnetpp
 
