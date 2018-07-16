@@ -1,9 +1,13 @@
 echo "Pre.sh script"
 
 init_func(){
-#    export DEBIAN_FRONTEND=noninteractive
+    export DEBIAN_FRONTEND=noninteractive
+    sudo apt-get update
+    sudo apt-get upgrade
+
 #    sudo debconf-set-selections <<< 'update-notifier-common 10periodic select Y'
 #    sudo apt-get install -yfq update-notifier-common
+
     sudo rm /etc/apt/apt.conf.d/*
     sudo apt-get install apt-transport-https
 }

@@ -383,25 +383,10 @@ omnetpp_func (){
     libosgearth-dev
 
     # OMNeT++ 5
-    # Create working directory
-    sudo mkdir -p /opt/omnetpp
 
-    # Fetch Omnet++ source
-    # (Official mirror "doesn't support" command line downloads. Fortunately, we don't care)
-    cd ~/Downloads
-    wget -q --header="Accept: text/html" \
-            --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0" \
-            --referer="https://omnetpp.org" \
-            --output-document=omnetpp-5.2.1-src.tgz \
-            https://www.omnetpp.org/omnetpp/send/30-omnet-releases/2321-omnetpp-5-2-1-linux
-    tar -xf omnetpp-5.2.1-src.tgz
-    sudo mv omnetpp-5.2.1 /opt/omnetpp
-
-    # Configure and compile omnet++
-    cd /opt/omnetpp/omnetpp-5.2.1
-    
-    export PATH=/opt/omnetpp/omnetpp-5.2.1/bin:$PATH
-    export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-5.2.1/Makefile.inc
+    export OMNET_VERSION=5.2.1
+    export PATH=/opt/omnetpp/omnetpp-$OMNET_VERSION/bin:$PATH
+    export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-$OMNET_VERSION/Makefile.inc
     export HOSTNAME
     export HOST
     export DISPLAY=:0.0
@@ -412,12 +397,29 @@ omnetpp_func (){
     echo "DISPLAY=$DISPLAY"
     echo "OMNETPP_CONFIGFILE=$OMNETPP_CONFIGFILE"
 
+    # Create working directory
+    sudo mkdir -p /opt/omnetpp
+
+    # Fetch Omnet++ source
+    # (Official mirror "doesn't support" command line downloads. Fortunately, we don't care)
+    cd ~/Downloads
+
+    wget -q https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/omnetpp-$OMNET_VERSION-src-linux.tgz
+
+#    wget -q --header="Accept: text/html" --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0" --referer="https://omnetpp.org" --output-document=omnetpp-5.2.1-src.tgz https://www.omnetpp.org/omnetpp/send/30-omnet-releases/2321-omnetpp-5-2-1-linux
+    tar -xf omnetpp-$OMNET_VERSION-src-linux.tgz
+    sudo mv omnetpp-$OMNET_VERSION /opt/omnetpp
+
+    # Configure and compile omnet++
+    cd /opt/omnetpp/omnetpp-$OMNET_VERSION
+    
+
     #source setenv
-    ./configure WITH_QTENV=no
+    ./configure WITH_QTENV=no WITH_OSGEARTH=no
     make
 
-    echo "export PATH=/opt/omnetpp/omnetpp-5.2.1/bin:$PATH" >> $HOME/.bashrc
-    echo "export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-5.2.1/Makefile.inc" >> $HOME/.bashrc
+    echo "export PATH=/opt/omnetpp/omnetpp-$OMNET_VERSION/bin:$PATH" >> $HOME/.bashrc
+    echo "export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-$OMNET_VERSION/Makefile.inc" >> $HOME/.bashrc
 
 
     #install inet library (NIST clone of inet on github)
