@@ -385,11 +385,14 @@ omnetpp_func (){
     # OMNeT++ 5
 
     export OMNET_VERSION=5.2.1
-    export PATH=/opt/omnetpp/omnetpp-$OMNET_VERSION/bin:$PATH
-    export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-$OMNET_VERSION/Makefile.inc
     export HOSTNAME
     export HOST
     export DISPLAY=:0.0
+    echo "export PATH=/opt/omnetpp/omnetpp-$OMNET_VERSION/bin/:$PATH" >> $HOME/.bashrc
+    echo "export PATH=/opt/omnetpp/omnetpp-$OMNET_VERSION/bin/:$PATH" >> $HOME/env_file.sh
+    echo "export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-$OMNET_VERSION/Makefile.inc" >> $HOME/.bashrc
+    echo "export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-$OMNET_VERSION/Makefile.inc" >> $HOME/env_file.sh
+    source $HOME/env_file.sh
 
     echo "PATH=$PATH"
     echo "HOSTNAME=$HOSTNAME"
@@ -415,12 +418,8 @@ omnetpp_func (){
     
 
     #source setenv
-    ./configure WITH_QTENV=no WITH_OSGEARTH=no
+    ./configure WITH_QTENV=no
     make
-
-    echo "export PATH=/opt/omnetpp/omnetpp-$OMNET_VERSION/bin:$PATH" >> $HOME/.bashrc
-    echo "export OMNETPP_CONFIGFILE=/opt/omnetpp/omnetpp-$OMNET_VERSION/Makefile.inc" >> $HOME/.bashrc
-
 
     #install inet library (NIST clone of inet on github)
     git clone -b feature/can --recursive https://github.com/usnistgov/inet.git
