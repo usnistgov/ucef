@@ -2,7 +2,7 @@
 services: 
   c2wtcore: 
     build: .
-    image: "cpswt/c2wtcore_v002:160816"
+    image: "cpswt/c2wtcore_v002:170626"
     #command: "sh /root/Projects/c2wt/deployment/HelloWorld_Deployment_Files/start.sh"
     volumes:
       - ./deployment:/root/Projects/c2wt/deployment
