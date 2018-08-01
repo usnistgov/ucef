@@ -1,4 +1,4 @@
-- src: https://github.com/sperka/ansible-role-archiva.git
+- src: https://github.com/usnistgov/ansible-role-archiva.git
   version: master
   name: archiva
 

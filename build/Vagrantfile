@@ -37,13 +37,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end # srv.vm.provider
 
       # Configures the Virtualbox specific metrics
-      srv.vbguest.auto_update = true  
+      #srv.vbguest.auto_update = true  
       srv.vm.post_up_message = dev_setup["post_up_message"]
       
       # Path of the provision files to be called
       provision_scripts = dev_setup['provision_scripts']
       provision_scripts.each do |run_script|
-        srv.vm.provision "shell", :path => File.join(vm_config_dir, run_script), privileged: false
+        srv.vm.provision "shell", :path => File.join(vm_config_dir, run_script), privileged: false, :args => ['-X']
       end
       
 

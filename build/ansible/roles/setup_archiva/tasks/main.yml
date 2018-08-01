@@ -3,19 +3,23 @@
   become: true
   xml: 
     file: "{{ archiva.install_path }}/apache-archiva-{{ archiva.version }}/conf/archiva.xml"
-    value: 99999
+    value: "99999"
     xpath: /configuration/redbackRuntimeConfiguration/configurationProperties/security/policy/password/expiration/days
 
 - name: change expiration setting enabled
   become: true
   xml: 
     file: "{{ archiva.install_path }}/apache-archiva-{{ archiva.version }}/conf/archiva.xml"
-    value: false
+    value: "false"
     xpath: /configuration/redbackRuntimeConfiguration/configurationProperties/security/policy/password/expiration/enabled
+
+#- name: restart archiva
+#  become: true
+#  service: name=archiva state=restarted
 
 - name: restart archiva
   become: true
-  service: name=archiva state=restarted
+  shell: /etc/init.d/archiva restart
 
 - name: "Config maven"
   become: false
