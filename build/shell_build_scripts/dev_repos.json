@@ -7,17 +7,17 @@
         },
         {
             "directory": "cpswt-db",
-            "tag": "v1.0.0-alpha",
+            "tag": "develop",
             "url": "https://github.com/usnistgov/ucef-db.git"
         },
         {
             "directory": "cpswt-devtools",
-            "tag": "feature/omnetpp",
+            "tag": "develop",
             "url": "https://github.com/usnistgov/ucef.git"
         },
         {
             "directory": "cpswt-gridlabd-meta",
-            "tag": "v1.0.0-alpha",
+            "tag": "develop",
             "url": "https://github.com/usnistgov/ucef-gridlabd-meta.git"
         },
         {
