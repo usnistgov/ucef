@@ -8,4 +8,4 @@ dependency_versions:
     portico: 2.1.0
 paths:
     maven_settings_dir: .m2
-    portico_dir: "/home/vagrant"
+    portico_dir: "/usr/local"

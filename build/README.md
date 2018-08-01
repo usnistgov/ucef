@@ -9,7 +9,17 @@ UCEF Virtual Machine
 ### Prerequisites 
 1) Make sure you have installed Oracle Virtualbox and Vagrant software (see the links below): 
 - Oracle Virtualbox: [https://www.virtualbox.org/](https://www.virtualbox.org/ )
-- Vagrant: [https://www.vagrantup.com/docs/installation/](https://www.vagrantup.com/docs/installation/) - Downloads: [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
+- Vagrant Downloads: [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
+- Vagrant Installation Instructions: [https://www.vagrantup.com/docs/installation/](https://www.vagrantup.com/docs/installation/) 
+
+*Note: vagrant build can be version dependent. For a stable release download one of the tested images above.* 
+
+	-- Vagrant Version 2.1.1
+	-- VirtualBox Version  5.2.12 r122591 (Qt5.6.2)
+
+- Older versions of VirtualBox can be found at: https://www.virtualbox.org/wiki/Download_Old_Builds.
+- Older versions of Vagrant can be found at: https://releases.hashicorp.com/vagrant/
+
 
 2) After installing Vagrant (or if you already have it installed), we need to make sure that Guest-Additions plugin is installed in Vagrant, by running the command on a DOS command prompt:
     
@@ -33,7 +43,7 @@ UCEF Virtual Machine
 - node
 - openjdk8
 - docker
-- python27
+- python27, python35
 - shipyard
 - terminator
 - chromium
@@ -43,9 +53,14 @@ UCEF Virtual Machine
 - archiva
 - gridlabd
 - mysql & mysql-workbench
+- omnet++ (includes eclipse C++ development platform)
+- wirshark
+- mc
+- nmap
+- cpp-netlib
 
 
-**UserName and Password for the Virtual Machine is default vagrant**
+**UserName and Password for the Virtual Machine is default vagrant:vagrant**
 
 ## UCEF Git Source Repositories
 

@@ -1,12 +1,7 @@
 [{
-    "name": "UCEF 1.0.0-alpha",
-    "box": "box-cutter/ubuntu1404-desktop",
-    "sync_folders": [
-        // {
-        //   "host_folder": "../share",
-        //   "vagrant_folder": "/cpswt"
-        // }
-    ],
+    "name": "UCEF 1.0.0-alpha-omnetpp",
+    "box": "https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/ubuntu1604-desktop-17.0907.1.box",
+    "sync_folders": [],
     "VBoxProperties": {
         "--memory": 4096,
         "--cpus": 4,
@@ -21,6 +16,5 @@
         "bootstrap.sh",
         "post.sh"
     ],
-    "post_up_message": "========================================= \n * Created at ISIS, Vanderbilt University \n * Authors: Yogesh Barve email:yogesh.d.barve@Vanderbilt.edu \n *          Himanshu Neema email:himanshu.neema@isis.vanderbilt.edu \n============================================="
-
+    "post_up_message": "========================================= \n * Created at ISIS, Vanderbilt University, and NIST \n * Authors: Yogesh Barve email:yogesh.d.barve@Vanderbilt.edu \n *          Himanshu Neema email:himanshu.neema@isis.vanderbilt.edu \n *          Martin Burns email:martin.burns@nist.gov \n============================================="
 }]

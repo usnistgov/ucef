@@ -23,91 +23,11 @@ UCEF is provided as an open source toolkit that:
 * allows experiments to be composed among local simulations, hardware in the loop (HIL), cloud simulations, and collaborative experiments across the world;
 * integrates federates designed in (expected as of this workshop): Java, C++, Omnet++, Matlab, LabView, Gridlab-D.
 
-## Site organization
+### To Build the Virtual Machine or Download One
+See [**Build**](build) which contains code to allow for the automated generation of the UCEF Virtual Machine
 
-This site has two principle sections:
-- [**Build**](build) which contains code to allow for the automated generation of the UCEF Virtual Machine
-- [**Docs**](docs) which contains documentation on UCEF
-
----
-
-# July 27 Kickoff Workshop
-The workshop was completed on the 27th of July. Please monitor this site for future activities on the continued development and evolution of UCEF.
-
-At this workshop, participants will learn the details of UCEF, obtain a copy that they can install at the workshop and take home with them on a USB drive, and participate in a hands-on exercise to design/implement/build a collaborative experiment involving all attendees.
-
-We are looking for practitioners of these technologies who may be interested in not only using UCEF, but more importantly in contributing to its development and evolution. 
-
-To participate in the workshop exercise you will need a laptop with a Wi-Fi connection (during the federated experiment your laptop will be connected to a local private Wi-Fi network set up for this purpose). We will provide USB drive with software needed to load virtual machine on your computer. NIST will have a couple of secure USB drives for those who cannot connect an unencrypted USB to their laptop***.
-
-### Workshop Logistics
-
-Workshop was completed on July 27th
-
- 
-### AGENDA
-
-[9:00-9:30] Welcome and NIST SGCPS
-NIST CPS Testbed Effort
-How testbed fits into research endeavors at SGCPS
-NIST/Vanderbilt Collaboration – C2WT, Cosimulation, …
-NIST/PNNL Collaboration – TE Challenge  
-
-[9:30-10:30] Architecture
-Use Cases
-Communications Requirements
-HLA Overview  
-
-[10:30-11:30] UCEF Fundamentals
-Virtual Machine
-WebGME,
-Federate types, Interactions, Objects
-Federation Manager
-Courses of Action (COA) Experiment orchestration language  
-
-[11:30-12:00] Install UCEF
-Install VirtualBox, VM  
-
-[12:00-1:00] Lunch  
-
-[13:00-15:30] Hands-on UCEF Exercise
-Create test federate according to scripted scenario
-Edit and compile source code
-Run federation
-Feedback on the exercise  
-
-[15:30-16:30] UCEF Contin’d
-Eclipse
-Docker/Uberjar
-Mongo, MySQL and data acquisition during experiments
-FIWARE experimental visualization/analysis technology
-GridlabD
-Simulink
-LabView
-Omnet ++  
-
-[16:30-17:30] Collaboration Opportunity
-Open-Source Community
-GitHub
-Issues
-Forking and Pull Requests
-Vagrant
-Archiva, Git  
-
-[17:30:17:45] Feedback on Workshop
-
-### References
-[1]	NIST SP 1500-201, Edward R. Griffor, Christopher Greer, David A. Wollman, Martin J. Burns (June 2017), Framework for Cyber-Physical Systems: Volume 1, Overview, https://dx.doi.org/10.6028/NIST.SP.1500-201  
-
-[2]	https://www.forbes.com/sites/louiscolumbus/2016/11/27/roundup-of-internet-of-things-forecasts-and-market-estimates-2016/#5664b318292d  
- 
-[3]	Cyber-physical systems: the next computing revolution, Raj Rajkumar, Insup Lee, Lui Sha, John Stankovic; DAC '10 Proceedings of the 47th Design Automation Conference, Pages 731-736  
-
-[4]	Cyber-physical system development environment for energy applications, Roth, Song, Burns, Neema,Emfinger, Sztipanovits, 2017 Proceedings of the ASME 2017 11th International Conference on Energy Sustainability (ES2017)  
-
-[5]	1516-2010 - IEEE Standard for Modeling and Simulation (M&S) High Level Architecture (HLA)-- Framework and Rules  
 
 ### UCEF Website
 
-Follow this link to the [UCEF Website on GitHub](docs/README.md "") 
+Follow this link to the [UCEF Collaboration Website](https://pages.nist.gov/ucef "") 
 
