@@ -22,6 +22,10 @@ This tutorial describes how to design separate re-usable federates and run them 
 1. Do Federates Exporter
 1. Do Deployment Exporter
 
+### Some Variations
+* Instead of Interactions, add ObjectRoot instances O1 and O2 instead of I1 and I2 (see above).
+* Add parameters to the I1 and I2 instances, or O1 and O2 instances, as appropriate.
+
 ## Make Separate Ping and Pong Projects
 1. Make Ping by importing PingPongProject webgmex named Ping and deleting Pong  and the resulting dangling connections 
 1. do Federates Exporter only
