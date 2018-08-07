@@ -3,10 +3,19 @@ title: PingPong Federation
 layout: page
 ---
 
+---
+
+*Table of Contents for this Page*
+
+* TOC
+{:toc}
+
+---
+
 # Making two standalone federates and a federation
 This tutorial describes how to design separate re-usable federates and run them from their separate projects, along with, a federation manager based on a federation containing the federates.
 
-## Make PingPong Project
+## Make the PingPong Project
 1. Make PingPongProject using federation_design seed
 1. Rename the top of the object browser on the right "PingPong"
 1. Enter the IntegrationModel folder 
@@ -22,7 +31,7 @@ This tutorial describes how to design separate re-usable federates and run them 
 1. Do Federates Exporter
 1. Do Deployment Exporter
 
-### Some Variations
+## Some Variations
 * Instead of Interactions, add ObjectRoot instances O1 and O2 instead of I1 and I2 (see above).
 * Add parameters to the I1 and I2 instances, or O1 and O2 instances, as appropriate.
 
@@ -70,3 +79,43 @@ This tutorial describes how to design separate re-usable federates and run them 
     ```
     curl -X POST http://10.0.2.15:8083/fedmgr --data '{"action": "TERMINATE"}' -H "Content-Type: application/json"
     ```
+
+## Building a federation only and running within the federation project (PingPongProject_deployment)
+
+### Alternatives: Run all federates from the PingPongProject_deployment folder
+In this case, build all behavior into the federates in the PingPongProject_generated folder. These federates can be separated at a later time as individual federates.
+
+1.  Run FederationManager
+
+    ```
+	mvn exec:java -P FederationManagerExecJava
+    ```
+1.  Run Ping
+
+    ```
+	mvn exec:java -P ExecJava,Ping
+    ```
+1.  Run Pong
+
+    ```
+	mvn exec:java -P ExecJava,Pong
+    ```
+1.  Run the curl statements to start and stop the experiment
+
+### Alternatives: Run/Debug from Eclipse
+1. Open a new eclipse workspace
+2. Import from existing maven projects
+3. Browse to the folder that contains the deployment and generated projects
+4. Accept all subprojects (each pom.xml file in the file tree creates a separate project
+5. If you right click on the PingPong_root and select Run As / Maven Install you can compile the federate code
+6. If you right click on the PingPong_exec and select Run As / Maven Install you can build the federation manager and the federation code
+7. If you right click on the PingPong_exec and select Run As / Maven Build you can create a runtime configuration for the federation manager. 
+* In the Goals: section type ```exec:java```
+* In the Profiles section type ```FederationManagerExecJava```
+8. Now you can run the federation manager with the eclipse run or debug
+9. To run the Ping from the same folder, if you right click on the PingPong_exec and select Run As / Maven Build you can create a runtime configuration for the Ping federate: 
+* In the Goals: section type ```exec:java```
+* In the Profiles section type (the space between profile names is important) ```ExecJava Ping```
+10. Do the same for Pong  
+
+You can now run the FederationManager, Ping, and Pong from within eclipse and set break points and otherwise debug. You may find it a little difficult to select from the different console windows. There are icons that will allow you to open multiple console windows.
