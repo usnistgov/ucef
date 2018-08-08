@@ -12,8 +12,15 @@ layout: page
 
 ---
 
-# Making two standalone federates and a federation
+# Making two standalone Java federates and a federation
 This tutorial describes how to design separate re-usable federates and run them from their separate projects, along with, a federation manager based on a federation containing the federates.
+
+The basic workflow used is:
+1. Build a federation with Ping and Pong federates
+1. Generate code for all
+1. Create separate Ping and Pong standalone and reusable fedederates by importing the entire federation and deleting all but the desired federate and its interactions
+
+Several alternative configurations are described for running natively, using maven, and using eclipse for development.
 
 ## Make the PingPong Project
 1. Make PingPongProject using federation_design seed
@@ -27,9 +34,10 @@ This tutorial describes how to design separate re-usable federates and run them 
 1. Wire up Pub Sub for I1 and I2 
 1. Enter the experiments folder and the the FederationExperiment folder
 1. Drag in federate from the right pallette as  Federation Exeecution references
-1. Export project as webgmex
+1. Export project as webgmex by right-clicking the top of the object browser and selecting export with assets
 1. Do Federates Exporter
 1. Do Deployment Exporter
+1. Download resulting zip files containing code generated projects 
 
 ## Some Variations
 * Instead of Interactions, add ObjectRoot instances O1 and O2 instead of I1 and I2 (see above).
@@ -106,7 +114,7 @@ In this case, build all behavior into the federates in the PingPongProject_gener
 1. Open a new eclipse workspace
 2. Import from existing maven projects
 3. Browse to the folder that contains the deployment and generated projects
-4. Accept all subprojects (each pom.xml file in the file tree creates a separate project
+4. Accept all subprojects (each pom.xml file in the file tree creates a separate project)
 5. If you right click on the PingPong_root and select Run As / Maven Install you can compile the federate code
 6. If you right click on the PingPong_exec and select Run As / Maven Install you can build the federation manager and the federation code
 7. If you right click on the PingPong_exec and select Run As / Maven Build you can create a runtime configuration for the federation manager. 
@@ -119,3 +127,22 @@ In this case, build all behavior into the federates in the PingPongProject_gener
 10. Do the same for Pong  
 
 You can now run the FederationManager, Ping, and Pong from within eclipse and set break points and otherwise debug. You may find it a little difficult to select from the different console windows. There are icons that will allow you to open multiple console windows.
+
+### Alternatives: Run/Debug from Eclipse as Java Application (as opposed to Maven)
+1. Open the menu Debug/Debug Configurations
+2. On left side double click on Java Application to create a new debug configuration
+3. Change the Name to Ping
+4. Browse the Project for the Ping project
+5. Search for the main class PingPong.Ping
+6. Check the Stop in main so on debug it will stop on main
+7. Click the Arguments tab
+8. In the Program arguments add the command line arguments ```-federationId=PingPong"
+9. In the VM arguments add -Dlog4j.configurationFile=conf/log4j.xml
+10. On the bottom right of the form select Apply
+11. Debug now by selecting Debug or close the form. The configuration should be available on the Debug or Run menu.
+
+## Final Notes
+
+* You can mix and match the execution methods in this tutorial. For example, you can run the federation manager from the command line and all but one federate as well. The last federate -- perhaps the one you are working on -- can be run under debug in eclipse.
+
+* Once you add behavior to your federates, if you regenerate the exported projects from the WebGME environment, you will need to merge your custom code into the regenerated projects. There are many publicly available merge and diff tools that make this process easy since it typically requires just merging the one implementation file and copying the additional classes generated.
