@@ -136,8 +136,8 @@ You can now run the FederationManager, Ping, and Pong from within eclipse and se
 5. Search for the main class PingPong.Ping
 6. Check the Stop in main so on debug it will stop on main
 7. Click the Arguments tab
-8. In the Program arguments add the command line arguments ```-federationId=PingPong"
-9. In the VM arguments add -Dlog4j.configurationFile=conf/log4j.xml
+8. In the Program arguments add the command line arguments ```-federationId=PingPong -configFile=conf/PongConfig.json```
+9. In the VM arguments add ```-Dlog4j.configurationFile=conf/log4j2.xml```
 10. On the bottom right of the form select Apply
 11. Debug now by selecting Debug or close the form. The configuration should be available on the Debug or Run menu.
 
