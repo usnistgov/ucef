@@ -56,12 +56,24 @@ The following represent the building blocks of UCEF:
 
     - This project adds a Gridlab-D graphic model editor for UCEF
 
-- ucef-db: [https://github.com/usnistgov/ucef-db.git](https://github.com/usnistgov/ucef-db.git)
+- ucef-database: [https://github.com/usnistgov/ucef-database.git](https://github.com/usnistgov/ucef-database.git)
 
     - This project contains database engine support for UCEF
 
 ## UCEF Wrappers
 - ucef-gateway: [https://github.com/usnistgov/ucef-gateway.git](https://github.com/usnistgov/ucef-gateway.git)
 
-    - ucef-gateway provides for a simplified method of adapting any external simulator or solver to the HLA infrastructure of UCEF. 
+    - ucef-gateway provides for a simplified method of adapting any external simulator or solver to the HLA infrastructure of UCEF.
+
+- ucef-gridlabd: [https://github.com/usnistgov/ucef-gridlabd.git](https://github.com/usnistgov/ucef-gridlabd.git)
+
+    - ucef-gridlabd provides for the ability to run GridLAB-D(TM) simulations under UCEF allowing interactions between federates to reach inside the GridLAB-D(TM) simulation.
+
+- ucef-labview: [https://github.com/usnistgov/ucef-labview.git](https://github.com/usnistgov/ucef-labview.git)
+
+    - ucef-labview provides for the ability to run LabVIEW(TM) simulations under UCEF allowing interactions between federates to reach inside the LabVIEW(TM) simulation.
+
+## UCEF Library
+- ucef-library: [https://github.com/usnistgov/ucef-library.git](https://github.com/usnistgov/ucef-library.git)
+    - ucef-library provides for available re-usable federates, federations, and experiments.
 
