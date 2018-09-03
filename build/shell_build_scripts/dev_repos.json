@@ -6,11 +6,6 @@
             "url": "https://github.com/usnistgov/ucef-cpp.git"
         },
         {
-            "directory": "cpswt-db",
-            "tag": "develop",
-            "url": "https://github.com/usnistgov/ucef-db.git"
-        },
-        {
             "directory": "cpswt-devtools",
             "tag": "develop",
             "url": "https://github.com/usnistgov/ucef.git"
