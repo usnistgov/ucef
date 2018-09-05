@@ -40,6 +40,6 @@ gitpython_func
 echo "Cloning the Repositories"
 python /vagrant/shell_build_scripts/git_dev_fetch.py
 # move files from build subfolder to here for execution
-cd /home/vagrant/cpswt/cpswt-devtools/
+cd /home/vagrant/ucefcodebase/cpswt-devtools/
 sudo mv build/* .
 sudo rm -rf build
