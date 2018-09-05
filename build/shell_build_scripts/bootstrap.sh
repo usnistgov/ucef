@@ -40,7 +40,7 @@ mongodb_func(){
     sudo apt update -y
     sudo apt install mongodb-org -y -f
 
-    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
+    sudo cp /home/vagrant/ucefcodebase/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
     sudo systemctl enable /etc/systemd/mongod.service
     sudo systemctl daemon-reload
     sudo systemctl start mongod
@@ -74,6 +74,24 @@ mysql_func(){
 
 jquerry_func (){
     sudo apt-get install -y -f jq
+}
+
+#######################
+# ucef development   ##
+#######################
+ucef_tools_func () {
+    cd /home/vagrant/ucefcodebase/ucef-gateway
+    mvn clean install -U
+    cd /home/vagrant/ucefcodebase/ucef-library/Federates/metronome/source
+    mvn clean install -U
+    cd /home/vagrant/ucefcodebase/ucef-library/Federates/tmy3weather/source
+    mvn clean install -U
+    cd /home/vagrant/ucefcodebase/ucef-database
+    mvn clean install -U
+    cd /home/vagrant/ucefcodebase/ucef-gridlabd
+    mvn clean install -U
+#    cd /home/vagrant/ucefcodebase/ucef-labview
+#    mvn clean install -U
 }
 
 ####################
@@ -268,7 +286,7 @@ webgme_func()
     npm install
 
     # configure WebGME service
-    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgme.service /etc/systemd/webgme.service
+    sudo cp /home/vagrant/ucefcodebase/cpswt-devtools/config/webgme.service /etc/systemd/webgme.service
     sudo systemctl enable /etc/systemd/webgme.service
     sudo systemctl daemon-reload
     sudo systemctl start webgme
@@ -277,7 +295,7 @@ webgme_func()
     npm install
 
     # Autostart WebGMEGld on crash and reboot
-    sudo cp /home/vagrant/cpswt/cpswt-devtools/config/webgmegld.service /etc/systemd/webgmegld.service
+    sudo cp /home/vagrant/ucefcodebase/cpswt-devtools/config/webgmegld.service /etc/systemd/webgmegld.service
     sudo systemctl enable /etc/systemd/webgmegld.service
     sudo systemctl daemon-reload
     sudo systemctl start webgmegld
@@ -514,8 +532,8 @@ gnome_func(){
 
     # Set launcher shortcuts
     mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
-    cp /home/vagrant/cpswt/cpswt-devtools/config/*.desktop $HOME/.local/share/applications
-    cp /home/vagrant/cpswt/cpswt-devtools/config/*.png $HOME/.local/share/icons/hicolor/48x48/apps
+    cp /home/vagrant/ucefcodebase/cpswt-devtools/config/*.desktop $HOME/.local/share/applications
+    cp /home/vagrant/ucefcodebase/cpswt-devtools/config/*.png $HOME/.local/share/icons/hicolor/48x48/apps
     gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://nautilus.desktop', 'archiva.desktop', 'eclipse.desktop', 'webgme.desktop', 'google-chrome.desktop', 'gnome-terminal.desktop', 'mysql-workbench.desktop', 'gedit.desktop', 'wireshark.desktop', 'omnetpp.desktop']"
 
     # Enable workspaces
@@ -549,6 +567,8 @@ cleanup_func(){
 ###############################################################################
 # Installation Script                                                         #
 ###############################################################################
+echo ${CPSWT_FLAVOR}=====> Start of VM Build `date`
+
 # initialization
 echo "${CPSWT_FLAVOR}-----> Initialization"
 init_func
@@ -613,6 +633,13 @@ gridlabd_func
 echo "${CPSWT_FLAVOR}-----> Build Docker Image"
 build_docker_image
 
+#######################
+# ucef development   ##
+#######################
+echo "${CPSWT_FLAVOR}-----> Install UCEF Tools Development"
+ucef_tools_func
+
+
 #####################
 # misc applications #
 #####################
@@ -633,3 +660,5 @@ gnome_func
 sudo apt-get install --reinstall libnss3 -y -f
 
 cleanup_func
+
+echo ${CPSWT_FLAVOR}=====> End of VM Build `date`

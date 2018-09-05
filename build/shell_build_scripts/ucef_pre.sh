@@ -11,16 +11,16 @@ set_env_var_func(){
 
 webgme_init_func(){
     # set environment variable
-    set_env_var_func "CPSWT_WEBGME_HOME=/home/vagrant/cpswt/cpswt-meta"
-    set_env_var_func "CPSWT_WEBGMEGLD_HOME=/home/vagrant/cpswt/cpswt-gridlabd-meta"
+    set_env_var_func "CPSWT_WEBGME_HOME=/home/vagrant/ucefcodebase/cpswt-meta"
+    set_env_var_func "CPSWT_WEBGMEGLD_HOME=/home/vagrant/ucefcodebase/cpswt-gridlabd-meta"
 
     # Create folders
     mkdir -p $CPSWT_WEBGME_HOME
     mkdir -p $CPSWT_WEBGMEGLD_HOME
 
     # Copy the folders
-    #cp -R /cpswt/meta "$CPSWT_WEBGME_HOME"
-    #cp -R /cpswt/gridlabd-meta "$CPSWT_WEBGMEGLD_HOME"
+    #cp -R /ucefcodebase/meta "$CPSWT_WEBGME_HOME"
+    #cp -R /ucefcodebase/gridlabd-meta "$CPSWT_WEBGMEGLD_HOME"
 }
 
 federate_src_init_func(){
@@ -30,19 +30,19 @@ federate_src_init_func(){
     # Export C2WTROOT 
 
     #echo "C2WTROOT=\"/home/vagrant/cpswt\"" | sudo tee -a /etc/environment
-    set_env_var_func "JAVA_ROOT_FOUNDATION_SRC=/home/vagrant/cpswt/cpswt-core"
-    set_env_var_func "CPP_ROOT_FOUNDATION_SRC=/home/vagrant/cpswt/cpswt-cpp"
+    set_env_var_func "JAVA_ROOT_FOUNDATION_SRC=/home/vagrant/ucefcodebase/cpswt-core"
+    set_env_var_func "CPP_ROOT_FOUNDATION_SRC=/home/vagrant/ucefcodebase/cpswt-cpp"
 }
 
 build_docker_image_init_func(){
     # Export Docker_FED_SRC
-    set_env_var_func "Docker_FED_SRC=/home/vagrant/cpswt/cpswt-devtools/dockerfeds"
+    set_env_var_func "Docker_FED_SRC=/home/vagrant/ucefcodebase/cpswt-devtools/dockerfeds"
 }
 
 
 initialize_maven_archiva_settings_init_func(){
     #Export ARCHIVA_SETTINGS_XML_DIR
-    set_env_var_func "ARCHIVA_SETTINGS_XML_DIR=/vagrant/cpswt/cpswt-devtools/config"
+    set_env_var_func "ARCHIVA_SETTINGS_XML_DIR=/vagrant/ucefcodebase/cpswt-devtools/config"
 }
 
 set -x

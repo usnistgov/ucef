@@ -6,11 +6,6 @@
             "url": "https://github.com/usnistgov/ucef-cpp.git"
         },
         {
-            "directory": "cpswt-db",
-            "tag": "develop",
-            "url": "https://github.com/usnistgov/ucef-db.git"
-        },
-        {
             "directory": "cpswt-devtools",
             "tag": "develop",
             "url": "https://github.com/usnistgov/ucef.git"
@@ -34,6 +29,31 @@
             "directory": "cpswt-samples",
             "tag": "develop",
             "url": "https://github.com/usnistgov/ucef-samples.git"
+        },
+        {
+            "directory": "ucef-database",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-database.git"
+        },
+        {
+            "directory": "ucef-gateway",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-gateway.git"
+        },
+        {
+            "directory": "ucef-library",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-library.git"
+        },
+        {
+            "directory": "ucef-gridlabd",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-gridlabd.git"
+        },
+        {
+            "directory": "ucef-labview",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-labview.git"
         }
     ]
 }

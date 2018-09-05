@@ -1,5 +1,5 @@
 [{
-    "name": "UCEF 1.0.0-alpha-omnetpp",
+    "name": "UCEF 1.0.0-BETA",
     "box": "https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/ubuntu1604-desktop-17.0907.1.box",
     "sync_folders": [],
     "VBoxProperties": {

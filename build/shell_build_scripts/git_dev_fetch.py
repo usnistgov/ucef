@@ -12,7 +12,7 @@ from pprint  import pprint
 
 #build script values
 dev_repo_file="/vagrant/shell_build_scripts/dev_repos.json"
-cpsproject_path='/home/vagrant/cpswt'
+cpsproject_path='/home/vagrant/ucefcodebase'
 
 with open(dev_repo_file) as json_data:
     dev_repo = json.load(json_data)
