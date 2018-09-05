@@ -1,0 +1,14 @@
+<settings>
+<servers>
+    <server>
+      <id>archiva.internal</id>
+      <username>deployer</username>
+      <password>goC2wtng</password>
+    </server>
+    <server>
+      <id>archiva.snapshots</id>
+    <username>deployer</username>
+      <password>goC2wtng</password>
+    </server>
+  </servers>
+</settings>
