@@ -76,6 +76,24 @@ jquerry_func (){
     sudo apt-get install -y -f jq
 }
 
+#######################
+# ucef development   ##
+#######################
+ucef_tools_func () {
+    cd /home/vagrant/ucefcodebase/ucef-gateway
+    mvn clean install -U
+    cd /home/vagrant/ucefcodebase/ucef-library/Federates/metronome/source
+    mvn clean install -U
+    cd /home/vagrant/ucefcodebase/ucef-library/Federates/tmy3weather/source
+    mvn clean install -U
+    cd /home/vagrant/ucefcodebase/ucef-database
+    mvn clean install -U
+    cd /home/vagrant/ucefcodebase/ucef-gridlabd
+    mvn clean install -U
+#    cd /home/vagrant/ucefcodebase/ucef-labview
+#    mvn clean install -U
+}
+
 ####################
 # management tools #
 ####################
@@ -549,6 +567,8 @@ cleanup_func(){
 ###############################################################################
 # Installation Script                                                         #
 ###############################################################################
+echo ${CPSWT_FLAVOR}=====> Start of VM Build `date`
+
 # initialization
 echo "${CPSWT_FLAVOR}-----> Initialization"
 init_func
@@ -613,6 +633,13 @@ gridlabd_func
 echo "${CPSWT_FLAVOR}-----> Build Docker Image"
 build_docker_image
 
+#######################
+# ucef development   ##
+#######################
+echo "${CPSWT_FLAVOR}-----> Install UCEF Tools Development"
+ucef_tools_func
+
+
 #####################
 # misc applications #
 #####################
@@ -633,3 +660,5 @@ gnome_func
 sudo apt-get install --reinstall libnss3 -y -f
 
 cleanup_func
+
+echo ${CPSWT_FLAVOR}=====> End of VM Build `date`

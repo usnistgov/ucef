@@ -51,7 +51,7 @@
             "url": "https://github.com/usnistgov/ucef-gridlabd.git"
         },
         {
-            "directory": "cpswt-labview",
+            "directory": "ucef-labview",
             "tag": "develop",
             "url": "https://github.com/usnistgov/ucef-labview.git"
         }
