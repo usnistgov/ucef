@@ -13,12 +13,12 @@ echo $federation
 logs=$root/$d/logs
 LOG4J=$root/$d/conf/log4j2.xml
 
-mkdir $g
-mkdir $d
-mkdir $d/logs
+mkdir -p $g
+mkdir -p $d
+mkdir -p $d/logs
 
-unzip $f1 -d$g
-unzip $f2 -d$d
+unzip -f $f1 -d$g
+unzip -f $f2 -d$d
 
 cd $g
 mvn clean install
@@ -32,7 +32,7 @@ mvn clean install
 ##################################
 cd $root/$d
 
-xterm -fg white -bg black -l -lf $logs/federation-manager-${timestamp}.log -T "Federation Manager" -geometry 140x40+0+0 -e "export CPSWT_ROOT=`pwd` && mvn exec:java -P FederationManagerExecJava" &
+xterm -fg white -bg black -l -lf $logs/federation-manager-${timestamp}.log -T "Federation Manager" -geometry 140x40+0+0 -e "export CPSWT_ROOT=`pwd` && mvn -Dlog4j.configurationFile=$LOG4J exec:java -P FederationManagerExecJava" &
 
 printf "Waiting for the federation manager to come online.."
 until $(curl -o /dev/null -s -f -X GET http://127.0.0.1:8083/fedmgr); do
@@ -49,9 +49,9 @@ for i in $g/$federation-java-federates/$federation-impl-java/* ; do
    cd $root/$i/target
 
 	fed=`basename $i`
-	config=conf/default/$fed
+	config=conf/$fed
 	config+=Config.json
-	command="java -Dlog4j.configurationFile=$LOG4J -jar $fed-0.1.0-SNAPSHOT.jar -federationId=$federation -configFile=../$config"
+	command="java -Dlog4j.configurationFile=$LOG4J -jar $fed-0.1.0-SNAPSHOT.jar -federationId=$federation -configFile=../$config -name=$fed"
 	echo Command: $command
 	xterm -fg green -bg black -l -lf $logs/$fed-${timestamp}.log -T "$fed" -geometry 140x40+100+100 -e $command &
 
