@@ -14,6 +14,16 @@ This file contains the start of a complete integration test for UCEF-Beta
 TBD Tom and Himanshu -- should require no configuration edits -- just compile and run
 
 
+## Build and Run a Simple Federation
+1. Open Chrome
+2. Open Katalon Recorder (see [Instructions on installing recorder for Chrome](selenium.md) )
+3. Import script [Script that creates federation in webgme and exports deployment and generated federates](BuildPingPongFederationWithExports.html) 
+4. -- note that between Federates Exporter and Deployment Exporter, you have to refresh browser because recorded script stalls (will try to resolve).
+5. Two zip files PingPong_generated.zip and PingPong_deployment are in the ~/Downloads folder
+6. Place them in their own folder
+7. Run the script "unpackcompileandrunfederation.sh" from that folder
+8. The zip files should be unpacked, compiled, and the federation run. The script pauses for a spacebar input to send the federation start command and terminate command
+
 ## Build and verify application projects
 
 1. clone the following projects (in this order):
