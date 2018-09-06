@@ -89,9 +89,11 @@ ucef_tools_func () {
     cd /home/vagrant/ucefcodebase/ucef-database
     mvn clean install -U
     cd /home/vagrant/ucefcodebase/ucef-gridlabd
+    ./build.sh
+    cd /home/vagrant/ucefcodebase/ucef-labview
     mvn clean install -U
-#    cd /home/vagrant/ucefcodebase/ucef-labview
-#    mvn clean install -U
+    cd /home/vagrant/ucefcodebase/test
+    sudo chmod +x unpackcompileandrunfederation.sh
 }
 
 ####################

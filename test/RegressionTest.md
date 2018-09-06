@@ -3,11 +3,12 @@ This file contains the start of a complete integration test for UCEF-Beta
 
 ## Build and verify VM
 1. build vm
-2. check archiva for SynchronizedFederate built, cpp built
-3. build pingpong app
-4. compile and run pingpong
-5. docker run hello-world
-6. test omnetpp by run can/arbitration simulation
+1. check archiva for SynchronizedFederate built, cpp built -- in chrome browse: http://127.0.0.1:8080/#browse/org.cpswt
+1. test Docker by running:
+```
+docker run hello-world
+```
+1. test omnetpp by run can/arbitration simulation
 
 ## Build and verify Samples projects
 1. Build and test the samples projects -- hello world, hello world gridlabd, and ChallengeResponse
@@ -24,43 +25,27 @@ TBD Tom and Himanshu -- should require no configuration edits -- just compile an
 7. Run the script "unpackcompileandrunfederation.sh" from that folder
 8. The zip files should be unpacked, compiled, and the federation run. The script pauses for a spacebar input to send the federation start command and terminate command
 
-## Build and verify application projects
-
-1. clone the following projects (in this order):
+## Build and Run TEChallenge Simulation
+1. Run the TEChallenge simulation (note space bar to proceed from federates joining to curl to run and curl to end)
 ```
 mkdir -p ~/Projects
 cd ~/Projects
-git clone https://github.com/usnistgov/ucef-gateway
-git clone https://github.com/usnistgov/ucef-library
-git clone https://github.com/usnistgov/ucef-database
-git clone https://github.com/usnistgov/ucef-gridlabd
-git clone https://github.com/usnistgov/TEChallengeComponentModel
-```    
-2. build the projects
-```
-cd ~/Projects/ucef-gateway
-mvn clean install -U
-cd ~/Projects/ucef-library/Federates/metronome/source
-mvn clean install -U
-cd ~/Projects/ucef-library/Federates/tmy3weather/source
-mvn clean install -U
-cd ~/Projects/ucef-database
-mvn clean install -U
-cd ~/Projects/ucef-gridlabd
-mvn clean install -U
-cd ~/Projects/ucef-TEChallengeComponentModel/
+git clone https://github.com/usnistgov/TEChallengeComponentModel.git
+cd ~/Projects/TEChallengeComponentModel/
 git checkout feature/TEJavaFederation
-cd Federation
+cd src/Federation
 ./buildall.sh
 ```
-3. Run the TEChallenge simulation (note space bar to proceed from federates joining to curl to run and curl to end)
+2. Then run the federation
 ```
-cd ~/Projects/ucef-TEChallengeComponentModel/experiments/techallenge
+cd ~/Projects/TEChallengeComponentModel/experiments/techallenge
 ./run.sh
 ```
-4. Open the mysql workbench (root:c2wt) and examine the tables
+3. Open the mysql workbench (root:c2wt) and examine the tables
+4. There should be entries in the index table for each object and interaction
+5. There should be one row per timeStep/instanceName and for object tables each attribute
 
-# To Refresh Code on updates
+# HowTo Refresh Code on updates
 We can anticipate updates to the samples, meta, and core projects as well as the individual federates. Use the following instructions to update your VM with these updates.
 
 1. To get updates to ucef-core
