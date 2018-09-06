@@ -17,8 +17,8 @@ mkdir -p $g
 mkdir -p $d
 mkdir -p $d/logs
 
-unzip -f $f1 -d$g
-unzip -f $f2 -d$d
+unzip -u $f1 -d$g
+unzip -u $f2 -d$d
 
 cd $g
 mvn clean install
