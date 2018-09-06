@@ -92,8 +92,12 @@ ucef_tools_func () {
     ./build.sh
     cd /home/vagrant/ucefcodebase/ucef-labview
     mvn clean install -U
-    cd /home/vagrant/ucefcodebase/test
-    sudo chmod +x unpackcompileandrunfederation.sh
+    cd /home/vagrant/ucefcodebase/ucef-devtools/test
+    sudo chmod +x *.sh
+
+    echo "export PATH=/home/vagrant/ucefcodebase/ucef-devtools/test:$PATH" >> $HOME/.bashrc
+    echo "export PATH=/home/vagrant/ucefcodebase/ucef-devtools/test:$PATH" >> $HOME/env_file.sh
+    source $HOME/env_file.sh
 }
 
 ####################
