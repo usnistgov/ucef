@@ -19,7 +19,7 @@ TBD Tom and Himanshu -- should require no configuration edits -- just compile an
 1. Open Chrome
 2. Open Katalon Recorder (see [Instructions on installing recorder for Chrome](selenium.md) )
 3. Import script [Script that creates federation in webgme and exports deployment and generated federates](BuildPingPongFederationWithExports.html) 
-4. -- note that between Federates Exporter and Deployment Exporter, you have to refresh browser because recorded script stalls (will try to resolve).
+4. -- note that between Federates Exporter and Deployment Exporter, you have to refresh browser because recorded script stalls (we will try to resolve).
 5. Two zip files PingPong_generated.zip and PingPong_deployment are in the ~/Downloads folder
 6. Place them in their own folder
 7. Run the script "unpackcompileandrunfederation.sh" from that folder
