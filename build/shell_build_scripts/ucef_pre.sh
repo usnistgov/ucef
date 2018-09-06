@@ -36,13 +36,13 @@ federate_src_init_func(){
 
 build_docker_image_init_func(){
     # Export Docker_FED_SRC
-    set_env_var_func "Docker_FED_SRC=/home/vagrant/ucefcodebase/cpswt-devtools/dockerfeds"
+    set_env_var_func "Docker_FED_SRC=/home/vagrant/ucefcodebase/ucef-devtools/dockerfeds"
 }
 
 
 initialize_maven_archiva_settings_init_func(){
     #Export ARCHIVA_SETTINGS_XML_DIR
-    set_env_var_func "ARCHIVA_SETTINGS_XML_DIR=/vagrant/ucefcodebase/cpswt-devtools/config"
+    set_env_var_func "ARCHIVA_SETTINGS_XML_DIR=/vagrant/ucefcodebase/ucef-devtools/build/config"
 }
 
 set -x

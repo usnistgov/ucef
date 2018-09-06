@@ -6,7 +6,7 @@
             "url": "https://github.com/usnistgov/ucef-cpp.git"
         },
         {
-            "directory": "cpswt-devtools",
+            "directory": "ucef-devtools",
             "tag": "develop",
             "url": "https://github.com/usnistgov/ucef.git"
         },

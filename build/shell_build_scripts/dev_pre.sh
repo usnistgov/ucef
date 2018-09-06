@@ -37,7 +37,7 @@ federate_src_init_func(){
 
 build_docker_image_init_func(){
     # Export Docker_FED_SRC
-    set_env_var_func "Docker_FED_SRC=/home/vagrant/ucefcodebase/cpswt-devtools/dockerfeds"
+    set_env_var_func "Docker_FED_SRC=/home/vagrant/ucefcodebase/ucef-devtools/dockerfeds"
 }
 
 

@@ -40,7 +40,7 @@ mongodb_func(){
     sudo apt update -y
     sudo apt install mongodb-org -y -f
 
-    sudo cp /home/vagrant/ucefcodebase/cpswt-devtools/config/mongod.service /etc/systemd/mongod.service
+    sudo cp /home/vagrant/ucefcodebase/ucef-devtools/build/config/mongod.service /etc/systemd/mongod.service
     sudo systemctl enable /etc/systemd/mongod.service
     sudo systemctl daemon-reload
     sudo systemctl start mongod
@@ -286,7 +286,7 @@ webgme_func()
     npm install
 
     # configure WebGME service
-    sudo cp /home/vagrant/ucefcodebase/cpswt-devtools/config/webgme.service /etc/systemd/webgme.service
+    sudo cp /home/vagrant/ucefcodebase/ucef-devtools/build/config/webgme.service /etc/systemd/webgme.service
     sudo systemctl enable /etc/systemd/webgme.service
     sudo systemctl daemon-reload
     sudo systemctl start webgme
@@ -295,7 +295,7 @@ webgme_func()
     npm install
 
     # Autostart WebGMEGld on crash and reboot
-    sudo cp /home/vagrant/ucefcodebase/cpswt-devtools/config/webgmegld.service /etc/systemd/webgmegld.service
+    sudo cp /home/vagrant/ucefcodebase/ucef-devtools/build/config/webgmegld.service /etc/systemd/webgmegld.service
     sudo systemctl enable /etc/systemd/webgmegld.service
     sudo systemctl daemon-reload
     sudo systemctl start webgmegld
@@ -532,8 +532,8 @@ gnome_func(){
 
     # Set launcher shortcuts
     mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
-    cp /home/vagrant/ucefcodebase/cpswt-devtools/config/*.desktop $HOME/.local/share/applications
-    cp /home/vagrant/ucefcodebase/cpswt-devtools/config/*.png $HOME/.local/share/icons/hicolor/48x48/apps
+    cp /home/vagrant/ucefcodebase/ucef-devtools/build/config/*.desktop $HOME/.local/share/applications
+    cp /home/vagrant/ucefcodebase/ucef-devtools/build/config/*.png $HOME/.local/share/icons/hicolor/48x48/apps
     gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://nautilus.desktop', 'archiva.desktop', 'eclipse.desktop', 'webgme.desktop', 'google-chrome.desktop', 'gnome-terminal.desktop', 'mysql-workbench.desktop', 'gedit.desktop', 'wireshark.desktop', 'omnetpp.desktop']"
 
     # Enable workspaces
