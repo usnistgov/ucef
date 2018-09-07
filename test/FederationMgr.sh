@@ -65,11 +65,11 @@ echo Log4J = $LOG4JOption
 cd $dp
 
 # run the fed manager
-if [ -z "$3" ]; then
-  $command &
-else
+#if [ -z "$3" ]; then
+#  $command &
+#else
  xterm $xt -e $command &
-fi
+#fi
 
 
 printf "Waiting for the federation manager to come online.."
