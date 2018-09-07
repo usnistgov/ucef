@@ -480,7 +480,9 @@ gridlabd_func(){
     sudo mv gridlab-d-code /opt
 
     cd /opt/gridlab-d-code
-    git checkout develop
+    # 20180907 MJB - Commit in gridlabd caused compile to fail on ucef. Use September 5 2018 commit
+    #git checkout develop 
+    git checkout 75b40d9e8d9b77507a5055b62e4c221d132f6c79
     sudo mkdir -p /usr/local/gridlab-d
     autoreconf -isf
      ./configure --enable-silent-rules 'CFLAGS=-g -O0 -w' 'CXXFLAGS=-g -O0 -w' 'LDFLAGS=-g -O0 -w'

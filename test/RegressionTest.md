@@ -3,11 +3,16 @@ This file contains the start of a complete integration test for UCEF-Beta
 
 ## Build and verify VM
 1. build vm
-1. check archiva for SynchronizedFederate built, cpp built -- in chrome browse: http://127.0.0.1:8080/#browse/org.cpswt
-1. test Docker by running:
+2. check archiva for SynchronizedFederate built, cpp built -- in chrome browse: http://127.0.0.1:8080/#browse/org.cpswt
+3. test Docker by running:
 ```
 docker run hello-world
 ```
+4. test gridlabd by running command -- should bring up browser with message
+```
+gridlabd
+```
+
 1. test omnetpp by run can/arbitration simulation
 
 ## Build and verify Samples projects
