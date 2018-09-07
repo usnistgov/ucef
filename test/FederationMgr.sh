@@ -39,7 +39,7 @@ xt=$(cut -d"=" -f 2 <<< $3)
 fi
 
 
-d=`basename $root`
+d=`basename $dp`
 federation=$(echo $d | cut -d _ -f 1)
 
 logs=$dp/logs
@@ -66,7 +66,7 @@ cd $dp
 
 # run the fed manager
 if [ -z "$3" ]; then
-  $command >$logs/federation-manager-${timestamp}.log &
+  $command &
 else
  xterm $xt -e $command &
 fi
