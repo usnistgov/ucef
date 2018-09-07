@@ -45,22 +45,37 @@ fi
 
 d=`basename $dp`
 fed=`basename $p`
+f=$(basename $(dirname $(dirname "$PWD")))
+federation=$(echo $f| cut -d'-' -f 1)
+jar=$(ls target/$fed*.jar | cut -d"/" -f 2)
+
+#determine default federation
+if [ "$2" = "" ]; then
+  configfile=Config.json
+  configfile="../conf/$fed"$configfile
+  fedidarg="-federationId=$federation -configFile=$configfile"
+else
+  fedidarg=$2
+fi
+
+
 
 if [ ! -d $logs ]; then
     echo Creating the $logs_directory directory
     mkdir $logs
 fi
 
-jar=$(basename "$dp/$fed*.jar")
-command="java $LOG4JOption -jar $jar $2"
+command="java $LOG4JOption -jar $jar $fedidarg"
 #command="mvn exec:java -P FederationManagerExecJava -Dfederation.name=$federation $2"
 
 
 echo Federate= $fed
+echo DefaultFederation = $federation
 echo Logs = $logs
 echo Deployment Path = $dp
 echo Terminal Options = $3
 echo Command = $command
+echo Options = $2
 
 
 ##################################
