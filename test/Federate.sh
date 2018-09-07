@@ -29,8 +29,10 @@ fi
 if [ -z "$1" ]; 
 then
   dp=$root/target
+  p=$root
 else
   dp=$1/target
+  p=$1
 fi
 
 #determine if xterm is needed
@@ -42,14 +44,14 @@ fi
 
 
 d=`basename $dp`
-fed=`basename $1`
+fed=`basename $p`
 
 if [ ! -d $logs ]; then
     echo Creating the $logs_directory directory
     mkdir $logs
 fi
 
-jar=$dp/$fed-*
+jar=$(basename "$dp/$fed*.jar")
 command="java $LOG4JOption -jar $jar $2"
 #command="mvn exec:java -P FederationManagerExecJava -Dfederation.name=$federation $2"
 
