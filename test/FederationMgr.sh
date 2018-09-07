@@ -17,8 +17,14 @@ logs_directory=$root/logs
 fedmgr_host=127.0.0.1
 fedmgr_port=8083
 
+if [ "$LOG4J" = "" ]; then
+LOG4JOption=""
+else
+LOG4JOption="-Dlog4j.configurationFile=$LOG4J"
+fi
+
 #determine path to deployment folder
-if [ -z "$1"]; then
+if [ -z "$1" ]; then
 	dp=$root
 else
 	dp=$1
@@ -39,10 +45,10 @@ federation=$(echo $d | cut -d _ -f 1)
 logs=$dp/logs
 if [ ! -d $logs ]; then
     echo Creating the $logs_directory directory
-    mkdir $logs
+    mkdir -p $logs
 fi
 
-command="mvn exec:java -P FederationManagerExecJava -Dfederation.name=$federation $2"
+command="mvn $LOG4JOption exec:java -P FederationManagerExecJava -Dfederation.name=$federation $2"
 
 
 echo Federation= $federation
@@ -50,6 +56,7 @@ echo Logs = $logs
 echo Deployment Path = $dp
 echo Terminal Options = $3
 echo Command = $command
+echo Log4J = $LOG4JOption
 
 
 ##################################
