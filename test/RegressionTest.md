@@ -13,7 +13,7 @@ docker run hello-world
 gridlabd
 ```
 
-1. test omnetpp by run can/arbitration simulation
+5. test omnetpp by run can/arbitration simulation
 
 ## Build and verify Samples projects
 1. Build and test the samples projects -- hello world, hello world gridlabd, and ChallengeResponse
