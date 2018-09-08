@@ -2,9 +2,9 @@
 export LOG4J=/home/vagrant/Downloads/foo/PingPong_deployment/conf/log4j2.xml 
 
 
-FederationMgr.sh ~/Downloads/foo/PingPong_deployment "" "x=-fg white -bg black -geometry 140x40+0+0"
-Federate.sh "/home/vagrant/Downloads/foo/PingPong_generated/PingPong-java-federates/PingPong-impl-java/Ping" "-federationId=PingPong -configFile=../conf/PingConfig.json -name=Ping" "x=-fg green -bg black -geometry 140x40+200+0"
-Federate.sh "/home/vagrant/Downloads/foo/PingPong_generated/PingPong-java-federates/PingPong-impl-java/Pong" "-federationId=PingPong -configFile=../conf/PongConfig.json -name=Pong" "x=-fg orange -bg black -geometry 140x40+400+0"
+federationMgr.sh ~/Downloads/foo/PingPong_deployment "" "x=-fg white -bg black -geometry 140x40+0+0"
+federate.sh "/home/vagrant/Downloads/foo/PingPong_generated/PingPong-java-federates/PingPong-impl-java/Ping" "-federationId=PingPong -configFile=../conf/PingConfig.json -name=Ping" "x=-fg green -bg black -geometry 140x40+200+0"
+federate.sh "/home/vagrant/Downloads/foo/PingPong_generated/PingPong-java-federates/PingPong-impl-java/Pong" "-federationId=PingPong -configFile=../conf/PongConfig.json -name=Pong" "x=-fg orange -bg black -geometry 140x40+400+0"
 
 ##################################
 # start the simulation
