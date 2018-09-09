@@ -141,6 +141,43 @@ You can now run the FederationManager, Ping, and Pong from within eclipse and se
 10. On the bottom right of the form select Apply
 11. Debug now by selecting Debug or close the form. The configuration should be available on the Debug or Run menu.
 
+### Alternatives: Create and Run Cpp Federates under Maven
+1. Instead of selecting JavaFederate from left panel in the WebGME editor, select CppFederate
+2. Complete project the same way you do a Java federate
+3. After exporting Federates and Deployment
+In _generated:
+```
+mvn package install -P CppFed
+```
+In _deployment:
+```
+mvn clean install
+```
+4. To run C++ federates in deployment:
+5.  Run FederationManager
+
+```
+mvn exec:java -P FederationManagerExecJava
+```
+6. Run Ping Federate in new terminal terminal
+```
+mvn exec:exec -P CppFed,Ping
+```
+7. Run Pong Federate in new terminal terminal
+```
+mvn exec:exec -P CppFed,Pong
+```
+8. In a new terminal, run start and terminate scripts accordingly
+```
+federation_start.sh
+```
+9. Run terminate script to end simulation
+```
+federation_terminate.sh
+```
+
+
+
 ## Final Notes
 
 * You can mix and match the execution methods in this tutorial. For example, you can run the federation manager from the command line and all but one federate as well. The last federate -- perhaps the one you are working on -- can be run under debug in eclipse.
