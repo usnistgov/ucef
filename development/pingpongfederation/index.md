@@ -28,16 +28,16 @@ Several alternative configurations are described for running natively, using mav
 1. Enter the IntegrationModel folder 
 1. Add Ping JavaFederate by dragging from the left pallette
 1. Add Pong JavaFederate
-1. Add I1 Interaction by dragging from the right pallette C2WInteractionRoot
+1. Add I1 Interaction by dragging from the left pallette C2WInteractionRoot
 1. Add I2 Interaction
-
 1. Wire up Pub Sub for I1 and I2 
-1. Enter the experiments folder and the the FederationExperiment folder
-1. Drag in federate from the right pallette as  Federation Exeecution references
-1. Export project as webgmex by right-clicking the top of the object browser and selecting export with assets
-1. Do Federates Exporter
-1. Do Deployment Exporter
-1. Download resulting zip files containing code generated projects 
+1. Export project as webgmex by right-clicking the top of the object browser and selecting export with assets -- this will allow you to archive and reload the WebGME project at a later date
+1. Select the "player" icon near the top left of the browser and select Federates Exporter
+1. Select Save & Run
+1. The select Deployment Exporter
+1. Select Save & Run
+1. Select the "player" icon near the top left of the browser and select Show Results
+1. Download resulting zip files containing code generated projects by clicking on the results
 
 ## Some Variations
 * Instead of Interactions, add ObjectRoot instances O1 and O2 instead of I1 and I2 (see above).
@@ -147,11 +147,11 @@ You can now run the FederationManager, Ping, and Pong from within eclipse and se
 3. After exporting Federates and Deployment
 In _generated:
 ```
-mvn package install -P CppFed
+mvn package install 
 ```
 In _deployment:
 ```
-mvn clean install
+mvn package install -P CppFed
 ```
 4. To run C++ federates in deployment:
 5.  Run FederationManager
