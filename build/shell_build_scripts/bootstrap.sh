@@ -575,7 +575,9 @@ cleanup_func(){
 ###############################################################################
 # Installation Script                                                         #
 ###############################################################################
-echo ${CPSWT_FLAVOR}-----> Start of VM Build `date`
+export CPSWT_FLAVOR="UCEF 1.0.0-BETA"
+
+echo "${CPSWT_FLAVOR}-----> Start of VM Build `date`"
 
 # initialization
 echo "${CPSWT_FLAVOR}-----> Initialization"
@@ -669,4 +671,4 @@ sudo apt-get install --reinstall libnss3 -y -f
 
 cleanup_func
 
-echo ${CPSWT_FLAVOR}-----> End of VM Build `date`
+echo "${CPSWT_FLAVOR}-----> End of VM Build `date`"
