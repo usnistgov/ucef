@@ -1,0 +1,20 @@
+[Unit]
+Description=High-performance, schema-free document-oriented database
+After=network.target
+Documentation=https://docs.mongodb.org/manual
+
+[Service]
+User=mongodb
+Group=mongodb
+ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
+Restart=always
+# Restart service after 30 seconds if node service crashes
+RestartSec=30
+# Output to syslog
+StandardOutput=syslog
+# Output to syslog
+StandardError=syslog
+SyslogIdentifier=mongod
+
+[Install]
+WantedBy=multi-user.target

@@ -8,8 +8,9 @@
     -Dversion={{ dependency_versions.portico }} \
     -Dpackaging=jar -DgeneratePom=true
 
-- set_fact:
-    cpswtng_archiva: 127.0.0.1
+# 20180421 MJB cpswtng_archiva already in etc/hosts
+#- set_fact:
+#    cpswtng_archiva: 127.0.0.1
 
 # Example that prints the loopback address and gateway for each host
 - debug:
@@ -26,18 +27,25 @@
       src: settings-admin.xml.j2
       dest: "{{ ansible_env.HOME }}/{{ paths.maven_settings_dir }}/settings.xml"
 
-- wait_for:
-    host: "{{ cpswtng_archiva }}"
-    port: 8080
-    delay: 10
-    state: started
+#- wait_for:
+#    host: "{{ cpswtng_archiva }}"
+#    port: 8080
+#    delay: 10
+#    state: started
+
+- name: Wait untils Archiva web API is available
+  shell: curl --head --silent http://{{ ansible_host }}:{{ archiva.port }}/
+  register: result
+  until: result.stdout.find("200 OK") != -1
+  retries: 20
+  delay: 5    
 
 - name: Deploy portico {{ dependency_versions.portico }} to archiva
   become: false
   ignore_errors: yes
   shell: >
     mvn deploy:deploy-file \
-    -Durl=http://{{ cpswtng_archiva }}:8080/repository/internal
+    -Durl=http://{{ ansible_host }}:{{ archiva.port }}/repository/internal
     -DrepositoryId=archiva.internal \
     -Dfile={{ paths.portico_dir }}/portico-{{ dependency_versions.portico }}/lib/portico.jar \
     -DgroupId=org.porticoproject \

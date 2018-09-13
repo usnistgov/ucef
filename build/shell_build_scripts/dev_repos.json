@@ -3,31 +3,58 @@
     "tag": "v1.0.0-alpha",
     "git_repos": [{
             "directory": "cpswt-cpp",
+            "tag": "develop",
             "url": "https://github.com/usnistgov/ucef-cpp.git"
         },
         {
-            "directory": "cpswt-db",
-            "url": "https://github.com/usnistgov/ucef-db.git"
-        },
-        {
-            "directory": "cpswt-devtools",
+            "directory": "ucef-devtools",
+            "tag": "develop",
             "url": "https://github.com/usnistgov/ucef.git"
         },
         {
             "directory": "cpswt-gridlabd-meta",
+            "tag": "develop",
             "url": "https://github.com/usnistgov/ucef-gridlabd-meta.git"
         },
         {
             "directory": "cpswt-core",
+            "tag": "develop",
             "url": "https://github.com/usnistgov/ucef-core.git"
         },
         {
             "directory": "cpswt-meta",
+            "tag": "develop",
             "url": "https://github.com/usnistgov/ucef-meta.git"
         },
         {
             "directory": "cpswt-samples",
+            "tag": "develop",
             "url": "https://github.com/usnistgov/ucef-samples.git"
+        },
+        {
+            "directory": "ucef-database",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-database.git"
+        },
+        {
+            "directory": "ucef-gateway",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-gateway.git"
+        },
+        {
+            "directory": "ucef-library",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-library.git"
+        },
+        {
+            "directory": "ucef-gridlabd",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-gridlabd.git"
+        },
+        {
+            "directory": "ucef-labview",
+            "tag": "develop",
+            "url": "https://github.com/usnistgov/ucef-labview.git"
         }
     ]
 }
