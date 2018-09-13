@@ -2,57 +2,57 @@
     "repo_site": "github.com",
     "git_repos": [{
             "directory": "cpswt-cpp",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-cpp.git"
         },
         {
             "directory": "ucef-devtools",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef.git"
         },
         {
             "directory": "cpswt-gridlabd-meta",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-gridlabd-meta.git"
         },
         {
             "directory": "cpswt-core",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-core.git"
         },
         {
             "directory": "cpswt-meta",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-meta.git"
         },
         {
             "directory": "cpswt-samples",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-samples.git"
         },
         {
             "directory": "ucef-database",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-database.git"
         },
         {
             "directory": "ucef-gateway",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-gateway.git"
         },
         {
             "directory": "ucef-library",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-library.git"
         },
         {
             "directory": "ucef-gridlabd",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-gridlabd.git"
         },
         {
             "directory": "ucef-labview",
-            "tag": "master",
+            "tag": "v1.0.0-beta",
             "url": "https://github.com/usnistgov/ucef-labview.git"
         }
     ]
