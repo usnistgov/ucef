@@ -32,7 +32,7 @@ This is the technical library of resource for the UCEF platform. You will find v
   
   <dt>
     <a href="{{document.url}}" >
-    {{document.name}} (viddeos)</a>
+    {{document.name}} (videos)</a>
   </dt>
   <dd>{{document.description}}</dd>
 
