@@ -9,10 +9,31 @@
 #   team: UCEF Team id -- UCEF for all
 #   featured: true (if item should be featured)
 
+- name: "UCEF1.0.0-BETA Virtual Machine"
+  description: "UCEF1.0.0-BETA-20180914"
+  category: "software"
+  url: https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/UCEF+1.0.0-beta-20180914.ova
+  md5: 
+  sha512: 
+  team: ucef
 - name: "UCEF1.0.0-ALPHA Virtual Machine"
   description: "UCEF1.0.0-ALPHA-20170725"
   category: "software"
   url: https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/UCEF1.0.0-alpha-20170725.ova
   md5: fbde2382df7a30e8eadab2055853c666
   sha512: f95422fde05cb6de2a1f7c75d4095e018f98b09c1cd4b1f7a956ee81a9661d8b3b8444a1190cc99f107641ed1930bd2073c58ca5e0be8ad1ac694610e2bc5c1e
+  team: ucef
+- name: "Create PingPong Federation and Generate Code"
+  description: "This video illustrates how to use WebGME to create a federation and generate code."
+  category: "videos"
+  url: https://s3.amazonaws.com/nist-sgcps/UCEF/videos/CreateAPingPongFederationAndCode.mp4
+  md5: 
+  sha512: 
+  team: ucef
+- name: "Create PingPong Federation and Generate Code"
+  description: "This video illustrates how to use the Eclipse IDE to add behavior to the PingPong federation and run the resulting code."
+  category: "videos"
+  url: https://s3.amazonaws.com/nist-sgcps/UCEF/videos/CompilingEditingRunningPingPong.mp4
+  md5: 
+  sha512: 
   team: ucef
