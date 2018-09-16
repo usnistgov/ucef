@@ -37,10 +37,10 @@
   md5: 
   sha512: 
   team: ucef
- - name: "UCEF 1.0.0 Beta Release Webinar Presentation"
+- name: "UCEF 1.0.0 Beta Release Webinar Presentation"
   description: "This slide presentation was shown at the beta release webinar held on 9/14/2018"
   category: "presentations"
   url: https://s3.amazonaws.com/nist-sgcps/UCEF/presentations/UCEFBetaReleaseASPresentedUpload.pdf
   md5: 
   sha512: 
-  team: ucef 
+  team: ucef
