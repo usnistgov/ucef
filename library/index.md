@@ -44,7 +44,7 @@ This is the technical library of resource for the UCEF platform. You will find v
 # Presentations
 <dl>
 {% for document in site.data.documents %}
-  {% if document.category == "presentation" %}
+  {% if document.category == "presentations" %}
   {% if document.team == "ucef" %}
   
   <dt>
