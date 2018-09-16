@@ -14,7 +14,7 @@ from urlparse import urlparse, urlunparse
 from requests_ntlm import HttpNtlmAuth
 
 import subprocess
-import os
+import os 
 
 def checkAccess():
 	devnull = open(os.devnull, 'w')
@@ -51,10 +51,10 @@ def initializeCredentials():
 	##########################################################################
 
 	# Get the federated credentials from the user
-	print "NIST Realm Username:",
+	print ("NIST Realm Username:",end="")
 	username = 'NIST\\' + raw_input()
 	password = getpass.getpass()
-	print ''
+	print ('')
 
 	# Initiate session handler 
 	session = requests.Session() 
@@ -108,20 +108,20 @@ def initializeCredentials():
 
 	# If I have more than one role, ask the user which one they want, 
 	# otherwise just proceed 
-	print "" 
+	print ("") 
 	if len(awsroles) > 1: 
 		i = 0 
-		print "Please choose the role you would like to assume:" 
+		print ("Please choose the role you would like to assume:")
 		for awsrole in awsroles: 
-			print '[', i, ']: ', awsrole.split(',')[0] 
+			print ('[', i, ']: ', awsrole.split(',')[0] )
 			i += 1 
 
-		print "Selection: ", 
-		selectedroleindex = raw_input() 
+		print ("Selection: ", 
+		selectedroleindex = raw_input() )
 	 
 		# Basic sanity check of input 
 		if int(selectedroleindex) > (len(awsroles) - 1): 
-			print 'You selected an invalid role index, please try again' 
+			print ('You selected an invalid role index, please try again' )
 			sys.exit(0) 
 	 
 		role_arn = awsroles[int(selectedroleindex)].split(',')[0] 
@@ -159,12 +159,12 @@ def initializeCredentials():
 		config.write(configfile)
 
 	# Give the user some basic info as to what has just happened
-	print '\n\n----------------------------------------------------------------'
-	print 'Your new access key pair has been stored in the AWS configuration file {0} under the saml profile.'.format(filename)
-	print 'Note that it will expire at {0}.'.format(token.credentials.expiration)
-	print 'After this time you may safely rerun this script to refresh your access key pair.'
-	print 'To use this credential call the AWS CLI with the --profile option (e.g. aws --profile saml ec2 describe-instances).'
-	print '----------------------------------------------------------------\n\n'
+	print ('\n\n----------------------------------------------------------------')
+	print ('Your new access key pair has been stored in the AWS configuration file {0} under the saml profile.'.format(filename))
+	print ('Note that it will expire at {0}.'.format(token.credentials.expiration))
+	print ('After this time you may safely rerun this script to refresh your access key pair.')
+	print ('To use this credential call the AWS CLI with the --profile option (e.g. aws --profile saml ec2 describe-instances).')
+	print ('----------------------------------------------------------------\n\n')
 
 if (checkAccess() != 0) :
 	print ("Access denied, initialize credentials")
