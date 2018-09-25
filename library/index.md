@@ -24,22 +24,30 @@ This is the technical library of resource for the UCEF platform. You will find v
 {% endfor %}
 </dl>
 
-# HowTo Videos
+# Videos
 <dl>
 {% for document in site.data.documents %}
   {% if document.category == "videos" %}
   {% if document.team == "ucef" %}
   
-  <dt>
-    <a href="{{document.url}}" >
-    {{document.name}} (videos)</a>
-  </dt>
-  <dd>{{document.description}}</dd>
+<div style="width:470px; display:block'">
+
+	<dl>
+		<dt>{{document.name}}</dt>
+		<dd>{{document.description}}</dd>
+		
+		<video width="450" height="240" controls preload="none" poster="{{document.embedded}}">
+			<source src="{{document.url}}" type="video/mp4">
+			Your browser does not support HTML5 video.
+		</video>
+	</dl>
+</div>
 
   {% endif %}
   {% endif %}
 {% endfor %}
 </dl>
+
 
 # Presentations
 <dl>
