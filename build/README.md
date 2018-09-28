@@ -2,6 +2,10 @@ UCEF Virtual Machine
 =============================
 
 ## Download Current VM Image
+UCEF 1.0.0-BETA:
+  [https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/UCEF+1.0.0-beta-20180914.ova](https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/UCEF+1.0.0-beta-20180914.ova)
+
+UCEF 1.0.0-ALPHA:
   [https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/UCEF+1.0.0-alpha-20170725.ova](https://s3.amazonaws.com/nist-sgcps/UCEF/ucefvms/UCEF+1.0.0-alpha-20170725.ova)
   
 ## Build Instructions
