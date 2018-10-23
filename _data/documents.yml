@@ -31,6 +31,14 @@
   md5: 
   sha512: 
   team: ucef
+- name: "UCEF Gateway Design Webinar"
+  description: "This video contains the recorded UCEF Gateway Design Webinar which described the structure and application of this powerful technology for simply wrapping any simulator into the UCEF/HLA framework"
+  category: "videos"
+  url: https://s3.amazonaws.com/nist-sgcps/UCEF/videos/UCEFGatewayWebinar20181018.mp4
+  embedded: 'https://pages.nist.gov/ucef/assets/ucef_final.jpg'
+  md5: 
+  sha512: 
+  team: ucef 
 - name: "Create PingPong Federation and Generate Code"
   description: "This video illustrates how to use WebGME to create a federation and generate code."
   category: "videos"
