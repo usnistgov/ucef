@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://pages.nist.gov/ucef" xmlns:ucef="https://pages.nist.gov/ucef" targetNamespace="https://pages.nist.gov/ucef" elementFormDefault="qualified">
+    <xs:element name="updatePeriod" type="updatePeriodType">
+        <xs:annotation>
+            <xs:documentation>The period in federation logical time at which new values are published for an interaction or object attribute.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:simpleType name="updatePeriodType">
+        <xs:restriction base="xs:double">
+            <xs:minExclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="publishedObjects" type="publishedObjectsType">
+        <xs:annotation>
+            <xs:documentation>A set of GridLAB-D object names that should be published in the federation as a HLA interaction or object class.</xs:documentation>
+        </xs:annotation>
+        <xs:unique name="objectNameUnique">
+            <xs:selector xpath="ucef:objectName"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+    <xs:complexType name="publishedObjectsType">
+        <xs:sequence>
+            <xs:element name="objectName" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>The name of an object defined in the GridLAB-D model.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="unitConversion" type="unitConversionType">
+        <xs:annotation>
+            <xs:documentation>A rule that defines how to perform unit conversion between values in the GridLAB-D model and the HLA federation.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="unitConversionType">
+        <xs:choice>
+            <xs:element ref="unitName"/>
+            <xs:element ref="linearConversion"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:element name="unitName" type="unitNameType">
+        <xs:annotation>
+            <xs:documentation>A unit conversion rule that declares the HLA federation uses the specified unit name. This rule relies on GridLAB-D's internal unit conversion and only works for attributes and parameters defined as floating point values.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:simpleType name="unitNameType">
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="linearConversion" type="linearConversionType">
+        <xs:annotation>
+            <xs:documentation>A unit conversion rule that implements the linear function (hlaValue = scale * gldValue + offset) where the GridLAB-D value is the independent variable.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="linearConversionType">
+        <xs:sequence>
+            <xs:element name="scale" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation>The scale multiplier for the linear conversion.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="offset" type="xs:double">
+            <xs:annotation>
+                    <xs:documentation>The offset for the linear conversion.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ignored">
+        <xs:annotation>
+            <xs:documentation>A flag to indicate that a parameter or attribute should not be sent to or retrieved from the GridLAB-D simulation.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="propertyName" type="propertyNameType">
+        <xs:annotation>
+            <xs:documentation>A substitute name to use for the property in the associated GridLAB-D object instead of the attribute or parameter name.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:simpleType name="propertyNameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9_.]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="interactionDetails" type="interactionDetailsType">
+        <xs:annotation>
+            <xs:documentation>Custom GridLAB-D configuration options for interaction classes.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="interactionDetailsType">
+        <xs:all>
+            <xs:element ref="updatePeriod" minOccurs="0"/>
+            <xs:element ref="publishedObjects" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:element name="objectDetails" type="objectDetailsType">
+        <xs:annotation>
+            <xs:documentation>Custom GridLAB-D configuration options for object classes.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="objectDetailsType">
+        <xs:all>
+            <xs:element ref="publishedObjects" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:element name="parameterDetails" type="parameterDetailsType">
+        <xs:annotation>
+            <xs:documentation>Custom GridLAB-D configuration options for interaction parameters.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="parameterDetailsType">
+        <xs:all>
+            <xs:element ref="propertyName" minOccurs="0"/>
+            <xs:element ref="unitConversion" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:element name="attributeDetails" type="attributeDetailsType">
+        <xs:annotation>
+            <xs:documentation>Custom GridLAB-D configuration options for object attributes.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="attributeDetailsType">
+        <xs:all>
+            <xs:element ref="propertyName" minOccurs="0"/>
+            <xs:element ref="unitConversion" minOccurs="0"/>
+            <xs:element ref="updatePeriod" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+</xs:schema>
+
