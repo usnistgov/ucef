@@ -350,7 +350,7 @@ build_foundation_classes_func (){
 
     # java foundation
     echo "Maven install and deploy java foundation projects"
-    cd ${JAVA_ROOT_FOUNDATION_SRC}/core
+    cd ${JAVA_ROOT_FOUNDATION_SRC}/cpswt-core
     mvn -DRTI_HOME=$RTI_HOME clean install deploy -U -B
 
     # CPP 3rdparty
