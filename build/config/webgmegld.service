@@ -6,8 +6,8 @@ After=mongod.service
 
 [Service]
 # Path to your webgme application
-WorkingDirectory=/home/vagrant/ucef/cpswt-gridlabd-meta/
-ExecStart=/home/vagrant/.nvm/versions/node/v4.5.0/bin/node /home/vagrant/ucef/cpswt-gridlabd-meta/app.js
+WorkingDirectory=/home/vagrant/ucef/gridlabd-meta/
+ExecStart=/home/vagrant/.nvm/versions/node/v4.5.0/bin/node /home/vagrant/ucef/gridlabd-meta/app.js
 Restart=always
 # Restart service after 30 seconds if node service crashes
 RestartSec=30

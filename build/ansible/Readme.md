@@ -4,7 +4,7 @@
     $ ansible-galaxy install -r requirements.yml -p ./roles/
     
     # run install playbook
-    $ cd /path/to/ucef-devtools/ansible/
+    $ cd /path/to/devtools/ansible/
     $ ansible-playbook install-devtools-playbook.yml -i inventory
 
 

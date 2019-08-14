@@ -40,7 +40,7 @@ mongodb_func(){
     sudo apt update -y
     sudo apt install mongodb-org -y -f
 
-    sudo cp /home/vagrant/ucef/ucef-devtools/build/config/mongod.service /etc/systemd/mongod.service
+    sudo cp /home/vagrant/ucef/devtools/build/config/mongod.service /etc/systemd/mongod.service
     sudo systemctl enable /etc/systemd/mongod.service
     sudo systemctl daemon-reload
     sudo systemctl start mongod
@@ -80,23 +80,23 @@ jquerry_func (){
 # ucef development   ##
 #######################
 ucef_tools_func () {
-    cd /home/vagrant/ucef/ucef-gateway
+    cd /home/vagrant/ucef/gateway
     mvn clean install -U
-    cd /home/vagrant/ucef/ucef-library/Federates/metronome/source
+    cd /home/vagrant/ucef/library/Federates/metronome/source
     mvn clean install -U
-    cd /home/vagrant/ucef/ucef-library/Federates/tmy3weather/source
+    cd /home/vagrant/ucef/library/Federates/tmy3weather/source
     mvn clean install -U
-    cd /home/vagrant/ucef/ucef-database
+    cd /home/vagrant/ucef/wrappers/database
     mvn clean install -U
-    cd /home/vagrant/ucef/ucef-gridlabd
+    cd /home/vagrant/ucef/wrappers/gridlabd
     ./build.sh
-    cd /home/vagrant/ucef/ucef-labview
+    cd /home/vagrant/ucef/wrappers/labview
     mvn clean install -U
-    cd /home/vagrant/ucef/ucef-devtools/test
+    cd /home/vagrant/ucef/devtools/test
     sudo chmod +x *.sh
 
-    echo "export PATH=/home/vagrant/ucef/ucef-devtools/test:$PATH" >> $HOME/.bashrc
-    echo "export PATH=/home/vagrant/ucef/ucef-devtools/test:$PATH" >> $HOME/env_file.sh
+    echo "export PATH=/home/vagrant/ucef/devtools/test:$PATH" >> $HOME/.bashrc
+    echo "export PATH=/home/vagrant/ucef/devtools/test:$PATH" >> $HOME/env_file.sh
     source $HOME/env_file.sh
 }
 
@@ -292,7 +292,7 @@ webgme_func()
     npm install
 
     # configure WebGME service
-    sudo cp /home/vagrant/ucef/ucef-devtools/build/config/webgme.service /etc/systemd/webgme.service
+    sudo cp /home/vagrant/ucef/devtools/build/config/webgme.service /etc/systemd/webgme.service
     sudo systemctl enable /etc/systemd/webgme.service
     sudo systemctl daemon-reload
     sudo systemctl start webgme
@@ -301,7 +301,7 @@ webgme_func()
     npm install
 
     # Autostart WebGMEGld on crash and reboot
-    sudo cp /home/vagrant/ucef/ucef-devtools/build/config/webgmegld.service /etc/systemd/webgmegld.service
+    sudo cp /home/vagrant/ucef/devtools/build/config/webgmegld.service /etc/systemd/webgmegld.service
     sudo systemctl enable /etc/systemd/webgmegld.service
     sudo systemctl daemon-reload
     sudo systemctl start webgmegld
@@ -350,7 +350,7 @@ build_foundation_classes_func (){
 
     # java foundation
     echo "Maven install and deploy java foundation projects"
-    cd ${JAVA_ROOT_FOUNDATION_SRC}/cpswt-core
+    cd ${JAVA_ROOT_FOUNDATION_SRC}/core
     mvn -DRTI_HOME=$RTI_HOME clean install deploy -U -B
 
     # CPP 3rdparty
@@ -540,8 +540,8 @@ gnome_func(){
 
     # Set launcher shortcuts
     mkdir -p $HOME/.local/share/icons/hicolor/48x48/apps
-    cp /home/vagrant/ucef/ucef-devtools/build/config/*.desktop $HOME/.local/share/applications
-    cp /home/vagrant/ucef/ucef-devtools/build/config/*.png $HOME/.local/share/icons/hicolor/48x48/apps
+    cp /home/vagrant/ucef/devtools/build/config/*.desktop $HOME/.local/share/applications
+    cp /home/vagrant/ucef/devtools/build/config/*.png $HOME/.local/share/icons/hicolor/48x48/apps
     gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://nautilus.desktop', 'archiva.desktop', 'eclipse.desktop', 'webgme.desktop', 'google-chrome.desktop', 'gnome-terminal.desktop', 'mysql-workbench.desktop', 'gedit.desktop', 'wireshark.desktop', 'omnetpp.desktop']"
 
     # Enable workspaces

@@ -90,7 +90,11 @@ This project contains sample applications that demonstrate UCEF capabilities.
 
 This project adds a Gridlab-D graphic model editor for UCEF
 
-- ucef-db: [https://github.com/usnistgov/ucef-db.git](https://github.com/usnistgov/ucef-db.git)
+- ucef-gateway: [https://github.com/usnistgov/ucef-gateway.git](https://github.com/usnistgov/ucef-gateway.git)
 
-This project contains database engine support for UCEF
+This project contains Java code to facilitate the development of new wrappers
+
+- ucef-wrappers: [https://github.com/usnistgov/ucef-wrappers.git](https://github.com/usnistgov/ucef-wrappers.git)
+
+This project contains the supported set of simulation wrappers
 
