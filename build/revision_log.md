@@ -13,7 +13,7 @@ Other notes:
 -----
 
 # HelloWorld Sample
-For running a sample example, refer to /home/vagrant/Projects/ucefcodebase/samples/HelloWorld/Readme.txt
+For running a sample example, refer to /home/vagrant/Projects/ucef/samples/HelloWorld/Readme.txt
 
 # ToDo:
 
