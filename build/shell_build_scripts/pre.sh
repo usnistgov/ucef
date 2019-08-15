@@ -18,6 +18,9 @@ python27_func(){
     sudo apt-get install python2.7 -y
     sudo apt-get install python-pip -y
     sudo apt-get install python-lxml -y
+    
+    pip install --upgrade pip
+    pip install future
 }
 git_func(){
     sudo apt-get install git -y
