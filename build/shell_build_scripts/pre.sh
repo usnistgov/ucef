@@ -5,8 +5,8 @@ init_func(){
     sudo apt-get update
     sudo apt-get upgrade
 
-#    sudo debconf-set-selections <<< 'update-notifier-common 10periodic select Y'
-#    sudo apt-get install -yfq update-notifier-common
+    sudo debconf-set-selections <<< 'update-notifier-common 10periodic select Y'
+    sudo apt-get install -yfq update-notifier-common
 
     sudo rm /etc/apt/apt.conf.d/*
     sudo apt-get install apt-transport-https
@@ -18,9 +18,6 @@ python27_func(){
     sudo apt-get install python2.7 -y
     sudo apt-get install python-pip -y
     sudo apt-get install python-lxml -y
-    
-    pip install --upgrade pip
-    pip install future
 }
 git_func(){
     sudo apt-get install git -y
