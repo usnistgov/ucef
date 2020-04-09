@@ -1,0 +1,16 @@
+{
+    "box": "ucef-base",
+    "cpus": 2,
+    "memory": 4096,
+    "network_packer_ip": "192.168.0.10",
+    "network_static_ip": "192.168.0.21",
+    "name": "UCEF 1.1.0",
+    "provision_scripts": [
+        "hyperv.sh",
+        "ucef.sh"
+    ],
+    "VBoxManage": {
+        "--vram": 128,
+        "--accelerate3d": "off"
+    }
+}

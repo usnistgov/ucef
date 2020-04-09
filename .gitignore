@@ -1,0 +1,5 @@
+builds/
+packer_cache/
+.vagrant/
+
+packer.exe

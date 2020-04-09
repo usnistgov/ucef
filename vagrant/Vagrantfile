@@ -1,0 +1,61 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.require_version ">= 2.2.7"
+
+# parse the JSON configuration file
+require 'json'
+machine_data = JSON.parse(File.read('machine.json'))
+
+Vagrant.configure("2") do |config|
+    config.vm.define machine_data['name'] do |m|
+        m.vm.box = machine_data['box']
+
+        # configure Hyper-V (if available)
+        m.vm.provider "hyperv" do |h|
+            h.cpus = machine_data['cpus']
+            h.memory = machine_data['memory']
+            h.vmname = machine_data['name']
+
+            # not sure this works
+            h.vm_integration_services = {
+                guest_service_interface: true
+            }
+
+            # permission problems with shared folders using Hyper-V
+            m.vm.synced_folder ".", "/vagrant", disabled: true
+        end
+
+        # configure VirtualBox (if available)
+        m.vm.provider "virtualbox" do |v|
+            v.cpus = machine_data['cpus']
+            v.memory = machine_data['memory']
+            v.name = machine_data['name']
+            
+            machine_data['VBoxManage'].each do |key, value|
+                v.customize ["modifyvm", :id, "#{key}", "#{value}"]
+            end
+        end
+
+        # copy the provision files to /tmp/vagrant/
+        m.vm.provision "file", source: "files", destination: "/tmp/vagrant"
+
+        # fix the networking in the most obtuse way possible
+        m.vm.provision "shell" do |s|
+            s.args  = [machine_data['network_packer_ip'], machine_data['network_static_ip'], '-X']
+            s.env   = {"DEBIAN_FRONTEND" => "noninteractive"}
+            s.path  = File.join("scripts", "network.sh")
+            s.privileged = false
+        end
+
+        # run the shell provision scripts
+        machine_data['provision_scripts'].each do |script_name|
+            m.vm.provision "shell" do |s|
+                s.args  = ['-X']
+                s.env   = {"DEBIAN_FRONTEND" => "noninteractive"}
+                s.path  = File.join("scripts", script_name)
+                s.privileged = false
+            end
+        end
+    end
+end
