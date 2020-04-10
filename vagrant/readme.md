@@ -18,7 +18,7 @@ other build environments are not tested
 # installation
 all installation steps must be done as an administrator. when using a terminal application to execute the commands listed in this section, make sure to launch the terminal as an administrator.
 
-each time you run the packer build process to generate a new vagrant box, run the following command with {{vm_name}} substituted for the value you've specified in ubuntu-1804-amd64 (default value of ubuntu-1804-amd64). for Hyper-V builds, `vagrant box add builds/{{vm_name}}-hyperv.box --force --name ucef-base`. for VirtualBox builds, `vagrant box add builds/{{vm_name}}-amd64-virtualbox.box --force --name ucef-base`
+each time you run the packer build process to generate a new vagrant box, run the following command with {{vm_name}} substituted for the value you've specified in packer/ubuntu-1804-amd64.json (default value of ubuntu-1804-amd64). for Hyper-V builds, `vagrant box add builds/{{vm_name}}-hyperv.box --force --name ucef-base`. for VirtualBox builds, `vagrant box add builds/{{vm_name}}-amd64-virtualbox.box --force --name ucef-base`
 
 execute the following command in this directory from an elevated command prompt:
 `vagrant up`
