@@ -23,8 +23,6 @@ execute the following command in this directory from an elevated command prompt:
 `packer build -only=virtualbox-iso ubuntu-1804-amd64.json`
 
 ## Hyper-V
-add some steps about Hyper-V setup for NIST users
-
 all installation steps must be done as an administrator. when using a terminal application to execute the commands listed in this section, make sure to launch the terminal as an administrator.
 
 execute the following command in this directory from an elevated command prompt:
@@ -52,12 +50,12 @@ when preseed_path is set to `bento/http` the installation process expects a DHCP
 a static ip address can be used to resolve this issue. first, set preseed_path to `ucef/http`. second, if building with Hyper-V, set hyperv_switch to an internal switch on a NAT network. then navigate to `ucef/http` and open the preseed file for your build in a text editor (preseed.cfg for VirtualBox and preseed-hyperv.cfg for Hyper-V).
 
 the following lines should be examined and modified if necessary to work with your network:
+```
 d-i netcfg/get_ipaddress string 192.168.0.10
 d-i netcfg/get_netmask string 255.255.255.0
 d-i netcfg/get_gateway string 192.168.0.1
 d-i netcfg/get_nameservers string 8.8.8.8 8.8.4.4
-
-this static ip address will only be used to provision the virtual machine. during the provisioning process, the networking script will reset the network configuration of the final output to use DHCP.
+```
 
 # deviations from bento
 the most significant deviation from the bento build process - besides almost everything - is the change to the boot command for the Hyper-V build. it looks like the boot command was written for Generation 2 virtual machines; the original command does not work with Generation 1 virtual machines and it was changed to match the VirtualBox boot command which does work.
