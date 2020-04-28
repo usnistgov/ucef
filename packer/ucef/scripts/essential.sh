@@ -30,11 +30,51 @@ systemctl enable mongod
 
 case "$PACKER_BUILDER_TYPE" in
 hyperv-iso)
+    # will there be permission problems with all of this being owned by root ?
+    
+    # get the dependencies to build xrdp from source
+    apt-get install gcc make autoconf automake libtool pkgconf nasm
+    apt-get install xserver-org-dev libssl-dev libpam0g-dev libxfixes-dev libxrandr-dev
+    
+    # download and extract xrdp to /opt/xrdp-0.9.12
+    wget https://github.com/neutrinolabs/xrdp/releases/download/v0.9.12/xrdp-0.9.12.tar.gz
+    tar xvfz xrdp-0.9.12.tar.gz -C /opt
+    rm xrdp-0.9.12.tar.gz
+    
+    # compile xrdp
+    cd /opt/xrdp-0.9.12
+    ./bootstrap
+    ./configure
+    make
+    
+    # install xrdp
+    make install
+    ln -s /usr/local/sbin/xrdp /usr/sbin
+    ln -s /usr/local/sbin/xrdp-sesman /usr/sbin
+    
+    # download and extract xorgxrdp to /opt/xorgxrdp-0.2.12
+    wget https://github.com/neutrinolabs/xorgxrdp/releases/download/v0.2.12/xorgxrdp-0.2.14.tar.gz
+    tar xvfz xorgxrdp-0.2.14.tar.gz -C /opt
+    rm xorgxrdp-0.2.14.tar.gz
+    
+    # compile xorgxrdp
+    cd /opt/xorgxrdp-0.2.12
+    ./bootstrap
+    ./configure
+    make
+    
+    # install xorgxrdp
+    make install
+    
+    # configure xrdp
+    sudo systemctl enable xrdp
+    
+    # this old approach could fail on boot
     # enable remote desktop
-    sudo apt-get install -y xrdp
-    sudo adduser xrdp ssl-cert
+    #sudo apt-get install -y xrdp
+    #sudo adduser xrdp ssl-cert
 
     # fix problem with xrdp-sesman running
     #   seems to be related to disabling IPv6
-    sudo sed -i 's,ExecStart,ExecStartPre=/bin/sleep 20\nExecStart,g' /lib/systemd/system/xrdp-sesman.service
+    #sudo sed -i 's,ExecStart,ExecStartPre=/bin/sleep 20\nExecStart,g' /lib/systemd/system/xrdp-sesman.service
 esac
