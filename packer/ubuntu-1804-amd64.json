@@ -145,6 +145,7 @@
         "ucef/scripts/portico.sh",
         "ucef/scripts/gridlabd.sh",
         "ucef/scripts/mysql.sh",
+        "ucef/scripts/networking.sh",
         "bento/scripts/cleanup.sh",
         "bento/scripts/minimize.sh"
       ],

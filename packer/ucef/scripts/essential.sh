@@ -27,3 +27,14 @@ apt-get install -y mongodb-org
 # autostart MongoDB
 systemctl start mongod
 systemctl enable mongod
+
+case "$PACKER_BUILDER_TYPE" in
+hyperv-iso)
+    # enable remote desktop
+    sudo apt-get install -y xrdp
+    sudo adduser xrdp ssl-cert
+
+    # fix problem with xrdp-sesman running
+    #   seems to be related to disabling IPv6
+    sudo sed -i 's,ExecStart,ExecStartPre=/bin/sleep 20\nExecStart,g' /lib/systemd/system/xrdp-sesman.service
+esac
