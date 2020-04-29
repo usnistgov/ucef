@@ -1,5 +1,7 @@
 #!/bin/sh -eux
 
+case "$PACKER_BUILDER_TYPE" in
+virtualbox-iso|virtualbox-ovf)
 ubuntu_version="`lsb_release -r | awk '{print $2}'`";
 major_version="`echo $ubuntu_version | awk -F. '{print $1}'`";
 
@@ -23,3 +25,4 @@ if [ "$major_version" -ge "16" ]; then
   sed -i 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0 \1"/g' /etc/default/grub;
   update-grub;
 fi
+esac

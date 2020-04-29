@@ -134,6 +134,7 @@
       "expect_disconnect": true,
       "scripts": [
         "bento/scripts/update.sh",
+        "bento/scripts/networking.sh",
         "bento/scripts/sshd.sh",
         "bento/scripts/sudoers.sh",
         "bento/scripts/vagrant.sh",
