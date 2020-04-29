@@ -41,4 +41,4 @@ sudo systemctl start webgme
 
 # required for PyPower (please remove)
 sudo apt-get install -y python3-pip
-pip3 install -r /home/vagrant/ucef/transactive-energy/src/tesp/TE30/TE30_generated/TE30-java-federates/TE30-impl-java/PyPower/src/main/resources/requirements.txt
+sudo pip3 install -r /home/vagrant/ucef/transactive-energy/src/tesp/TE30/TE30_generated/TE30-java-federates/TE30-impl-java/PyPower/src/main/resources/requirements.txt
