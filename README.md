@@ -52,16 +52,15 @@ you should create a new NAT Network in Windows 10 if you plan to use Hyper-V. th
 Enable Hyper-V Platform and Management Tools
 https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings
 
-Create a new virtual NAT switch
-https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/setup-nat-network
-in PowerShell as Administrator
-    New-VMSwitch -SwitchName "NATSwitch" -SwitchType Internal
-    Get-NetAdapter
-        find the ifIndex for NATSwitch
-    New-NetIPAddress -IPAddress 192.168.0.1 -PrefixLength 24 -InterfaceIndex <ifIndexFromGetNetAdapter>
-    New-NetNat -Name NATNetwork -InternalIPInterfaceAddressPrefix 192.168.0.0/24
+Create a new virtual NAT switch (https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/setup-nat-network) in PowerShell as Administrator
+* New-VMSwitch -SwitchName "NATSwitch" -SwitchType Internal
+* Get-NetAdapter
+*  find the ifIndex for NATSwitch
+* New-NetIPAddress -IPAddress 192.168.0.1 -PrefixLength 24 -InterfaceIndex <ifIndexFromGetNetAdapter>
+* New-NetNat -Name NATNetwork -InternalIPInterfaceAddressPrefix 192.168.0.0/24
+
 Hyper-V Manager > Virtual Switch Manager > NATSwitch
-    Ensure the Connection type is set to Internal network
+* Ensure the Connection type is set to Internal network 
 
 you must use the IP configuration specified above for the switch, or adjust all the configuration files in this repo to use your customized settings.
 
@@ -83,10 +82,11 @@ vagrant may prompt you to select a virtual network switch towards the start of t
 restart the virtual machine once before using it. otherwise the networking settings will not take effect.
 
 ## accessing the virtual machine using Hyper-V
-Start the VM from Hyper-V
-Launch Remote Desktop Connection in Windows 10
-    Connect to 192.168.0.21 (or the IP you assigned)
-Authenticate at the login screen using session Xorg (vagrant/vagrant)
+* Start the VM from Hyper-V
+* Launch Remote Desktop Connection in Windows 10
+* Connect to 192.168.0.21 (or the IP you assigned)
+* Authenticate at the login screen using session Xorg (vagrant/vagrant)
+
 
 ## NISTNet connection issues
 this was not tested using Hyper-V on NISTNet - it probably does not work as configured.
