@@ -2,6 +2,8 @@ these are developer notes and contains many inaccuracies.
 
 this directory builds a UCEF virtual machine from a vagrant box (produced from packer). it's intended to checkout and build a specific version of the code. all dependencies - and installation steps that take significant time - should be part of the packer build process instead.
 
+remove the packer ip addresses in the JSON file and use --provider=virtualbox when using vagrant up
+
 # requirements
 either
 - Windows 10
@@ -51,6 +53,8 @@ set `network_static_ip` to the address you want to use for this virtual machine.
 you cannot change the gateway or dns nameservers. if you need to change these values, you will have to modify the packer preseed file and re-build the base box using packer.
 
 # known issues
+source /etc/environment seems to be required to reset JAVA_HOME - does xfce not load the environment file correctly?
+
 maven will generate an obscene number of warnings and error messages. this is just UCEF being UCEF - they are not actually problems. there should be no warnings/error messages except those associated with some part of the maven build process.
 
 static ip addresses are just wrong. it's so overly complicated for such a simple thing. the correct answer is to use the line `m.vm.network "private_network", ip: machine_data['network_static_ip']` and add a network_static_ip option to the JSON file. but of course this doesn't work, because Hyper-V. the virtual machine will not update its ip address until a manual reboot. i do not know if this affects the build process in some negative way. however, it seems rather difficult to have vagrant restart a machine during the provisioning process.
