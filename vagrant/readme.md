@@ -1,33 +1,4 @@
-these are developer notes and contains many inaccuracies.
-
 this directory builds a UCEF virtual machine from a vagrant box (produced from packer). it's intended to checkout and build a specific version of the code. all dependencies - and installation steps that take significant time - should be part of the packer build process instead.
-
-remove the packer ip addresses in the JSON file and use --provider=virtualbox when using vagrant up
-
-# requirements
-either
-- Windows 10
-- Vagrant 2.2.7
-- VirtualBox 6.1.4r136177
-
-or
-- Windows 10 
-- Vagrant 2.2.7
-- Hyper-V 10.0.17134.1
-
-other build environments are not tested
-
-# installation
-all installation steps must be done as an administrator. when using a terminal application to execute the commands listed in this section, make sure to launch the terminal as an administrator.
-
-each time you run the packer build process to generate a new vagrant box, run the following command with {{vm_name}} substituted for the value you've specified in ubuntu-1804-amd64 (default value of ubuntu-1804-amd64). for Hyper-V builds, `vagrant box add builds/{{vm_name}}-hyperv.box --force --name ucef-base`. for VirtualBox builds, `vagrant box add builds/{{vm_name}}-amd64-virtualbox.box --force --name ucef-base`
-
-execute the following command in this directory from an elevated command prompt:
-`vagrant up`
-
-if you are using Hyper-V, vagrant may prompt you to select a virtual network switch towards the start of the installation process. select a switch that has internet access. 
-
-when built, restart the virtual machine once before using it. otherwise the networking settings will not take effect.
 
 # configuration options
 most configuration options are in the file `machine.json`:
@@ -66,8 +37,6 @@ potential for inconsistent directory names between ucef.sh and clone_ucef.json -
 C++ federates won't run - there is an error in the generated code from WebGME that points to the wrong JDK path. updates to Java removed the JRE and changed the JDK path structures - and the C++ generated code has not been updated to reflect this. for now, don't use C++ federates.
 
 installs python3-pip and some requirements file at a ridiculous directory. need to update the TE federation to remove PyPower and this installation requirement.
-
-hyperv script runs regardless of build type
 
 desktop environment not configured (shortcuts, keybinds)
 

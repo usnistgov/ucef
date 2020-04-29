@@ -1,34 +1,4 @@
-these are developer notes and contains many inaccuracies.
-
 this directory builds a vagrant box for an ubuntu 18.04 virtual machine with the software requirements for UCEF. it does not produce a runnable virtual machine; a temporary virtual machine will be created during the provisioning process that will be deleted after its contents are export into a vagrant box file.
-
-# requirements
-either
-- Windows 10
-- Packer 1.5.4
-- VirtualBox 6.1.4r136177
-
-or
-- Windows 10 
-- Packer 1.5.4
-- Hyper-V 10.0.17134.1
-
-other build environments are not tested
-
-# installation
-## VirtualBox
-NIST Windows 10 users cannot build using VirtualBox; use Hyper-V instead. if you are using Windows 10 Enterprise (non-NIST distribution), make sure you can create a regular 64-bit linux virtual machine in VirtualBox. if your options are restricted to 32-bit, use the Hyper-V build instead or google how to resolve this problem.
-
-execute the following command in this directory from an elevated command prompt:
-`packer build -only=virtualbox-iso ubuntu-1804-amd64.json`
-
-## Hyper-V
-add some steps about Hyper-V setup for NIST users
-
-all installation steps must be done as an administrator. when using a terminal application to execute the commands listed in this section, make sure to launch the terminal as an administrator.
-
-execute the following command in this directory from an elevated command prompt:
-`packer build -only=hyperv-iso ubuntu-1804-amd64.json`
 
 # configuration options
 most configuration options are in the file `ubuntu-1804-amd64.json` under the sections for variables:
