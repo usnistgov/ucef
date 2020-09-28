@@ -68,45 +68,48 @@ vagrant up --provider=virtualbox
 All installation steps must be done as an administrator. When using a terminal application to execute the commands listed in this section, be sure to launch the terminal as an administrator.
 
 ### Configure Hyper-V
-You should create a new NAT Network in Windows 10 when using Hyper-V because the Default Switch seems to be unreliable (at NIST) at assigning IP addresses:
+You should create a new NAT Network in Windows 10 when using Hyper-V because the Default Switch seems to be unreliable at assigning IP addresses:
 
 1. Enable Hyper-V Platform and Management Tools (see https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings)
-2. Create a new virtual NAT switch (https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/setup-nat-network) in PowerShell as Administrator 
+2. Create a new virtual NAT switch in PowerShell as Administrator (https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/setup-nat-network) 
     1. `New-VMSwitch -SwitchName "NATSwitch" -SwitchType Internal`
     2. Find the ifIndex for NATSwitch using `Get-NetAdapter`
     3. `New-NetIPAddress -IPAddress 192.168.0.1 -PrefixLength 24 -InterfaceIndex <ifIndexFromGetNetAdapter>`
     4. `New-NetNat -Name NATNetwork -InternalIPInterfaceAddressPrefix 192.168.0.0/24`
+3. From the Hyper-V Manager, select `Action -> Virtual Switch Manager -> NATSwitch` and ensure that `Connection type` is set to `Internal Network`.
 
-Hyper-V Manager > Virtual Switch Manager > NATSwitch
-* Ensure the Connection type is set to Internal network 
+If you choose to use a different IP address for the virtual switch (192.168.0.1), edit all of the configuration files in this repository to correspond to your custom value.
 
-If you use a different IP address for the virtual switch, edit all of the configuration files in this repository to correspond to your custom value.
+### Generate a .box file using Packer
+1. Download HashiCorp Vagrant and run its installer.
+2. Download HashiCorp Packer and place the executable in the `packer` directory. Alternatively, put the executable in a directory that's included in your system path variable.
+3. Go to the `packer` directory and execute the following command from an elevated command prompt:
+```
+packer build -only=hyperv-iso ubuntu-1804-amd64.json
+```
+4. Wait for Packer to complete with output about exporting a .box file. This can take several hours.
+5. Execute the following command from the `packer` directory using an elevated command prompt:
+```
+vagrant box add builds/ubuntu-1804-amd64-hyperv.box --force --name ucef-base
+```
 
-## generate a .box file using Packer
-download HashiCorp Packer and either put it on your system path or place the executable in the `packer` directory. download HashiCorp Vagrant and run its installer.
+### Create the UCEF Virtual Machine using Vagrant
+1. Go to the `vagrant` directory and execute the following command from an elevated command prompt:
+```
+vagrant up
+```
+2. Vagrant will prompt you to select a virtual network switch at the start of the provisioning process. Select the `NATSwitch` you created at the start of these instructions.
+3. Once Vagrant completes, restart the virtual machine.
 
-navigate to the packer directory and execute the following command from an elevated command prompt:
-`packer build -only=hyperv-iso ubuntu-1804-amd64.json`
+### Accessing the Hyper-V Virtual Machine
+While you can launch the virtual machine from Hyper-V Manager, it will be slow because it was not created from a Microsoft base image. You should instead access the virtual machine using Windows remote desktop.
 
-once packer completes (outputs something about exporting a .box file), execute the following command from the packer directory:
-`vagrant box add builds/ubuntu-1804-amd64-hyperv.box --force --name ucef-base`
+1. In Hyper-V Manager, right-click the virtual machine and select `Start`.
+2. From the Windows start menu, search for and launch `Remote Desktop Connection`.
+3. Connect to `192.168.0.21`. You can customize the session if you select `Show Options`.
+4. Login using Session `Xorg`, username `vagrant`, and password `vagrant`.
 
-## create the UCEF virtual machine using Vagrant
-navigate to the vagrant directory and execute the following command from an elevated command prompt:
-`vagrant up`
+If you cannot connect to `192.168.0.21`, check the network settings for the virtual machine. In Hyper-V Manager, select the virtual machine and then change to the `Networking` tab. You should connect to the value listed under `IP Addresses`.
 
-vagrant may prompt you to select a virtual network switch towards the start of the installation process. select the NATSwitch you created from the prior step.
-
-restart the virtual machine once before using it. otherwise the networking settings will not take effect.
-
-## accessing the virtual machine using Hyper-V
-* Start the VM from Hyper-V
-* Launch Remote Desktop Connection in Windows 10
-* Connect to 192.168.0.21 (or the IP you assigned)
-* Authenticate at the login screen using session Xorg (vagrant/vagrant)
-
-
-## NISTNet connection issues
-this was not tested using Hyper-V on NISTNet - it probably does not work as configured.
-
-you will need to change the dns server for the static IP used by packer (see packer for instructions). the dns server you need to use for NISTNet is most likely `129.6.16.1`
+### Using the Hyper-V Virtual Machine on NISTNet
+The virtual machine will have no Internet access while on NISTNet because the default DNS Server (8.8.8.8) is not available on NISTNet. If the virtual machine will be used on NISTNet, modify the configuration files to change the default DNS Server to `129.6.16.1`. You can also install a network manager and make this change from within the virtual machine itself.
