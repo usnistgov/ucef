@@ -23,13 +23,13 @@ The following two environments are supported:
 ### Windows 10 VirtualBox
 - Windows 10
 - VirtualBox 6.1.4r136177 (https://www.virtualbox.org/)
-- HashiCorp Packer 1.5.4 (https://www.packer.io/)
+- HashiCorp Packer 1.6.1 (https://www.packer.io/)
 - HashiCorp Vagrant 2.2.7 (https://www.vagrantup.com/)
 
 ### Windows 10 Hyper-V
 - Windows 10
 - Hyper-V 10.0.17134.1
-- HashiCorp Packer 1.5.4 (https://www.packer.io/)
+- HashiCorp Packer 1.6.1 (https://www.packer.io/)
 - HashiCorp Vagrant 2.2.7 (https://www.vagrantup.com/)
 
 It is likely that Linux and MacOS also work when using the VirtualBox configuration, but these environments are not frequently tested. The VirtualBox environment is recommended, as it is faster and more stable, but NIST Windows 10 users must use Hyper-V due to a security feature that blocks the creation of 64-bit virtual machines. This document contains separate installation instructions for each environment, including configurable options and known issues with the installation process. It assumes you have access to a bash command line interface such as Git Bash (https://gitforwindows.org/). 
