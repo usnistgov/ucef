@@ -1,27 +1,27 @@
 {
     "repositories": [
         {
-            "branch": "develop",
+            "branch": "release/1.2.0",
             "directory": "cpp",
             "url": "https://github.com/usnistgov/ucef-cpp.git"
         },
         {
-            "branch": "develop",
+            "branch": "release/1.2.0",
             "directory": "database",
             "url": "https://github.com/usnistgov/ucef-database.git"
         },
         {
-            "branch": "develop",
+            "branch": "release/1.2.0",
             "directory": "gateway",
             "url": "https://github.com/usnistgov/ucef-gateway.git"
         },
         {
-            "branch": "develop",
+            "branch": "release/1.2.0",
             "directory": "gridlabd",
             "url": "https://github.com/usnistgov/ucef-gridlabd.git"
         },
         {
-            "branch": "develop",
+            "branch": "release/1.2.0",
             "directory": "java",
             "url": "https://github.com/usnistgov/ucef-core.git"
         },
@@ -31,7 +31,7 @@
             "url": "https://github.com/usnistgov/ucef-labview.git"
         },
         {
-            "branch": "develop",
+            "branch": "release/1.2.0",
             "directory": "meta",
             "url": "https://github.com/usnistgov/ucef-meta.git"
         },
@@ -41,7 +41,7 @@
             "url": "https://github.com/usnistgov/ucef-samples.git"
         },
         {
-            "branch": "develop",
+            "branch": "feature/ieee8500",
             "directory": "transactive-energy",
             "url": "https://github.com/usnistgov/TEChallengeComponentModel.git"
         }
