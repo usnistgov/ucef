@@ -3,10 +3,9 @@
 ##########
 eclipse_func(){
     cd $HOME/Downloads/
-wget --progress=bar:force  http://mirror.cc.vt.edu/pub/eclipse/technology/epp/downloads/release/neon/3/eclipse-java-neon-3-linux-gtk-x86_64.tar.gz
 
- //   wget --progress=bar:force https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2021-06/R/eclipse-inst-jre-linux64.tar.gz
-//    wget --progress=bar:force  http://mirror.cc.vt.edu/pub/eclipse/technology/epp/downloads/release/neon/3/eclipse-java-neon-3-linux-gtk-x86_64.tar.gz
+    wget --progress=bar:force https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2021-06/R/eclipse-inst-jre-linux64.tar.gz
+    wget --progress=bar:force  http://mirror.math.princeton.edu/pub/eclipse/technology/epp/downloads/release/neon/3/eclipse-java-neon-3-linux-gtk-x86_64.tar.gz
     tar xvf eclipse*.tar.gz -C $HOME
 
 
@@ -38,8 +37,10 @@ wget --progress=bar:force  http://mirror.cc.vt.edu/pub/eclipse/technology/epp/do
 }
 
 export CPSWT_FLAVOR="UCEF 1.1.0-test"
+export HOME="/home/vagrant"
 
-UCEF_HOME=/home/vagrant/
+
+cd $HOME/Downloads/
 
 echo "${CPSWT_FLAVOR}-----> Install Eclipse"
 eclipse_func
