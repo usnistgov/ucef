@@ -5,8 +5,8 @@
 
 #/home/vagrant/Downloads/SoapUI-x64-5.6.0.sh
 
-wget https://s3.amazonaws.com/downloads.eviware/soapuios/5.6.0/SoapUI-5.6.0-linux-bin.tar.gz
+wget --progress=bar:force https://s3.amazonaws.com/downloads.eviware/soapuios/5.6.0/SoapUI-5.6.0-linux-bin.tar.gz
 sudo tar -xzf SoapUI-5.6.0-linux-bin.tar.gz -C /opt/
-cd /opt/SoapUI-5.6.0/bin/
-./soapui.sh
+sudo cd /opt/SoapUI-5.6.0/bin/
+sudo ./soapui.sh
 sudo /opt/SoapUI-5.6.0/bin/testrunner.sh -r soapui-project.xml

@@ -7,7 +7,7 @@
     "name": "UCEF 1.1.0-test",
     "provision_scripts": [
         "ucef.sh",
-
+        "php.sh",
         "vscode.sh",
         "eclipse.sh" ,
         "soapui.sh"       
