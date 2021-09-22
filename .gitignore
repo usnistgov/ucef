@@ -1,5 +1,6 @@
 builds/
 packer_cache/
 .vagrant/
-
+.DS_Store
 packer.exe
+.log
