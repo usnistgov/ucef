@@ -28,7 +28,7 @@ echo 'Downloading SoapUI 5.6...'
 
 if [ ! -f SoapUI*sh ]
 then
-    wget $SoapUI_URL
+    wget --progress=bar:force $SoapUI_URL
 fi
 echo 'Finished downloading...'
 

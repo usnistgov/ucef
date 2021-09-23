@@ -1,16 +1,17 @@
 {
     "box": "ucef-base",
-    "cpus": 2,
-    "memory": 4096,
-    "network_packer_ip": "192.168.0.10",
-    "network_static_ip": "192.168.0.21",
+    "cpus": 4,
+    "memory": 16384,
+    "network_packer_ip": "",
+    "network_static_ip": "",
     "name": "UCEF 1.1.0-test",
     "provision_scripts": [
         "ucef.sh",
         "php.sh",
         "vscode.sh",
-        "eclipse.sh" ,
-        "soapui.sh"       
+        "installEclipse.sh", 
+        "installTomcat_v9.sh",
+        "installSoapUI_v5_6.sh"          
     ],
     "VBoxManage": {
         "--vram": 128,

@@ -4,3 +4,5 @@ packer_cache/
 .DS_Store
 packer.exe
 .log
+.jekyll-cache
+_site
