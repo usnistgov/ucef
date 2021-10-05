@@ -155,7 +155,7 @@
     "cpus": "1",
     "disk_size": "40960",
     "hyperv_switch": "NATSwitch",
-    "iso_checksum": "0a20ef21181a36588f8fb670cc63e8d326fa6e715b526543d300a68de389055f",
+    "iso_checksum": "f5cbb8104348f0097a8e513b10173a07dbc6684595e331cb06f93f385d0aecf6",
     "iso_url": "http://cdimage.ubuntu.com/ubuntu/releases/18.04.5/release/ubuntu-18.04.6-server-amd64.iso",
     "memory": "2048",
     "preseed_path": "ucef/http",
