@@ -4,6 +4,7 @@
 wget -O /tmp/mysql-apt-config_0.8.15-1_all.deb https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb
 echo mysql-apt-config mysql-apt-config/select-server select mysql-8.0 | debconf-set-selections
 dpkg -i /tmp/mysql-apt-config_0.8.15-1_all.deb # Warning: apt-key should not be used in scripts
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29 # fix for a silly error
 apt-get -y update
 
 # noninteractive install using the password vagrant
