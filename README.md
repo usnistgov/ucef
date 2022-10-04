@@ -83,12 +83,15 @@ If you choose to use a different IP address for the virtual switch (192.168.0.1)
 ### Generate a .box file using Packer
 1. Download HashiCorp Vagrant and run its installer.
 2. Download HashiCorp Packer and place the executable in the `packer` directory. Alternatively, put the executable in a directory that's included in your system path variable.
-3. Go to the `packer` directory and execute the following command from an elevated command prompt:
+3. If the virtual machine will be installed and used on the NIST Gaithersburg site, change the default DNS server:
+    1. Open the file `packer/ucef/http/preseed-hyperv.cfg`
+    2. Modify the line `d-i netcfg/get_nameservers string 8.8.8.8 8.8.4.4` to use `129.6.16.1 129.6.16.2`
+4. Go to the `packer` directory and execute the following command from an elevated command prompt:
 ```
 packer build -only=hyperv-iso ubuntu-1804-amd64.json
 ```
-4. Wait for Packer to complete with output about exporting a .box file. This can take several hours.
-5. Execute the following command from the `packer` directory using an elevated command prompt:
+5. Wait for Packer to complete with output about exporting a .box file. This can take several hours.
+6. Execute the following command from the `packer` directory using an elevated command prompt:
 ```
 vagrant box add builds/ubuntu-1804-amd64-hyperv.box --force --name ucef-base
 ```
